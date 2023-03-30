@@ -11,28 +11,25 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
-@Table(name = "rol")
+@Table (name = "tipo_pago")
 @Data
-public class Rol {
-	@Id
+public class TipoPago {
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int id_rol;
-	@Column(name = "nombre_tp", nullable = false, length = 20)
+	public int id_tp;
+    @Column(name = "nombre_tp", nullable = false, length = 20)
     @Size(min = 3, message = "Minimo 3 caracteres")
-	public String nombre_rol;
-	public int getId_rol() {
-		return id_rol;
+    public String nombre_tp;
+	public int getId_tp() {
+		return id_tp;
 	}
-	public void setId_rol(int id_rol) {
-		this.id_rol = id_rol;
+	public void setId_tp(int id_tp) {
+		this.id_tp = id_tp;
 	}
-	public String getNombre_rol() {
-		return nombre_rol;
+	public String getNombre_tp() {
+		return nombre_tp;
 	}
-	public void setNombre_rol(String nombre_rol) {
-		this.nombre_rol = nombre_rol;
+	public void setNombre_tp(String nombre_tp) {
+		this.nombre_tp = nombre_tp;
 	}
-
-	
-	
 }
