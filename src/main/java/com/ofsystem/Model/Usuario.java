@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -33,9 +32,7 @@ public class Usuario {
     @JoinColumn(name="idRol", referencedColumnName = "idRol")
 	public Rol iRol;
 
-	@OneToOne
-    @JoinColumn(name="dniTraba", referencedColumnName = "dniTraba")
-	public Trabajador dniTraba;
+
 
 	
 }

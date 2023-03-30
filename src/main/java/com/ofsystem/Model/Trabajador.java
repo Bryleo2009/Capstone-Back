@@ -9,6 +9,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -35,6 +38,11 @@ public class Trabajador {
 	@Column(name = "direccionTraba", length = 45)
 	public String direccionTraba;
 	public String imagen;
+	@OneToOne
+	@JoinColumn(name="idUser", referencedColumnName = "idUser")
+	public Usuario idUser;
+
+	
 
 
 

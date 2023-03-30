@@ -20,7 +20,7 @@ public class Comprobante {
 	public String idComp;
 	@Column(name = "nomClientComp", nullable = false, length = 45)
     @Size(min = 3, message = "Minimo 3 caracteres")
-	public String nomClient_comp; //Juan Alkexander
+	public String nomClientcomp; //Juan Alkexander
 	@Column(name = "identClientComp", nullable = false, length = 15)
     @Size(min = 8, message = "Minimo 8 caracteres")
 	public String identClientComp; //ruc o dni
