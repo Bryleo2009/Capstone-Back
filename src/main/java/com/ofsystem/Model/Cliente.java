@@ -18,12 +18,24 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int idCliente;
-	@Column(name = "nomCliente", nullable = false, length = 45)
+	@Column(name = "nombreCliente", nullable = false, length = 45)
+    @Size(min = 6, message = "Minimo 3 caracteres")
+	public String nombreCliente; //Juan Alkexander
+	@Column(name = "apellidoCliente", nullable = false, length = 70)
+    @Size(min = 8, message = "Minimo 3 caracteres")
+	public String apellidoCliente; // Velazquez Soria
+	@Column(name = "direccionCliente", nullable = false, length = 95)
+    @Size(min = 10, message = "Minimo 10 caracteres")
+	public String direccionCliente; //Av.alarcon cercado de lima 45567
+	@Column(name = "telefonoCliente", nullable = false, length = 45)
+    @Size(min = 9, message = "Minimo 9 caracteres")
+	public String telefonoCliente; //987474234
+	@Column(name = "ubigueoCliente", nullable = false, length = 45)
+    @Size(min = 5, message = "Minimo 5 caracteres")
+	public int ubigueoCliente;
+	@Column(name = "username", nullable = false, length = 150)
     @Size(min = 3, message = "Minimo 3 caracteres")
-	public String nomCliente; //Juan Alkexander
-	@Column(name = "apeCliente", nullable = false, length = 45)
-    @Size(min = 3, message = "Minimo 3 caracteres")
-	public String apeCliente; // Velazquez Soria
+	public String username;
 	
 	
 	
