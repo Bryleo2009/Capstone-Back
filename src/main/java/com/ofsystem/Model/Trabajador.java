@@ -2,17 +2,11 @@ package com.ofsystem.Model;
 
 
 
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -21,6 +15,8 @@ import lombok.Data;
 @Data
 public class Trabajador {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int idtraba;
 	@Size(min = 8, message = "Minimo 8 caracteres")
 	public String dniTraba;
 	@Column(name = "nombreTraba", nullable = false, length = 300)
