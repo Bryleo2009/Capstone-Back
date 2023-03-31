@@ -11,15 +11,15 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
-@Table(name = "rol")
+@Table(name = "categoria_product")
 @Data
-public class Rol {
-	@Id
+public class Categoria {
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int idRol;
-	@Column(name = "nombreTp", nullable = false, length = 20)
+    public int idCateg;
+    @Column(name = "nombreCateg", nullable = false, length = 20)
     @Size(min = 3, message = "Minimo 3 caracteres")
-	public String nombreRol;
-	
-	
+    public String nombreCateg;
+
+
 }

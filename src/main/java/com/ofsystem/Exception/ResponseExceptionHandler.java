@@ -48,13 +48,14 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 	}
 
 	//errores de parseo
+	/*
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		Status = HttpStatus.INTERNAL_SERVER_ERROR;
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false),Status.toString());
 		return new ResponseEntity<Object>(exceptionResponse, Status);
 	}
-	
+	*/
 	@ExceptionHandler(CannotCreateTransactionException.class)
 	public final ResponseEntity<ExceptionResponse> manejarDataVaciaExcepciones2(CannotCreateTransactionException  ex, WebRequest request){
 		Status = HttpStatus.SERVICE_UNAVAILABLE;
@@ -74,6 +75,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 
 
 	//error al validar tamaño minimo de cadena
+	/*
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -85,7 +87,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Error en los campos: " + errores, request.getDescription(false),Status.toString());
 		return new ResponseEntity<Object>(exceptionResponse, Status);
 	}
-
+*/
 	@ExceptionHandler(value = NullPointerException.class)
 	public ResponseEntity<Object> manejarNullPointerException(NullPointerException ex,WebRequest request) {
 		String detalle = obtenerLineaDeCodigo(ex);
