@@ -40,7 +40,7 @@ public class DetalleController {
 		Detalle unaDetalle = service.listarxID(dato.getIdDcomp());
 		URI location = null;
 		if(unaDetalle != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaDetalle.idComp).toUri();
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaDetalle.getIdDcomp()).toUri();
 			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdDcomp() + " --- " + location);
 		} else {
 			service.registrar(dato);
