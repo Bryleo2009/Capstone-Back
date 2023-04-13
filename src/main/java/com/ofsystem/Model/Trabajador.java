@@ -37,6 +37,10 @@ public class Trabajador {
 	@OneToOne
 	@JoinColumn(name="idUser", referencedColumnName = "idUser")
 	public Usuario idUser;
+	public Integer getIdTp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 
