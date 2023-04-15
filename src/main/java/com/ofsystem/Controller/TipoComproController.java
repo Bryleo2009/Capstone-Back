@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.TipoCompro;
 import com.ofsystem.Service.Imple.TipoComproServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class TipoComproController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody TipoCompro dato) {
+	public ResponseEntity<Object> registrar( @RequestBody TipoCompro dato) {
 		TipoCompro unaTipoCompro = service.listarxID(dato.getIdTc());
 		URI location = null;
 		if(unaTipoCompro != null) {
@@ -51,7 +50,7 @@ public class TipoComproController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<TipoCompro> modificar(@Valid @RequestBody TipoCompro dato) {		
+	public ResponseEntity<TipoCompro> modificar( @RequestBody TipoCompro dato) {		
 		return new ResponseEntity<TipoCompro>(service.modificar(dato),HttpStatus.OK);
 	}
 	

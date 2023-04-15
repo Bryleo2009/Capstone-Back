@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Rol;
 import com.ofsystem.Service.Imple.RolServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class RolController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Rol dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Rol dato) {
 		Rol unaRol = service.listarxID(dato.getIdRol());
 		URI location = null;
 		if(unaRol != null) {
@@ -51,7 +50,7 @@ public class RolController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Rol> modificar(@Valid @RequestBody Rol dato) {		
+	public ResponseEntity<Rol> modificar( @RequestBody Rol dato) {		
 		return new ResponseEntity<Rol>(service.modificar(dato),HttpStatus.OK);
 	}
 	

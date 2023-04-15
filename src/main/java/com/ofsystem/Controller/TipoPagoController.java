@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.TipoPago;
 import com.ofsystem.Service.Imple.TipoPagoServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class TipoPagoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody TipoPago dato) {
+	public ResponseEntity<Object> registrar( @RequestBody TipoPago dato) {
 		TipoPago unaTipoPago = service.listarxID(dato.getIdTp());
 		URI location = null;
 		if(unaTipoPago != null) {
@@ -51,7 +50,7 @@ public class TipoPagoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<TipoPago> modificar(@Valid @RequestBody TipoPago dato) {		
+	public ResponseEntity<TipoPago> modificar( @RequestBody TipoPago dato) {		
 		return new ResponseEntity<TipoPago>(service.modificar(dato),HttpStatus.OK);
 	}
 	

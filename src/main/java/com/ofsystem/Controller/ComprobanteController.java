@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Comprobante;
 import com.ofsystem.Service.Imple.ComprobanteServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class ComprobanteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Comprobante dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Comprobante dato) {
 		Comprobante unaComprobante = service.listarxID(dato.getIdComp());
 		URI location = null;
 		if(unaComprobante != null) {
@@ -51,7 +50,7 @@ public class ComprobanteController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Comprobante> modificar(@Valid @RequestBody Comprobante dato) {		
+	public ResponseEntity<Comprobante> modificar( @RequestBody Comprobante dato) {
 		return new ResponseEntity<Comprobante>(service.modificar(dato),HttpStatus.OK);
 	}
 	

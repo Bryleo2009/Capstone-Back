@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Usuario;
 import com.ofsystem.Service.Imple.UsuarioServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Usuario dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Usuario dato) {
 		Usuario unaUsuario = service.listarxID(dato.getIdUser());
 		URI location = null;
 		if(unaUsuario != null) {
@@ -51,7 +50,7 @@ public class UsuarioController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Usuario> modificar(@Valid @RequestBody Usuario dato) {		
+	public ResponseEntity<Usuario> modificar( @RequestBody Usuario dato) {		
 		return new ResponseEntity<Usuario>(service.modificar(dato),HttpStatus.OK);
 	}
 	

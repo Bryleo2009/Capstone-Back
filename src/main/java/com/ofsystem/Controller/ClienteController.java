@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Cliente;
 import com.ofsystem.Service.Imple.ClienteServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Cliente dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Cliente dato) {
 		Cliente unaCliente = service.listarxID(dato.getIdCliente());
 		URI location = null;
 		if(unaCliente != null) {
@@ -51,7 +50,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Cliente> modificar(@Valid @RequestBody Cliente dato) {		
+	public ResponseEntity<Cliente> modificar( @RequestBody Cliente dato) {		
 		return new ResponseEntity<Cliente>(service.modificar(dato),HttpStatus.OK);
 	}
 	

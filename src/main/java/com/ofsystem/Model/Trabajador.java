@@ -4,10 +4,7 @@ package com.ofsystem.Model;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -17,13 +14,10 @@ public class Trabajador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int idtraba;
-	@Size(min = 8, message = "Minimo 8 caracteres")
 	public String dniTraba;
 	@Column(name = "nombreTraba", nullable = false, length = 300)
-    @Size(min = 3, message = "Minimo 3 caracteres")
 	public String nombreTraba;
 	@Column(name = "apellidoTraba", nullable = false, length = 300)
-    @Size(min = 3, message = "Minimo 3 caracteres")
 	public String apellidoTraba;
 	@Column(name = "fechaNacTraba")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")

@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Detalle;
 import com.ofsystem.Service.Imple.DetalleServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class DetalleController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Detalle dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Detalle dato) {
 		Detalle unaDetalle = service.listarxID(dato.getIdDcomp());
 		URI location = null;
 		if(unaDetalle != null) {
@@ -51,7 +50,7 @@ public class DetalleController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Detalle> modificar(@Valid @RequestBody Detalle dato) {		
+	public ResponseEntity<Detalle> modificar( @RequestBody Detalle dato) {		
 		return new ResponseEntity<Detalle>(service.modificar(dato),HttpStatus.OK);
 	}
 	

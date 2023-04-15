@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Trabajador;
 import com.ofsystem.Service.Imple.TrabajadorServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class TrabajadorController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Trabajador dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Trabajador dato) {
 		Trabajador unaTrabajador = service.listarxID(dato.getIdTp());
 		URI location = null;
 		if(unaTrabajador != null) {
@@ -51,7 +50,7 @@ public class TrabajadorController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Trabajador> modificar(@Valid @RequestBody Trabajador dato) {		
+	public ResponseEntity<Trabajador> modificar( @RequestBody Trabajador dato) {		
 		return new ResponseEntity<Trabajador>(service.modificar(dato),HttpStatus.OK);
 	}
 	

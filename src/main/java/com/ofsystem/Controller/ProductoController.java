@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Service.Imple.ProductoServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class ProductoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Producto dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Producto dato) {
 		Producto unaProducto = service.listarxID(dato.getIdProduct());
 		URI location = null;
 		if(unaProducto != null) {
@@ -51,7 +50,7 @@ public class ProductoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Producto> modificar(@Valid @RequestBody Producto dato) {		
+	public ResponseEntity<Producto> modificar( @RequestBody Producto dato) {		
 		return new ResponseEntity<Producto>(service.modificar(dato),HttpStatus.OK);
 	}
 	

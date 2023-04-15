@@ -3,7 +3,6 @@ package com.ofsystem.Controller;
 import com.ofsystem.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Categoria;
 import com.ofsystem.Service.Imple.CategoriaServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +35,7 @@ public class CategoriaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar(@Valid @RequestBody Categoria dato) {
+	public ResponseEntity<Object> registrar( @RequestBody Categoria dato) {
 		Categoria unaCategoria = service.listarxID(dato.getIdCateg());
 		URI location = null;
 		if(unaCategoria != null) {
@@ -51,7 +50,7 @@ public class CategoriaController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Categoria> modificar(@Valid @RequestBody Categoria dato) {		
+	public ResponseEntity<Categoria> modificar( @RequestBody Categoria dato) {		
 		return new ResponseEntity<Categoria>(service.modificar(dato),HttpStatus.OK);
 	}
 	

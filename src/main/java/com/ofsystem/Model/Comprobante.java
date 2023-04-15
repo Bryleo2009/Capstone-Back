@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -19,10 +18,8 @@ public class Comprobante {
         @Column(length = 50)
 	public String idComp;
 	@Column(name = "nomClientComp", nullable = false, length = 45)
-    @Size(min = 3, message = "Minimo 3 caracteres")
 	public String nomClientcomp; //Juan Alkexander
 	@Column(name = "identClientComp", nullable = false, length = 15)
-    @Size(min = 8, message = "Minimo 8 caracteres")
 	public String identClientComp; //ruc o dni
 	@Column(name = "montoSubtotalComp", nullable = false)
 	public double montoSubtotalComp; //suma de los totales de items sin igv
