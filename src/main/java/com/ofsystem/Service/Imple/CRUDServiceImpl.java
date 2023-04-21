@@ -37,4 +37,5 @@ protected abstract JpaRepository<T, ID> getRepo();
 
 	@Override
 	public void registroMasivo (List<T> t){ getRepo().saveAll(t);};
+
 }
