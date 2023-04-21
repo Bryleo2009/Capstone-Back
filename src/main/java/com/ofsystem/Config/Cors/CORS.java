@@ -15,11 +15,13 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class CORS implements Filter {
+@EnableWebMvc
+public class CORS implements Filter, WebMvcConfigurer  {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -27,6 +29,16 @@ public class CORS implements Filter {
 
     }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .exposedHeaders("Authorization")
+                .allowCredentials(true)
+                .maxAge(3600);
+    }
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
@@ -58,7 +70,7 @@ public class CORS implements Filter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/media/**")
-                        .allowedOrigins("*")
+                        .allowedOriginPatterns("*")
                         .allowedMethods("*");
 
             }

@@ -1,12 +1,8 @@
 package com.ofsystem.Model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.ofsystem.Enums.CategoriaName;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -16,8 +12,15 @@ public class Categoria {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     public int idCateg;
-    @Column(name = "nombreCateg", nullable = false, length = 20)
-    public String nombreCateg;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nombreCateg", nullable = false, length = 1000)
+    public CategoriaName nombreCateg;
 
+    public Categoria() {
 
+    }
+
+    public Categoria(CategoriaName nombreCateg) {
+        this.nombreCateg = nombreCateg;
+    }
 }

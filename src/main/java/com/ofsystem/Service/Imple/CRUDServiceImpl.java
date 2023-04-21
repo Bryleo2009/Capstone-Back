@@ -34,4 +34,7 @@ protected abstract JpaRepository<T, ID> getRepo();
 	public void eliminar(ID id) {
 		getRepo().deleteById(id);
 	}
+
+	@Override
+	public void registroMasivo (List<T> t){ getRepo().saveAll(t);};
 }
