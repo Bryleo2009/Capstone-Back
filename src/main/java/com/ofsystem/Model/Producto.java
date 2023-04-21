@@ -20,19 +20,28 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int idProduct;
-	@Column(name = "descripcionProduct", nullable = false, length = 500)
+	@Column(name = "descripcionProduct", nullable = false, length = 1000)
 	public String descripcionProduct;
+	@Column(name = "nombreProduct", nullable = false, length = 1000)
+	public String nombreProduct;
 	@Column(name = "precioUni", nullable = false)
 	public double precioUni;
 	@Column(name = "stockProduct", nullable = false)
 	public int stockProduct;
-	@Column(name = "tallaProduct", nullable = false, length = 20)
+	@Column(name = "tallaProduct", nullable = false, length = 1000)
 	public String tallaProduct;
 	@Column(name = "etiquetasProduct", nullable = false, length = 10000)
 	public String etiquetas;
+	@Column(name = "isPrecioDescProduct", nullable = false)
+	public boolean isPrecioDescProduct;
+	@Column(name = "precioDescuProduct", nullable = true)
+	public double precioDescuProduct;
 	public String imagen;
 	@ManyToOne
     @JoinColumn(name="idCateg", referencedColumnName = "idCateg")
 	public Categoria idCateg;
+	@ManyToOne
+	@JoinColumn(name="idTipoProduc", referencedColumnName = "idTipoProduc")
+	public TipoProducto idTipoProduc;
 
 }
