@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface ICategoriaRepo extends JpaRepository<Categoria, Integer> {
     boolean existsByNombreCateg(CategoriaName nombreCateg);
+    Categoria findByNombreCateg(CategoriaName name);
 }

@@ -1,14 +1,7 @@
 package com.ofsystem.Model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -28,14 +21,10 @@ public class Producto {
 	public double precioUni;
 	@Column(name = "stockProduct", nullable = false)
 	public int stockProduct;
-	@Column(name = "tallaProduct", nullable = false, length = 1000)
-	public String tallaProduct;
-	@Column(name = "etiquetasProduct", nullable = false, length = 10000)
-	public String etiquetas;
 	@Column(name = "isPrecioDescProduct", nullable = false)
 	public boolean isPrecioDescProduct;
 	@Column(name = "precioDescuProduct", nullable = true)
-	public double precioDescuProduct;
+	public Double precioDescuProduct;
 	public String imagen;
 	@ManyToOne
     @JoinColumn(name="idCateg", referencedColumnName = "idCateg")
@@ -44,4 +33,27 @@ public class Producto {
 	@JoinColumn(name="idTipoProduc", referencedColumnName = "idTipoProduc")
 	public TipoProducto idTipoProduc;
 
+	@OneToMany
+	public List<Etiquetas> idEtiqueta;
+
+	@OneToMany
+	public List<Talla> idTalla;
+
+	public Producto() {
+
+	}
+
+	public Producto(String descripcionProduct, String nombreProduct, double precioUni, int stockProduct, boolean isPrecioDescProduct, double precioDescuProduct, String imagen, Categoria idCateg, TipoProducto idTipoProduc, List<Etiquetas> idEtiqueta, List<Talla> idTalla) {
+		this.descripcionProduct = descripcionProduct;
+		this.nombreProduct = nombreProduct;
+		this.precioUni = precioUni;
+		this.stockProduct = stockProduct;
+		this.isPrecioDescProduct = isPrecioDescProduct;
+		this.precioDescuProduct = precioDescuProduct;
+		this.imagen = imagen;
+		this.idCateg = idCateg;
+		this.idTipoProduc = idTipoProduc;
+		this.idEtiqueta = idEtiqueta;
+		this.idTalla = idTalla;
+	}
 }

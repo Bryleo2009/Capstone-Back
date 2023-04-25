@@ -2,6 +2,7 @@ package com.ofsystem.Service.Imple;
 
 import com.ofsystem.Enums.CategoriaName;
 import com.ofsystem.Enums.TipoProductoName;
+import com.ofsystem.Model.Categoria;
 import com.ofsystem.Model.TipoProducto;
 import com.ofsystem.Repo.ITipoProductoRepo;
 import com.ofsystem.Service.ITipoProductoService;
@@ -23,4 +24,9 @@ public class TipoProductoServiceImpl extends CRUDServiceImpl<TipoProducto, Integ
 	public boolean existsByNombreTipoProduc(TipoProductoName tipoProductoName){
 		return repo.existsByNombreTipoProduc(tipoProductoName);
 	}
+
+	public TipoProducto findByNombre(TipoProductoName name){
+		return  repo.findByNombreTipoProduc(name);
+	}
+
 }

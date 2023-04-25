@@ -33,9 +33,4 @@ public class Detalle {
     @JoinColumn(name="idComp", referencedColumnName = "idComp")
 	public Comprobante idComp;
 	
-	
-	
-	
-	
-	
 }

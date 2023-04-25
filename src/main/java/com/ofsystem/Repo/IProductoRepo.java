@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IProductoRepo extends JpaRepository<Producto, Integer> {
-
+    boolean existsByNombreProduct(String name);
 }

@@ -1,5 +1,6 @@
 package com.ofsystem.Service.Imple;
 
+import com.ofsystem.Enums.TipoProductoName;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Repo.IProductoRepo;
 import com.ofsystem.Service.IProductoService;
@@ -23,7 +24,10 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 
 	public Page<Producto> listarPaginado(Integer pageNo, Integer pageSize) {
 		Pageable pageable = PageRequest.of(pageNo, pageSize);
-
 		return repo.findAll(pageable);
+	}
+
+	public boolean existsByNombre(String name){
+		return repo.existsByNombreProduct(name);
 	}
 }
