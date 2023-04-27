@@ -1,20 +1,21 @@
 package com.ofsystem.Enums;
 
 public enum TallaName {
-    LARGE("L"),
-    SMOLL("S");
+    LARGE("LARGE","L"),
+    SMOLL("SMOLL","S");
 
     private final Object value;
+    private final String abreviatura;
 
-    private TallaName() {
-        this.value = null;
-    }
-
-    private TallaName(Object value) {
+    private TallaName(Object value, String abreviatura) {
         this.value = value;
+        this.abreviatura = abreviatura;
     }
 
-    public Object getValue() {
-        return this.value;
+    public String getValue() {
+        return this.value.toString();
+    }
+    public String getAbreviatura() {
+        return this.abreviatura;
     }
 }

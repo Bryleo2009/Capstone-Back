@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ITallaRepo extends JpaRepository<Talla, Integer> {
-    boolean existsByNombreTalla(TallaName name);
-    Talla findByNombreTalla(TallaName name);
+    boolean existsByIdentItem(TallaName name);
+    Talla findByIdentItem(TallaName name);
 }

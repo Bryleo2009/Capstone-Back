@@ -11,14 +11,21 @@ public class Etiquetas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEtiqueta;
     @Enumerated(EnumType.STRING)
-    @Column(name = "nombreEtiqueta", nullable = false)
-    private EtiquetaName nombreEtiqueta;
+    @Column(name = "identItem", nullable = false)
+    private EtiquetaName identItem;
+    @Column(name = "nombreItem", nullable = false)
+    private  String nombreItem;
+
+    @Column(name = "abreviItem", nullable = false)
+    private  String abreviItem;
 
     public Etiquetas() {
     }
 
-    public Etiquetas(EtiquetaName nombreEtiqueta) {
-        this.nombreEtiqueta = nombreEtiqueta;
+    public Etiquetas(EtiquetaName ident) {
+        this.identItem = ident;
+        this.abreviItem = ident.getAbreviatura();
+        this.nombreItem = ident.getValue();
     }
 }
 

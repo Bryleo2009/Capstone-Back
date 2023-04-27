@@ -21,11 +21,11 @@ public class EtiquetasServiceImpl extends CRUDServiceImpl<Etiquetas, Integer> im
 		return repo;
 	}
 
-	public boolean existsByNombreEtiqueta(EtiquetaName name){
-		return repo.existsByNombreEtiqueta(name);
+	public boolean existsByIdent(EtiquetaName name){
+		return repo.existsByIdentItem(name);
 	}
 	public Etiquetas findByNombre(EtiquetaName name){
-		return  repo.findByNombreEtiqueta(name);
+		return  repo.findByIdentItem(name);
 	}
 
 }

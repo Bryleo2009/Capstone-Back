@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IEtiquetasRepo extends JpaRepository<Etiquetas, Integer> {
-    boolean existsByNombreEtiqueta(EtiquetaName etiquetaName);
-    Etiquetas findByNombreEtiqueta(EtiquetaName name);
+    boolean existsByIdentItem(EtiquetaName ident);
+    Etiquetas findByIdentItem(EtiquetaName name);
 }

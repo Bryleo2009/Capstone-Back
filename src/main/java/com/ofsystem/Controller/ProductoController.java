@@ -1,6 +1,7 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Service.Imple.ProductoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,11 @@ public class ProductoController {
 			service.eliminar(id);
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+	@GetMapping("/filtrado")
+	public ResponseEntity<?> busquedaFiltrada () {
+		System.out.println(service.busquedaFiltrada());
+		return new ResponseEntity<ProductoFilter>(service.busquedaFiltrada(), HttpStatus.OK);
 	}
 }

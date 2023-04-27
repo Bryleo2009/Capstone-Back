@@ -23,11 +23,11 @@ public class TallaServiceImpl extends CRUDServiceImpl<Talla, Integer> implements
 	}
 
 	public boolean existsByNombreTalla(TallaName name){
-		return repo.existsByNombreTalla(name);
+		return repo.existsByIdentItem(name);
 	}
 
 	public Talla findByNombre(TallaName name){
-		return  repo.findByNombreTalla(name);
+		return  repo.findByIdentItem(name);
 	}
 
 

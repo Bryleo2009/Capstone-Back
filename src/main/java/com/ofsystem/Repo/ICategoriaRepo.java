@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface ICategoriaRepo extends JpaRepository<Categoria, Integer> {
-    boolean existsByNombreCateg(CategoriaName nombreCateg);
-    Categoria findByNombreCateg(CategoriaName name);
+    boolean existsByIdentItem(CategoriaName nombreCateg);
+    Categoria findByIdentItem(CategoriaName name);
 }

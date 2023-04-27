@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ITipoProductoRepo extends JpaRepository<TipoProducto, Integer> {
-    boolean existsByNombreTipoProduc(TipoProductoName tipoProductoName);
-    TipoProducto findByNombreTipoProduc(TipoProductoName name);
+    boolean existsByIdentItem(TipoProductoName tipoProductoName);
+    TipoProducto findByIdentItem(TipoProductoName name);
 }

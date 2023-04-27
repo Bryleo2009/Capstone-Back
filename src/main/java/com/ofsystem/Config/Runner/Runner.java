@@ -61,7 +61,7 @@ public class Runner implements CommandLineRunner {
         try {
             for (EtiquetaName etiquetaName : EtiquetaName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
-                if (!etiquetaService.existsByNombreEtiqueta(etiquetaName)) {
+                if (!etiquetaService.existsByIdent(etiquetaName)) {
                     Etiquetas etiquetas = new Etiquetas(etiquetaName);
                     etiquetaService.registrar(etiquetas);
                 }

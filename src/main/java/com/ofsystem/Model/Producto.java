@@ -33,10 +33,12 @@ public class Producto {
 	@JoinColumn(name="idTipoProduc", referencedColumnName = "idTipoProduc")
 	public TipoProducto idTipoProduc;
 
-	@OneToMany
+	@ManyToMany
+	@JoinColumn(name="idEtiqueta", referencedColumnName = "idEtiqueta")
 	public List<Etiquetas> idEtiqueta;
 
-	@OneToMany
+	@ManyToMany
+	@JoinColumn(name="idTalla", referencedColumnName = "idTalla")
 	public List<Talla> idTalla;
 
 	public Producto() {

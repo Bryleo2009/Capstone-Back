@@ -1,21 +1,24 @@
 package com.ofsystem.Enums;
 
 public enum EtiquetaName {
-    ETAPA_ANIO("Verano"),
-    MANGA_LARGA("Manga larga"),
-    COLOR_AZUL("#123");
+    ESTACION_VERANO("Verano", "ESTVER"),
+    MANGA_LARGA("Manga larga", "MANLAR"),
+    COLOR_AZUL("#123", "CBLUE");
 
     private final Object value;
+    private final String abreviatura;
 
-    private EtiquetaName() {
-        this.value = null;
-    }
-
-    private EtiquetaName(Object value) {
+    private EtiquetaName(Object value, String abreviatura) {
         this.value = value;
+        this.abreviatura = abreviatura;
     }
 
-    public Object getValue() {
-        return this.value;
+    public String getValue() {
+        return this.value.toString();
+    }
+
+    public String getAbreviatura() {
+        return this.abreviatura;
     }
 }
+

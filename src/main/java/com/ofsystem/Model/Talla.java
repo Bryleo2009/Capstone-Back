@@ -1,5 +1,6 @@
 package com.ofsystem.Model;
 
+import com.ofsystem.Enums.EtiquetaName;
 import com.ofsystem.Enums.TallaName;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,13 +13,19 @@ public class Talla {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTalla;
     @Enumerated(EnumType.STRING)
-    @Column(name = "nombreTalla", nullable = false)
-    private TallaName nombreTalla;
+    @Column(name = "identItem", nullable = false)
+    private TallaName identItem;
+    @Column(name = "nombreItem", nullable = false)
+    private  String nombreItem;
 
-    public Talla(TallaName nombreTalla) {
-        this.nombreTalla = nombreTalla;
+    @Column(name = "abreviItem", nullable = false)
+    private  String abreviItem;
+
+    public Talla(TallaName ident) {
+        this.identItem = ident;
+        this.abreviItem = ident.getAbreviatura();
+        this.nombreItem = ident.getValue();
     }
-
     public Talla() {
     }
 }

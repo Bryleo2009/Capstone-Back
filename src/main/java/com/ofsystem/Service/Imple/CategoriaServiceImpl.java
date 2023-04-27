@@ -22,10 +22,10 @@ public class CategoriaServiceImpl extends CRUDServiceImpl<Categoria, Integer> im
 	}
 
 	public boolean existsByNombreCateg(CategoriaName nombreCateg){
-		return repo.existsByNombreCateg(nombreCateg);
+		return repo.existsByIdentItem(nombreCateg);
 	}
 
 	public Categoria findByNombreCateg(CategoriaName name){
-		return  repo.findByNombreCateg(name);
+		return  repo.findByIdentItem(name);
 	}
 }

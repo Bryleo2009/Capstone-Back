@@ -22,11 +22,11 @@ public class TipoProductoServiceImpl extends CRUDServiceImpl<TipoProducto, Integ
 	}
 
 	public boolean existsByNombreTipoProduc(TipoProductoName tipoProductoName){
-		return repo.existsByNombreTipoProduc(tipoProductoName);
+		return repo.existsByIdentItem(tipoProductoName);
 	}
 
 	public TipoProducto findByNombre(TipoProductoName name){
-		return  repo.findByNombreTipoProduc(name);
+		return  repo.findByIdentItem(name);
 	}
 
 }

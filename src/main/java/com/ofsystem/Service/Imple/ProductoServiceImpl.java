@@ -1,6 +1,7 @@
 package com.ofsystem.Service.Imple;
 
-import com.ofsystem.Enums.TipoProductoName;
+import com.ofsystem.Mapper.Filter.ProductoFilter;
+import com.ofsystem.Mapper.IProductoMapper;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Repo.IProductoRepo;
 import com.ofsystem.Service.IProductoService;
@@ -11,11 +12,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> implements IProductoService{
 
 	@Autowired
 	private IProductoRepo repo;
+
+	@Autowired
+	private IProductoMapper repoMapper;
 	
 	@Override
 	protected JpaRepository<Producto, Integer> getRepo() {
@@ -29,5 +35,10 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 
 	public boolean existsByNombre(String name){
 		return repo.existsByNombreProduct(name);
+	}
+
+	public ProductoFilter busquedaFiltrada () {
+		System.out.println(repoMapper.busquedaFiltrada());
+		return repoMapper.busquedaFiltrada();
 	}
 }
