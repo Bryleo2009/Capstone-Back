@@ -80,6 +80,7 @@ public class ProductoController {
 																 @RequestParam(required = false, value="mayorPrecio",defaultValue = "99999") double mayorPrecio,
 																 @RequestParam(defaultValue = "10") Integer cantidad,
 																 @RequestParam(defaultValue = "0") Integer pagina) {
+		System.out.println(marcas);
 		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
 

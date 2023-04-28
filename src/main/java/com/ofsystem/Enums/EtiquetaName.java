@@ -3,7 +3,12 @@ package com.ofsystem.Enums;
 public enum EtiquetaName {
     ESTACION_VERANO("", "ESTVER","Ropa de verano"),
     MANGA_LARGA("", "MANLAR", "Manga larga"),
-    COLOR_AZUL("#123", "CBLUE", "Azul");
+    COLOR_AZUL("#013076", "CBLUE", "Azul"),
+    COLOR_ROJO("#C30100", "CRED", "Rojo"),
+    COLOR_NEGRO("#202124", "CBLACK", "Negro"),
+    COLOR_BLANCO("#EFEFF2", "CWHITE", "Blanco"),
+    COLOR_MARRON("#654030", "CBROWN", "Marrón"),
+    COLOR_VERDE("#019679", "CGREEN", "Verde");
 
     private final Object value;
     private final String abreviatura;

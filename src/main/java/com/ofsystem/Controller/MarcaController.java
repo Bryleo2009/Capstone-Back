@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/Marca")
+@RequestMapping("/Marcas")
 public class MarcaController {
 
 	@Autowired

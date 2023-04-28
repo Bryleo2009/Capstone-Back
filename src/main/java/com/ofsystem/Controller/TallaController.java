@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/Talla")
+@RequestMapping("/Tallas")
 public class TallaController {
 
 	@Autowired

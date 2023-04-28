@@ -103,11 +103,11 @@ public class Runner implements CommandLineRunner {
                 Producto unproducto = new Producto();
                 unproducto.setDescripcionProduct("camisa negra de gran tamaño");
                 unproducto.setNombreProduct(nombreProducto);
-                unproducto.setPrecioUni(15.99);
+                unproducto.setPrecioUni(52.99);
                 unproducto.setStockComproProduct(50);
                 unproducto.setStockRealProduct(50);
                 unproducto.setPrecioDescProduct(true);
-                unproducto.setPrecioDescuProduct(4.2);
+                unproducto.setPrecioDescuProduct(40.56);
                 unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_ADIDAS));
                 unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
                 unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.CAMISA));
