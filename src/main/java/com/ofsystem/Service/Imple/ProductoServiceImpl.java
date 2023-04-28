@@ -7,6 +7,7 @@ import com.ofsystem.Repo.IProductoRepo;
 import com.ofsystem.Service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -37,8 +38,13 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 		return repo.existsByNombreProduct(name);
 	}
 
-	public ProductoFilter busquedaFiltrada () {
-		System.out.println(repoMapper.busquedaFiltrada());
-		return repoMapper.busquedaFiltrada();
+
+	public Page<ProductoFilter> busquedaFiltrada(String categoria, String tipos, String etiquetas, String tallas, String marcas, double menorPrecio, double mayorPrecio, int cantidad, int pagina) {
+
+		PageRequest pageRequest = PageRequest.of(pagina, cantidad);
+		List<ProductoFilter> lista = repoMapper.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, menorPrecio, mayorPrecio, cantidad, pagina);
+
+		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
+
 }

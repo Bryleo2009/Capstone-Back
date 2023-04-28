@@ -1,6 +1,6 @@
 package com.ofsystem.Controller;
 
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Comprobante;
 import com.ofsystem.Service.Imple.ComprobanteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

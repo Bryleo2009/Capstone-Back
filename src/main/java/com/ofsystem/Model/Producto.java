@@ -19,8 +19,10 @@ public class Producto {
 	public String nombreProduct;
 	@Column(name = "precioUni", nullable = false)
 	public double precioUni;
-	@Column(name = "stockProduct", nullable = false)
-	public int stockProduct;
+	@Column(name = "stockRealProduct", nullable = false)
+	public int stockRealProduct;
+	@Column(name = "stockComproProduct", nullable = false)
+	public int stockComproProduct;
 	@Column(name = "isPrecioDescProduct", nullable = false)
 	public boolean isPrecioDescProduct;
 	@Column(name = "precioDescuProduct", nullable = true)
@@ -29,6 +31,9 @@ public class Producto {
 	@ManyToOne
     @JoinColumn(name="idCateg", referencedColumnName = "idCateg")
 	public Categoria idCateg;
+	@ManyToOne
+	@JoinColumn(name="idMarca", referencedColumnName = "idMarca")
+	public Marca idMarca;
 	@ManyToOne
 	@JoinColumn(name="idTipoProduc", referencedColumnName = "idTipoProduc")
 	public TipoProducto idTipoProduc;
@@ -45,15 +50,17 @@ public class Producto {
 
 	}
 
-	public Producto(String descripcionProduct, String nombreProduct, double precioUni, int stockProduct, boolean isPrecioDescProduct, double precioDescuProduct, String imagen, Categoria idCateg, TipoProducto idTipoProduc, List<Etiquetas> idEtiqueta, List<Talla> idTalla) {
+	public Producto(String descripcionProduct, String nombreProduct, double precioUni, int stockRealProduct, int stockComproProduct, boolean isPrecioDescProduct, Double precioDescuProduct, String imagen, Categoria idCateg, Marca idMarca, TipoProducto idTipoProduc, List<Etiquetas> idEtiqueta, List<Talla> idTalla) {
 		this.descripcionProduct = descripcionProduct;
 		this.nombreProduct = nombreProduct;
 		this.precioUni = precioUni;
-		this.stockProduct = stockProduct;
+		this.stockRealProduct = stockRealProduct;
+		this.stockComproProduct = stockComproProduct;
 		this.isPrecioDescProduct = isPrecioDescProduct;
 		this.precioDescuProduct = precioDescuProduct;
 		this.imagen = imagen;
 		this.idCateg = idCateg;
+		this.idMarca = idMarca;
 		this.idTipoProduc = idTipoProduc;
 		this.idEtiqueta = idEtiqueta;
 		this.idTalla = idTalla;

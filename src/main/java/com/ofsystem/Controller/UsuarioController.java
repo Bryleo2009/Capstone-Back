@@ -1,6 +1,6 @@
 package com.ofsystem.Controller;
 
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Usuario;
 import com.ofsystem.Service.Imple.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

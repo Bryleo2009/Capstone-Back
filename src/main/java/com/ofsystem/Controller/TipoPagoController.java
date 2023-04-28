@@ -1,6 +1,6 @@
 package com.ofsystem.Controller;
 
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.TipoPago;
 import com.ofsystem.Service.Imple.TipoPagoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

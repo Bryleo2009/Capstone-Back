@@ -1,15 +1,17 @@
 package com.ofsystem.Enums;
 
-public enum EtiquetaName {
-    ESTACION_VERANO("", "ESTVER","Ropa de verano"),
-    MANGA_LARGA("", "MANLAR", "Manga larga"),
-    COLOR_AZUL("#123", "CBLUE", "Azul");
+public enum MarcaName {
+
+    ETIQ_NIKE("NIKE","NK","Nike"),
+    ETIQ_ADIDAS("ADIDAS","ADD","Adidas"),
+    ETIQ_BILLAB("BILLABONG","BB","Billabong");
+
 
     private final Object value;
     private final String abreviatura;
     private final String vista;
 
-    private EtiquetaName(Object value, String abreviatura, String vista) {
+    private MarcaName(Object value, String abreviatura, String vista) {
         this.value = value;
         this.abreviatura = abreviatura;
         this.vista = vista;
@@ -27,4 +29,3 @@ public enum EtiquetaName {
         return this.vista;
     }
 }
-

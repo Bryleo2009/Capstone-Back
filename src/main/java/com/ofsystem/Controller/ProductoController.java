@@ -1,6 +1,6 @@
 package com.ofsystem.Controller;
 
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Service.Imple.ProductoServiceImpl;
@@ -22,14 +22,14 @@ public class ProductoController {
 	@Autowired
 	private ProductoServiceImpl service;
 	
-	@GetMapping
+	/*@GetMapping
 	public ResponseEntity<Page<Producto>> listar(
 			@RequestParam(defaultValue = "0") Integer pageNo,
 			@RequestParam(defaultValue = "10") Integer pageSize) {
 		Page<Producto> productos = service.listarPaginado(pageNo, pageSize);
 
 		return new ResponseEntity<Page<Producto>>(productos, HttpStatus.OK);
-	}
+	}*/
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Producto> listarPorId(@PathVariable("id") int id) {
@@ -70,10 +70,17 @@ public class ProductoController {
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
-
-	@GetMapping("/filtrado")
-	public ResponseEntity<?> busquedaFiltrada () {
-		System.out.println(service.busquedaFiltrada());
-		return new ResponseEntity<ProductoFilter>(service.busquedaFiltrada(), HttpStatus.OK);
+	@GetMapping()
+	public ResponseEntity<Page<ProductoFilter>> busquedaFiltrada(@RequestParam(required = false, value="categoria") String categoria,
+																 @RequestParam(required = false, value="tipos") String tipos,
+																 @RequestParam(required = false, value="etiquetas") String etiquetas,
+																 @RequestParam(required = false, value="tallas") String tallas,
+																 @RequestParam(required = false, value="marcas") String marcas,
+																 @RequestParam(required = false, value="menorPrecio",defaultValue = "1") double menorPrecio,
+																 @RequestParam(required = false, value="mayorPrecio",defaultValue = "99999") double mayorPrecio,
+																 @RequestParam(defaultValue = "10") Integer cantidad,
+																 @RequestParam(defaultValue = "0") Integer pagina) {
+		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
+
 }

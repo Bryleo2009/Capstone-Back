@@ -1,6 +1,6 @@
 package com.ofsystem.Controller;
 
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.TipoCompro;
 import com.ofsystem.Service.Imple.TipoComproServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

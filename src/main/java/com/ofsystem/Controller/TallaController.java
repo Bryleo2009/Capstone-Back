@@ -1,6 +1,6 @@
 package com.ofsystem.Controller;
 
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.Talla;
 import com.ofsystem.Service.Imple.TallaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

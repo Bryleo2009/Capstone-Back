@@ -1,10 +1,7 @@
 package com.ofsystem.Config.Runner;
 
-import com.ofsystem.Enums.CategoriaName;
-import com.ofsystem.Enums.EtiquetaName;
-import com.ofsystem.Enums.TallaName;
-import com.ofsystem.Enums.TipoProductoName;
-import com.ofsystem.Exception.ModeloNotFoundException;
+import com.ofsystem.Enums.*;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.*;
 import com.ofsystem.Service.Imple.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class Runner implements CommandLineRunner {
     private TallaServiceImpl tallaService;
     @Autowired
     private EtiquetasServiceImpl etiquetaService;
+    @Autowired
+    private MarcaServiceImpl marcaService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -83,6 +82,19 @@ public class Runner implements CommandLineRunner {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
 
+        //crear Marcas
+        try {
+            for (MarcaName name : MarcaName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!marcaService.existsByIdent(name)) {
+                    Marca etiquetas = new Marca(name);
+                    marcaService.registrar(etiquetas);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
         //producto temporal
         try {
             String nombreProducto = "camisa Negra";
@@ -92,9 +104,11 @@ public class Runner implements CommandLineRunner {
                 unproducto.setDescripcionProduct("camisa negra de gran tamaño");
                 unproducto.setNombreProduct(nombreProducto);
                 unproducto.setPrecioUni(15.99);
-                unproducto.setStockProduct(50);
+                unproducto.setStockComproProduct(50);
+                unproducto.setStockRealProduct(50);
                 unproducto.setPrecioDescProduct(true);
                 unproducto.setPrecioDescuProduct(4.2);
+                unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_ADIDAS));
                 unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
                 unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.CAMISA));
 
@@ -105,7 +119,7 @@ public class Runner implements CommandLineRunner {
 
                 List<Talla> tallas = new ArrayList<>();
                 tallas.add(tallaService.findByNombre(TallaName.LARGE));
-                tallas.add(tallaService.findByNombre(TallaName.SMOLL));
+                tallas.add(tallaService.findByNombre(TallaName.SMALL));
                 unproducto.setIdTalla(tallas);
 
                 productoService.registrar(unproducto);
