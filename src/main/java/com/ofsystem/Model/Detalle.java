@@ -32,5 +32,8 @@ public class Detalle {
 	@ManyToOne
     @JoinColumn(name="idComp", referencedColumnName = "idComp")
 	public Comprobante idComp;
-	
+
+	@Column(name = "precioDescuento", nullable = true)
+	public Double precioDescuento; //2.00
+
 }

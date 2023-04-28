@@ -1,20 +1,22 @@
 package com.ofsystem.Model;
 
-import com.ofsystem.Enums.EtiquetaName;
+
+import com.ofsystem.Enums.EstComproName;
 import com.ofsystem.Enums.TipoPagoName;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table (name = "tipoPago")
+@Table(name = "estCompro")
 @Data
-public class TipoPago {
+public class EstCompro {
+
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int idTp;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int idEstCompro;
     @Enumerated(EnumType.STRING)
     @Column(name = "identItem", nullable = false)
-    private TipoPagoName identItem;
+    private EstComproName identItem;
     @Column(name = "nombreItem", nullable = true)
     private  String nombreItem;
 
@@ -24,10 +26,10 @@ public class TipoPago {
     @Column(name = "vistaItem", nullable = true)
     private  String vistaItem;
 
-    public TipoPago() {
+    public EstCompro() {
     }
 
-    public TipoPago(TipoPagoName ident) {
+    public EstCompro(EstComproName ident) {
         this.identItem = ident;
         this.abreviItem = ident.getAbreviatura();
         this.nombreItem = ident.getValue();

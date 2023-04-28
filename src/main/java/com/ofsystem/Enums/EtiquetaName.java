@@ -35,5 +35,6 @@ public enum EtiquetaName {
     public String getVista() {
         return this.vista;
     }
+
 }
 
