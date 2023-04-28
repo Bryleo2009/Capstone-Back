@@ -1,22 +1,21 @@
 package com.ofsystem.Enums;
 
-public enum EtiquetaName {
-    ESTACION_VERANO("", "ESTVER","Ropa de verano"),
-    ESTACION_PRIMAVERA("", "ESTPRIM","Ropa de primavera"),
-    TIPO_MANGA_LARGA("", "MANLAR", "Manga larga"),
-    TIPO_MANGA_CORTA("", "MANCOR", "Manga corta"),
-    MAT_ALGODON("", "ALG", "Algodón");
+public enum RolName {
+
+    ROLE_ADMIN ( "ROLE_ADMIN", "ADM", "Administrador"),
+    ROLE_EMPLEADO ( "ROLE_EMPLEADO", "EMP", "Empleado"),
+    ROLE_CLIENTE ( "ROLE_CLIENTE", "CLT", "Cliente"),
+    ROLE_SOPORTE ( "ROLE_SOPORTE", "SPT", "Soporte");
 
     private final Object value;
     private final String abreviatura;
     private final String vista;
 
-    private EtiquetaName(Object value, String abreviatura, String vista) {
+    private RolName(Object value, String abreviatura, String vista) {
         this.value = value;
         this.abreviatura = abreviatura;
         this.vista = vista;
     }
-
     public String getValue() {
         return this.value.toString();
     }
@@ -30,4 +29,3 @@ public enum EtiquetaName {
     }
 
 }
-

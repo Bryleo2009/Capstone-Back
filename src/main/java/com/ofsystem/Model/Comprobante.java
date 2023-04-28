@@ -2,6 +2,8 @@ package com.ofsystem.Model;
 
 import java.util.Date;
 
+import com.ofsystem.Enums.EstComproName;
+import com.ofsystem.Enums.TipoComproName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,10 +17,10 @@ import lombok.Data;
 @Data
 public class Comprobante {
 	@Id
-        @Column(length = 50)
+	@Column(length = 50)
 	public String idComp;
 	@Column(name = "nomClientComp", nullable = false, length = 45)
-	public String nomClientcomp; //Juan Alkexander
+	public String nomClientComp; //Juan Alkexander
 	@Column(name = "identClientComp", nullable = false, length = 15)
 	public String identClientComp; //ruc o dni
 	@Column(name = "montoSubtotalComp", nullable = false)
@@ -26,7 +28,12 @@ public class Comprobante {
 	@Column(name = "montoTotalComp", nullable = false)
 	public double montoTotalComp; //incluido igv
 	@Column(name = "fechaEmiComp", nullable = false)
-	public java.sql.Date fechaEmiComp; //21/01/2021
+	public Date fechaEmiComp; //21/01/2021
+
+	@ManyToOne
+	@JoinColumn(name="idEstCompro", referencedColumnName = "idEstCompro")
+	public EstCompro idEstCompro;
+
 
 	@ManyToOne
     @JoinColumn(name="idTp", referencedColumnName = "idTp")

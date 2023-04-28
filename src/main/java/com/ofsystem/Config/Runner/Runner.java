@@ -29,6 +29,14 @@ public class Runner implements CommandLineRunner {
     @Autowired
     private ColorServiceImpl colorService;
 
+    @Autowired
+    private TipoPagoServiceImpl tipoPagoService;
+
+    @Autowired
+    private TipoDocServiceImpl tipoDocService;
+
+
+
     @Override
     public void run(String... args) throws Exception {
 

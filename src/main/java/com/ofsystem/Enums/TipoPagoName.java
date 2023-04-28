@@ -1,22 +1,19 @@
 package com.ofsystem.Enums;
 
-public enum EtiquetaName {
-    ESTACION_VERANO("", "ESTVER","Ropa de verano"),
-    ESTACION_PRIMAVERA("", "ESTPRIM","Ropa de primavera"),
-    TIPO_MANGA_LARGA("", "MANLAR", "Manga larga"),
-    TIPO_MANGA_CORTA("", "MANCOR", "Manga corta"),
-    MAT_ALGODON("", "ALG", "Algodón");
+public enum TipoPagoName {
+
+    VIRTUAL("","V","Pago virtual"),
+    PRESENCIAL("","P","Pago presencial");
 
     private final Object value;
     private final String abreviatura;
     private final String vista;
 
-    private EtiquetaName(Object value, String abreviatura, String vista) {
+    private TipoPagoName(Object value, String abreviatura, String vista) {
         this.value = value;
         this.abreviatura = abreviatura;
         this.vista = vista;
     }
-
     public String getValue() {
         return this.value.toString();
     }
@@ -30,4 +27,3 @@ public enum EtiquetaName {
     }
 
 }
-
