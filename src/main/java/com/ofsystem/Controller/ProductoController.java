@@ -72,15 +72,15 @@ public class ProductoController {
 	}
 	@GetMapping()
 	public ResponseEntity<Page<ProductoFilter>> busquedaFiltrada(@RequestParam(required = false, value="categoria") String categoria,
-																 @RequestParam(required = false, value="tipos") String tipos,
-																 @RequestParam(required = false, value="etiquetas") String etiquetas,
-																 @RequestParam(required = false, value="tallas") String tallas,
-																 @RequestParam(required = false, value="marcas") String marcas,
+																 @RequestParam(required = false, value="tipos") String[] tipos,
+																 @RequestParam(required = false, value="etiquetas") String[] etiquetas,
+																 @RequestParam(required = false, value="tallas") String[] tallas,
+																 @RequestParam(required = false, value="marcas") String[] marcas,
 																 @RequestParam(required = false, value="menorPrecio",defaultValue = "1") double menorPrecio,
 																 @RequestParam(required = false, value="mayorPrecio",defaultValue = "99999") double mayorPrecio,
 																 @RequestParam(defaultValue = "10") Integer cantidad,
 																 @RequestParam(defaultValue = "0") Integer pagina) {
-		System.out.println(marcas);
+
 		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
 

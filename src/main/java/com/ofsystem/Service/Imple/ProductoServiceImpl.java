@@ -39,11 +39,11 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 	}
 
 
-	public Page<ProductoFilter> busquedaFiltrada(String categoria, String tipos, String etiquetas, String tallas, String marcas, double menorPrecio, double mayorPrecio, int cantidad, int pagina) {
+	public Page<ProductoFilter> busquedaFiltrada(String categoria, String[] tipos, String[] etiquetas, String[] tallas, String[] marcas, double menorPrecio, double mayorPrecio, int cantidad, int pagina) {
 
 		PageRequest pageRequest = PageRequest.of(pagina, cantidad);
-		List<ProductoFilter> lista = repoMapper.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, menorPrecio, mayorPrecio, cantidad, pagina);
 
+		List<ProductoFilter> lista = repoMapper.busquedaFiltrada("'"+categoria+"'", "'"+String.join("', '", tipos)+"'","'"+String.join("', '", etiquetas)+"'" , "'" + String.join("', '", tallas) + "'", "'"+String.join("', '", marcas)+"'", menorPrecio, mayorPrecio, cantidad, pagina);
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
 
