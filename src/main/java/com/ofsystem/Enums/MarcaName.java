@@ -4,6 +4,7 @@ public enum MarcaName {
 
     ETIQ_NIKE("NIKE","NK","Nike"),
     ETIQ_ADIDAS("ADIDAS","ADD","Adidas"),
+    ETIQ_DOOAUSTRA("DOO AUSTRALIA","DOA","Doo Australia"),
     ETIQ_BILLAB("BILLABONG","BB","Billabong");
 
 

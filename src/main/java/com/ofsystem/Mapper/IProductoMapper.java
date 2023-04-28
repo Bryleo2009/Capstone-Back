@@ -24,7 +24,8 @@ public interface IProductoMapper {
             "AND (e.abrevi_item IN ( ${etiquetas} ) OR COALESCE(${etiquetas}, '') = '')\n" +
             "AND (t.abrevi_item IN ( ${tallas} ) OR COALESCE(${tallas}, '') = '')\n" +
             "AND (m.abrevi_item IN ( ${marcas} ) OR COALESCE( ${marcas}, '') = '')\n" +
-            "AND ((p.precio_uni >= ${menorPrecio} AND p.precio_uni <= ${mayorPrecio}) or (p.precio_descu_product >= ${menorPrecio} AND p.precio_descu_product <= ${mayorPrecio}))\n" +
+            "AND ((p.is_precio_desc_product AND p.precio_descu_product BETWEEN ${menorPrecio} AND ${mayorPrecio}) OR\n" +
+               "(NOT p.is_precio_desc_product AND p.precio_uni BETWEEN ${menorPrecio} AND ${mayorPrecio}))\n" +
             "group by p.id_product, m.vista_item\n" +
             "order by p.id_product LIMIT ${cantidad} OFFSET ${pagina};")
     List<ProductoFilter> busquedaFiltrada (@Param("categoria") String categoria,

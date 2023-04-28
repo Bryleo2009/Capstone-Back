@@ -97,28 +97,30 @@ public class Runner implements CommandLineRunner {
 
         //producto temporal
         try {
-            String nombreProducto = "camisa Negra";
+            String nombreProducto = "Polo Manga Corta Hombre";
             //verificar si el producto ya existe
             if (!productoService.existsByNombre(nombreProducto)) {
                 Producto unproducto = new Producto();
-                unproducto.setDescripcionProduct("camisa negra de gran tamaño");
+                unproducto.setDescripcionProduct("Tipo de cuello: Redondo | Modelo: WANNAWEB MAY21 | Estilo: Casual");
                 unproducto.setNombreProduct(nombreProducto);
                 unproducto.setPrecioUni(52.99);
                 unproducto.setStockComproProduct(50);
                 unproducto.setStockRealProduct(50);
                 unproducto.setPrecioDescProduct(true);
                 unproducto.setPrecioDescuProduct(40.56);
-                unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_ADIDAS));
+                unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
                 unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
-                unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.CAMISA));
+                unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));
 
                 List<Etiquetas> etiquetas = new ArrayList<>();
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.COLOR_AZUL));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MANGA_LARGA));
+                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.COLOR_HUESO));
+                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.TIPO_MANGA_CORTA));
                 unproducto.setIdEtiqueta(etiquetas);
 
                 List<Talla> tallas = new ArrayList<>();
                 tallas.add(tallaService.findByNombre(TallaName.LARGE));
+                tallas.add(tallaService.findByNombre(TallaName.MEDIUM));
+                tallas.add(tallaService.findByNombre(TallaName.EXTRA_LARGE));
                 tallas.add(tallaService.findByNombre(TallaName.SMALL));
                 unproducto.setIdTalla(tallas);
 

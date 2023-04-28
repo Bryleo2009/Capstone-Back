@@ -4,6 +4,7 @@ public enum TipoProductoName {
     CAMISA("","CAM","Camisa"),
     CHOMPA("","CHOM","Chompa"),
     PANTALON("","PANT","Pantalon"),
+    POLO("","POL","Polo"),
     JEANS("","JEAS","Jeans");
 
     private final Object value;
