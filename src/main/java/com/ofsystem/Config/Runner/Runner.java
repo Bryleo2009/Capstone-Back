@@ -26,6 +26,8 @@ public class Runner implements CommandLineRunner {
     private EtiquetasServiceImpl etiquetaService;
     @Autowired
     private MarcaServiceImpl marcaService;
+    @Autowired
+    private ColorServiceImpl colorService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -95,6 +97,19 @@ public class Runner implements CommandLineRunner {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
 
+        //crear Colores
+        try {
+            for (ColorName name : ColorName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!colorService.existsByIdentItem(name)) {
+                    Color etiquetas = new Color(name);
+                    colorService.registrar(etiquetas);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
         //producto temporal
         try {
             String nombreProducto = "Polo Manga Corta Hombre";
@@ -113,8 +128,10 @@ public class Runner implements CommandLineRunner {
                 unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));
 
                 List<Etiquetas> etiquetas = new ArrayList<>();
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.COLOR_HUESO));
                 etiquetas.add(etiquetaService.findByNombre(EtiquetaName.TIPO_MANGA_CORTA));
+                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_VERANO));
+                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_PRIMAVERA));
+                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MAT_ALGODON));
                 unproducto.setIdEtiqueta(etiquetas);
 
                 List<Talla> tallas = new ArrayList<>();
@@ -123,6 +140,11 @@ public class Runner implements CommandLineRunner {
                 tallas.add(tallaService.findByNombre(TallaName.EXTRA_LARGE));
                 tallas.add(tallaService.findByNombre(TallaName.SMALL));
                 unproducto.setIdTalla(tallas);
+
+                List<Color> colores = new ArrayList<>();
+                colores.add(colorService.findByIdentItem(ColorName.COLOR_HUESO));
+                colores.add(colorService.findByIdentItem(ColorName.COLOR_BLANCO));
+                unproducto.setIdColor(colores);
 
                 productoService.registrar(unproducto);
             } else {

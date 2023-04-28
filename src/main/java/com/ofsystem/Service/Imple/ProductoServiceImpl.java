@@ -39,11 +39,16 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 	}
 
 
-	public Page<ProductoFilter> busquedaFiltrada(String categoria, String[] tipos, String[] etiquetas, String[] tallas, String[] marcas, double menorPrecio, double mayorPrecio, int cantidad, int pagina) {
+	public Page<ProductoFilter> busquedaFiltrada(String categoria, String[] tipos, String[] etiquetas, String[] tallas, String[] marcas, String[] colores,double menorPrecio, double mayorPrecio, int cantidad, int pagina) {
 
 		PageRequest pageRequest = PageRequest.of(pagina, cantidad);
-
-		List<ProductoFilter> lista = repoMapper.busquedaFiltrada("'"+categoria+"'", "'"+String.join("', '", tipos)+"'","'"+String.join("', '", etiquetas)+"'" , "'" + String.join("', '", tallas) + "'", "'"+String.join("', '", marcas)+"'", menorPrecio, mayorPrecio, cantidad, pagina);
+		System.out.println("****de BACK*****");
+		System.out.println("tipos '"+String.join("', '", tipos)+"'");
+		System.out.println("etiquetas '"+String.join("', '", etiquetas)+"'");
+		System.out.println("tallas '"+String.join("', '", tallas)+"'");
+		System.out.println("marcas '"+String.join("', '", marcas)+"'");
+		System.out.println("marcas '"+String.join("', '", colores)+"'");
+		List<ProductoFilter> lista = repoMapper.busquedaFiltrada("'"+categoria+"'", "'"+String.join("', '", tipos)+"'","'"+String.join("', '", etiquetas)+"'" , "'" + String.join("', '", tallas) + "'", "'"+String.join("', '", marcas)+"'", "'"+String.join("', '", colores)+"'",menorPrecio, mayorPrecio, cantidad, pagina);
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
 

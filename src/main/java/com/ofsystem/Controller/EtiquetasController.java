@@ -1,7 +1,7 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.EtiquetaFilter;
+import com.ofsystem.Mapper.Filter.ColorFilter;
 import com.ofsystem.Model.Etiquetas;
 import com.ofsystem.Service.Imple.EtiquetasServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class EtiquetasController {
 
 	@Autowired
 	private EtiquetasServiceImpl service;
-	
+
 	@GetMapping
 	public ResponseEntity<List<Etiquetas>> listar() {
 		return new ResponseEntity<List<Etiquetas>>(service.listar(),HttpStatus.OK);
@@ -66,8 +66,4 @@ public class EtiquetasController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	@GetMapping("/colors")
-	public ResponseEntity<List<EtiquetaFilter>> getColor() {
-		return new ResponseEntity<List<EtiquetaFilter>>(service.getColor(),HttpStatus.OK);
-	}
 }

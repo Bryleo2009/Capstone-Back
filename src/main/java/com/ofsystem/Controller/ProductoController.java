@@ -76,12 +76,18 @@ public class ProductoController {
 																 @RequestParam(required = false, value="etiquetas") String[] etiquetas,
 																 @RequestParam(required = false, value="tallas") String[] tallas,
 																 @RequestParam(required = false, value="marcas") String[] marcas,
+																 @RequestParam(required = false, value="colores") String[] colores,
 																 @RequestParam(required = false, value="menorPrecio",defaultValue = "1") double menorPrecio,
 																 @RequestParam(required = false, value="mayorPrecio",defaultValue = "99999") double mayorPrecio,
 																 @RequestParam(defaultValue = "10") Integer cantidad,
 																 @RequestParam(defaultValue = "0") Integer pagina) {
-
-		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
+		System.out.println("****de FROM*****");
+		System.out.println("tipos '"+String.join("', '", tipos)+"'");
+		System.out.println("etiquetas '"+String.join("', '", etiquetas)+"'");
+		System.out.println("tallas '"+String.join("', '", tallas)+"'");
+		System.out.println("marcas '"+String.join("', '", marcas)+"'");
+		System.out.println("colores '"+String.join("', '", colores)+"'");
+		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, colores,menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
 
 }

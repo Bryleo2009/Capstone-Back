@@ -1,11 +1,9 @@
 package com.ofsystem.Service.Imple;
 
 import com.ofsystem.Enums.EtiquetaName;
-import com.ofsystem.Enums.TipoProductoName;
-import com.ofsystem.Mapper.Filter.EtiquetaFilter;
-import com.ofsystem.Mapper.IEtiquetaMapper;
+import com.ofsystem.Mapper.Filter.ColorFilter;
+import com.ofsystem.Mapper.IColorMapper;
 import com.ofsystem.Model.Etiquetas;
-import com.ofsystem.Model.TipoProducto;
 import com.ofsystem.Repo.IEtiquetasRepo;
 import com.ofsystem.Service.IEtiquetasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,6 @@ public class EtiquetasServiceImpl extends CRUDServiceImpl<Etiquetas, Integer> im
 
 	@Autowired
 	private IEtiquetasRepo repo;
-
-	@Autowired
-	private IEtiquetaMapper repoMapper;
 	
 	@Override
 	protected JpaRepository<Etiquetas, Integer> getRepo() {
@@ -35,8 +30,6 @@ public class EtiquetasServiceImpl extends CRUDServiceImpl<Etiquetas, Integer> im
 		return  repo.findByIdentItem(name);
 	}
 
-	public List<EtiquetaFilter> getColor(){
-		return repoMapper.getColor();
-	}
+
 
 }

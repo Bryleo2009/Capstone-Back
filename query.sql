@@ -9,12 +9,12 @@ inner join public.producto_id_talla ON producto_id_talla.producto_id_product = p
 inner join public.talla t ON t.id_talla = producto_id_talla.id_talla_id_talla
 inner join public.marcas m ON m.id_marca = p.id_marca
 where (ct.abrevi_item = 'CAB'  OR COALESCE('CAB' , '') = '')
-AND (tp.abrevi_item IN ( 'CAM' ) OR COALESCE('CAM', '') = '')
-AND (e.abrevi_item IN ( 'CBLUE' ) OR COALESCE('CBLUE', '') = '')
-AND (t.abrevi_item IN ( 'L' ) OR COALESCE('L', '') = '')
-AND (m.abrevi_item IN ( 'ADD' ) OR COALESCE( 'ADD', '') = '')
-AND ((p.is_precio_desc_product AND p.precio_descu_product BETWEEN 50 AND 1000) OR
-(NOT p.is_precio_desc_product AND p.precio_uni BETWEEN 50 AND 1000))
+AND (tp.abrevi_item IN ( '' ) OR COALESCE('', '') = '')
+AND (e.abrevi_item IN ( 'ESTVER' ) OR COALESCE('ESTVER', '') = '')
+AND (t.abrevi_item IN ( '' ) OR COALESCE('', '') = '')
+AND (m.abrevi_item IN ( '' ) OR COALESCE( '', '') = '')
+AND ((p.is_precio_desc_product AND p.precio_descu_product BETWEEN 10 AND 1000) OR
+(NOT p.is_precio_desc_product AND p.precio_uni BETWEEN 10 AND 1000))
 group by p.id_product, m.vista_item
 order by p.id_product 
 LIMIT ${cantidad} OFFSET ${pagina};

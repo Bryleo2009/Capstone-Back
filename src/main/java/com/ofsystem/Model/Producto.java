@@ -46,11 +46,15 @@ public class Producto {
 	@JoinColumn(name="idTalla", referencedColumnName = "idTalla")
 	public List<Talla> idTalla;
 
+	@ManyToMany
+	@JoinColumn(name="idColor", referencedColumnName = "idColor")
+	public List<Color> idColor;
+
 	public Producto() {
 
 	}
 
-	public Producto(String descripcionProduct, String nombreProduct, double precioUni, int stockRealProduct, int stockComproProduct, boolean isPrecioDescProduct, Double precioDescuProduct, String imagen, Categoria idCateg, Marca idMarca, TipoProducto idTipoProduc, List<Etiquetas> idEtiqueta, List<Talla> idTalla) {
+	public Producto(String descripcionProduct, String nombreProduct, double precioUni, int stockRealProduct, int stockComproProduct, boolean isPrecioDescProduct, Double precioDescuProduct, String imagen, Categoria idCateg, Marca idMarca, TipoProducto idTipoProduc, List<Etiquetas> idEtiqueta, List<Talla> idTalla, List<Color> idColor) {
 		this.descripcionProduct = descripcionProduct;
 		this.nombreProduct = nombreProduct;
 		this.precioUni = precioUni;
@@ -64,5 +68,6 @@ public class Producto {
 		this.idTipoProduc = idTipoProduc;
 		this.idEtiqueta = idEtiqueta;
 		this.idTalla = idTalla;
+		this.idColor = idColor;
 	}
 }
