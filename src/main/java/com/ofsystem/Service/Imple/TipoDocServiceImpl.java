@@ -19,7 +19,7 @@ public class TipoDocServiceImpl extends CRUDServiceImpl<TipoDoc, Integer> implem
 		return repo;
 	}
 
-	public boolean existsByNombreTipoProduc(TipoDocName TipoDocName){
+	public boolean existsByNombreTipoDoc(TipoDocName TipoDocName){
 		return repo.existsByIdentItem(TipoDocName);
 	}
 

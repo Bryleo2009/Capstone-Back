@@ -1,5 +1,7 @@
 package com.ofsystem.Service.Imple;
 
+import com.ofsystem.Enums.EtiquetaName;
+import com.ofsystem.Enums.TipoComproName;
 import com.ofsystem.Model.TipoCompro;
 import com.ofsystem.Repo.ITipoComproRepo;
 import com.ofsystem.Service.ITipoComproService;
@@ -12,10 +14,15 @@ public class TipoComproServiceImpl extends CRUDServiceImpl<TipoCompro, Integer> 
 
 	@Autowired
 	private ITipoComproRepo repo;
-	
+
+
 	@Override
 	protected JpaRepository<TipoCompro, Integer> getRepo() {
 		return repo;
+	}
+
+	public boolean existsByIdent(TipoComproName name){
+		return repo.existsByIdentItem(name);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.ofsystem.Config.Runner;
 import com.ofsystem.Enums.*;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.*;
+import com.ofsystem.Service.IRolService;
 import com.ofsystem.Service.Imple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,6 +36,17 @@ public class Runner implements CommandLineRunner {
     @Autowired
     private TipoDocServiceImpl tipoDocService;
 
+    @Autowired
+    private TipoComproServiceImpl tipoComproService;
+
+    @Autowired
+    private RolServiceImpl rolService;
+
+    @Autowired
+    private EstEnvioProductServiceImpl EstEnvioProductService;
+
+    @Autowired
+    private EstComproServiceImpl EstComproService;
 
 
     @Override
@@ -45,8 +57,8 @@ public class Runner implements CommandLineRunner {
             for (CategoriaName nombreCategoria : CategoriaName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!categoriaService.existsByNombreCateg(nombreCategoria)) {
-                    Categoria categoria = new Categoria(nombreCategoria);
-                    categoriaService.registrar(categoria);
+                    Categoria objeto = new Categoria(nombreCategoria);
+                    categoriaService.registrar(objeto);
                 }
             }
         } catch (Exception ex) {
@@ -58,8 +70,8 @@ public class Runner implements CommandLineRunner {
             for (TipoProductoName tipoProductoName : TipoProductoName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!tipoProductoService.existsByNombreTipoProduc(tipoProductoName)) {
-                    TipoProducto tipoProducto = new TipoProducto(tipoProductoName);
-                    tipoProductoService.registrar(tipoProducto);
+                    TipoProducto objeto = new TipoProducto(tipoProductoName);
+                    tipoProductoService.registrar(objeto);
                 }
             }
         } catch (Exception ex) {
@@ -71,8 +83,8 @@ public class Runner implements CommandLineRunner {
             for (EtiquetaName etiquetaName : EtiquetaName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!etiquetaService.existsByIdent(etiquetaName)) {
-                    Etiquetas etiquetas = new Etiquetas(etiquetaName);
-                    etiquetaService.registrar(etiquetas);
+                    Etiquetas objeto = new Etiquetas(etiquetaName);
+                    etiquetaService.registrar(objeto);
                 }
             }
         } catch (Exception ex) {
@@ -97,8 +109,8 @@ public class Runner implements CommandLineRunner {
             for (MarcaName name : MarcaName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!marcaService.existsByIdent(name)) {
-                    Marca etiquetas = new Marca(name);
-                    marcaService.registrar(etiquetas);
+                    Marca objeto = new Marca(name);
+                    marcaService.registrar(objeto);
                 }
             }
         } catch (Exception ex) {
@@ -110,13 +122,93 @@ public class Runner implements CommandLineRunner {
             for (ColorName name : ColorName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!colorService.existsByIdentItem(name)) {
-                    Color etiquetas = new Color(name);
-                    colorService.registrar(etiquetas);
+                    Color objeto = new Color(name);
+                    colorService.registrar(objeto);
                 }
             }
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
+
+        //crear TipoPago
+        try {
+            for (TipoPagoName name : TipoPagoName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!tipoPagoService.existsByIdent(name)) {
+                    TipoPago objeto = new TipoPago(name);
+                    tipoPagoService.registrar(objeto);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //crear TipoDoc
+        try {
+            for (TipoDocName name : TipoDocName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!tipoDocService.existsByNombreTipoDoc(name)) {
+                    TipoDoc objeto = new TipoDoc(name);
+                    tipoDocService.registrar(objeto);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //crear TipoCompro
+        try {
+            for (TipoComproName name : TipoComproName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!tipoComproService.existsByIdent(name)) {
+                    TipoCompro objeto = new TipoCompro(name);
+                    tipoComproService.registrar(objeto);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //crear Rol
+        try {
+            for (RolName name : RolName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!rolService.existsByIdent(name)) {
+                    Rol objeto = new Rol(name);
+                    rolService.registrar(objeto);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //crear EstEnvioProduct
+        try {
+            for (EstEnvioProductName name : EstEnvioProductName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!EstEnvioProductService.existsByNombreCateg(name)) {
+                    EstEnvioProduct objeto = new EstEnvioProduct(name);
+                    EstEnvioProductService.registrar(objeto);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //crear EstComproService
+        try {
+            for (EstComproName name : EstComproName.values()) {
+                // El enum ya está registrado en la base de datos, no se vuelve a registrar
+                if (!EstComproService.existsByNombreCateg(name)) {
+                    EstCompro objeto = new EstCompro(name);
+                    EstComproService.registrar(objeto);
+                }
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+
 
         //producto temporal
         try {
@@ -163,4 +255,7 @@ public class Runner implements CommandLineRunner {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
     }
+
+
+
 }

@@ -1,5 +1,7 @@
 package com.ofsystem.Service.Imple;
 
+import com.ofsystem.Enums.EtiquetaName;
+import com.ofsystem.Enums.TipoPagoName;
 import com.ofsystem.Model.TipoPago;
 import com.ofsystem.Repo.ITipoPagoRepo;
 import com.ofsystem.Service.ITipoPagoService;
@@ -18,4 +20,8 @@ public class TipoPagoServiceImpl extends CRUDServiceImpl<TipoPago, Integer> impl
 		return repo;
 	}
 
+
+	public boolean existsByIdent(TipoPagoName name){
+		return repo.existsByIdentItem(name);
+	}
 }
