@@ -5,7 +5,9 @@ public enum TipoProductoName {
     CHOMPA("","CHOM","Chompa"),
     PANTALON("","PANT","Pantalon"),
     POLO("","POL","Polo"),
-    JEANS("","JEAS","Jeans");
+    CONJUNTO("","CJT","Conjunto"),
+    JEANS("","JEAS","Jeans"),
+    BILLETERA("","BLL","Billeteras");
 
     private final Object value;
     private final String abreviatura;

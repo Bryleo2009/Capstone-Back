@@ -7,7 +7,9 @@ public enum ColorName {
     COLOR_BLANCO("#EFEFF2", "CWHITE", "Blanco"),
     COLOR_MARRON("#654030", "CBROWN", "Marrón"),
     COLOR_HUESO("#f6f5e2", "CBONE", "Hueso"),
-    COLOR_VERDE("#019679", "CGREEN", "Verde");
+    COLOR_VERDE("#019679", "CGREEN", "Verde"),
+    COLOR_NEUTRO("", "", ""),
+    COLOR_GRIS("#C4C4C4", "CGRAY", "Gris");
 
     private final Object value;
     private final String abreviatura;
