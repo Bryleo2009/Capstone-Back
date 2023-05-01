@@ -248,6 +248,8 @@ public class Runner implements CommandLineRunner {
                 colores.add(colorService.findByIdentItem(ColorName.COLOR_BLANCO));
                 unproducto.setIdColor(colores);
 
+                unproducto.setIUP();
+
                 productoService.registrar(unproducto);
 
                 // Crear objetos ProductoTalla para cada talla

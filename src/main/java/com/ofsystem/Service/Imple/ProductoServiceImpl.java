@@ -52,4 +52,7 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
 
+	public Producto listarxIUP (String iup){
+		return repoMapper.listarxIUP(iup);
+	}
 }

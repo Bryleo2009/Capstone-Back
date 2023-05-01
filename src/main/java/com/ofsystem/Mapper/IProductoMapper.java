@@ -42,4 +42,8 @@ public interface IProductoMapper {
                                            @Param("mayorPrecio") double mayorPrecio,
                                            @Param("cantidad") int cantidad,
                                            @Param("pagina") int pagina);
+
+    @Select("SELECT * FROM producto WHERE iup LIKE '%${iup}%'")
+    Producto listarxIUP(@Param("iup") String iup);
+
 }

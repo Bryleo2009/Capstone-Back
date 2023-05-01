@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Random;
 
 @Entity
 @Table (name = "producto")
@@ -13,6 +14,8 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int idProduct;
+	@Column(name = "iup", nullable = false, length = 1000)
+	public String IUP;
 	@Column(name = "descripcionProduct", nullable = false, length = 1000)
 	public String descripcionProduct;
 	@Column(name = "nombreProduct", nullable = false, length = 1000)
@@ -24,6 +27,7 @@ public class Producto {
 	@Column(name = "precioDescuProduct", nullable = true)
 	public Double precioDescuProduct;
 	public String imagen;
+	public String rutaQr;
 	@ManyToOne
     @JoinColumn(name="idCateg", referencedColumnName = "idCateg")
 	public Categoria idCateg;
@@ -51,5 +55,20 @@ public class Producto {
 
 	}
 
+	public void setIUP() {
+		this.IUP = generarIUP(nombreProduct,idCateg.getIdCateg(),idMarca.getIdMarca(),idTipoProduc.getIdTipoProduc());
+	}
+
+	public String generarIUP(String nombreProduct, int idCateg, int idMarca, int idTipoProduc) {
+		Random random = new Random();
+		int randomNumber = random.nextInt(999); // genera un número aleatorio entre 0 y 999
+		String nombreProductoSinEspacios = nombreProduct.replaceAll("\\s", "").toUpperCase();
+		String primeras2 = nombreProductoSinEspacios.substring(0, 2);
+		char terceraLetra = nombreProductoSinEspacios.charAt(2);
+		char ultimaLetra = nombreProductoSinEspacios.charAt(nombreProductoSinEspacios.length() - 1);
+		String iup = primeras2 + '-' + 'C' + idCateg + 'M' + idMarca + "TP" + idTipoProduc + '-' +
+				terceraLetra + '-' + String.format("%03d", randomNumber) + '-' + ultimaLetra;
+		return iup;
+	}
 
 }
