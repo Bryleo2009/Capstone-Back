@@ -48,7 +48,7 @@ public class MediaServiceImpl {
             throw new RuntimeException("Error de archivo: ", ex);
         }
 
-    }
+    }*/
 
     public Resource loadAsResource(String filename, String folder) {
         try {
@@ -64,7 +64,7 @@ public class MediaServiceImpl {
         }
     }
 
-
+/*
     public void delete(String filename, String folder) {
         try {
             Path file = rootLocation.resolve(folder).resolve(filename);

@@ -25,4 +25,13 @@ public class ProductoTalla {
         this.stockRealProduct = stockReal;
         this.stockComproProduct = stockCompro;
     }
+
+    public ProductoTalla() {
+    }
+
+    public ProductoTalla(Producto producto_id_product, Talla id_talla_id_talla, int Stock) {
+        this.producto_id_product = producto_id_product;
+        this.id_talla_id_talla = id_talla_id_talla;
+        setStock(Stock,Stock);
+    }
 }

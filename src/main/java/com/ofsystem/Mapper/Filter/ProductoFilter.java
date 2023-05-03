@@ -10,14 +10,14 @@ import java.util.List;
 
 public class ProductoFilter {
     public int id_product;
+    public String iup;
     public String nombre_product;
     public String imagen;
     public double precio_uni;
-    public int stock_compro_product;
-    public int stock_real_product;
     public boolean is_precio_desc_product;
     public Double precio_descu_product;
     public String etiquetas;
     public String tallas;
     public String marca;
+    public String colores;
 }

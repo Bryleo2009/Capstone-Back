@@ -51,6 +51,62 @@ public class Producto {
 	public List<Color> idColor;
 	@Column(name = "isExistente", nullable = false)
 	public boolean isExistente;
+
+	public boolean isExistente() {
+		return isExistente;
+	}
+
+	public void setExistente() {
+		isExistente = true;
+	}
+
+	public String concatenarTalla(List<Talla> lista) {
+		StringBuilder sb = new StringBuilder();
+		for (Talla obje : lista) {
+			if(obje.getVistaItem() == null){
+				sb.append(' ' +", ");
+			} else {
+				sb.append(obje.getVistaItem() +", ");
+			}
+		}
+		return sb.toString();
+	}
+
+	public String concatenarEtiqueta(List<Etiquetas> lista) {
+		StringBuilder sb = new StringBuilder();
+		for (Etiquetas obje : lista) {
+			if(obje.getVistaItem() == null){
+				sb.append(' ' +", ");
+			} else {
+				sb.append(obje.getVistaItem() +", ");
+			}
+		}
+		return sb.toString();
+	}
+
+	public String concatenarColor(List<Color> lista) {
+		StringBuilder sb = new StringBuilder();
+		for (Color obje : lista) {
+			if(obje.getVistaItem() == null){
+				sb.append(' ' +", ");
+			} else {
+				sb.append(obje.getVistaItem() +", ");
+			}
+		}
+		return sb.toString();
+	}
+
+	public String concatenarMarca(Marca lista) {
+		System.out.println(lista);
+		StringBuilder sb = new StringBuilder();
+		if(lista.getVistaItem() == null){
+			sb.append(' ');
+		} else {
+			sb.append(lista.getVistaItem());
+		}
+		return sb.toString();
+	}
+
 	public Producto() {
 
 	}
@@ -62,13 +118,15 @@ public class Producto {
 	public String generarIUP(String nombreProduct, int idCateg, int idMarca, int idTipoProduc) {
 		Random random = new Random();
 		int randomNumber = random.nextInt(999); // genera un número aleatorio entre 0 y 999
-		String nombreProductoSinEspacios = nombreProduct.replaceAll("\\s", "").toUpperCase();
-		String primeras2 = nombreProductoSinEspacios.substring(0, 2);
-		char terceraLetra = nombreProductoSinEspacios.charAt(2);
+		String nombreProductoSinEspacios = nombreProduct.replaceAll("[^a-zA-Z0-9]", "").toUpperCase();
+		int mitad = nombreProductoSinEspacios.length() / 2;
+		char primeraLetra = nombreProductoSinEspacios.charAt(0);
+		char letraMitad = nombreProductoSinEspacios.charAt(mitad);
+		char terceraLetra = nombreProductoSinEspacios.charAt(nombreProductoSinEspacios.length() - 2);
 		char ultimaLetra = nombreProductoSinEspacios.charAt(nombreProductoSinEspacios.length() - 1);
-		String iup = primeras2 + '-' + 'C' + idCateg + 'M' + idMarca + "TP" + idTipoProduc + '-' +
-				terceraLetra + '-' + String.format("%03d", randomNumber) + '-' + ultimaLetra;
+		String iup = primeraLetra + "-" + 'C' + idCateg + 'M' + idMarca + "TP" + idTipoProduc + letraMitad + '-' + terceraLetra + '-' + String.format("%03d", randomNumber) + '-' + ultimaLetra;
 		return iup;
 	}
+
 
 }

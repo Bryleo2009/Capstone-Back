@@ -2,9 +2,14 @@ package com.ofsystem.Config.Exception;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.CannotCreateTransactionException;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +23,7 @@ import java.util.Date;
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	HttpStatus Status = null;
-	/*
+
 	//otros errores
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ExceptionResponse> manejarTodasExcepciones(Exception ex, WebRequest request){
@@ -42,17 +47,18 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getCause().getCause().getMessage().toString(), request.getDescription(false),Status.toString());
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, Status);
 	}
-*/
+
 	//errores de parseo
-	/*
+
+
 	@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		Status = HttpStatus.INTERNAL_SERVER_ERROR;
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false),Status.toString());
 		return new ResponseEntity<Object>(exceptionResponse, Status);
 	}
-	*/
-	/*@ExceptionHandler(CannotCreateTransactionException.class)
+
+	@ExceptionHandler(CannotCreateTransactionException.class)
 	public final ResponseEntity<ExceptionResponse> manejarDataVaciaExcepciones2(CannotCreateTransactionException  ex, WebRequest request){
 		Status = HttpStatus.SERVICE_UNAVAILABLE;
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getCause().getCause().getMessage().toString(), request.getDescription(false),Status.toString());
@@ -68,23 +74,23 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, Status);
 	}
 
-*/
+
 
 	//error al validar tamaño minimo de cadena
-	/*
+
+
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		Status = HttpStatus.INTERNAL_SERVER_ERROR;
 		String errores = "";
 		for(ObjectError e : ex.getBindingResult().getAllErrors()) {
 			errores += e.getDefaultMessage() + " en el modelo " + e.getObjectName() + " --- ";
-		}		
+		}
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Error en los campos: " + errores, request.getDescription(false),Status.toString());
 		return new ResponseEntity<Object>(exceptionResponse, Status);
 	}
-*/
-	/*@ExceptionHandler(value = NullPointerException.class)
+
+	@ExceptionHandler(value = NullPointerException.class)
 	public ResponseEntity<Object> manejarNullPointerException(NullPointerException ex,WebRequest request) {
 		String detalle = obtenerLineaDeCodigo(ex);
 		Status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -98,5 +104,5 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 			return stackTrace[0].toString();
 		}
 		return "";
-	}*/
+	}
 }

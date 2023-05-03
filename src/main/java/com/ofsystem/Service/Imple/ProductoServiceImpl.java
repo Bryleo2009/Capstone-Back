@@ -3,6 +3,7 @@ package com.ofsystem.Service.Imple;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Mapper.IProductoMapper;
 import com.ofsystem.Model.Producto;
+import com.ofsystem.Model.Talla;
 import com.ofsystem.Repo.IProductoRepo;
 import com.ofsystem.Service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,10 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
 
-	public Producto listarxIUP (String iup){
-		return repoMapper.listarxIUP(iup);
+	public List<Producto> listarxIUP(String iup){
+		return repo.findProductoByIUPContaining(iup.substring(0, iup.length()-6));
 	}
+
+
+
 }
