@@ -1,26 +1,57 @@
 package com.ofsystem.Controller;
 
+import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Model.Producto;
+import com.ofsystem.Model.ProductoTalla;
+import com.ofsystem.Model.Talla;
 import com.ofsystem.Service.Imple.ProductoServiceImpl;
+import com.ofsystem.Service.Imple.ProductoTallaServiceImpl;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/Productos")
 public class ProductoController {
+	@Value("${media.location}")
+	private String mediaLocation;
+
+	public Path rootLocation;
 
 	@Autowired
 	private ProductoServiceImpl service;
+
+	@Autowired
+	private ProductoTallaServiceImpl serviceTalla;
+
+	String IUP="";
 	
 	/*@GetMapping
 	public ResponseEntity<Page<Producto>> listar(
@@ -30,6 +61,11 @@ public class ProductoController {
 
 		return new ResponseEntity<Page<Producto>>(productos, HttpStatus.OK);
 	}*/
+
+	@GetMapping("/listar")
+	public ResponseEntity<List<Producto>> listar() {
+		return new ResponseEntity<List<Producto>>(service.listar(),HttpStatus.OK);
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Producto> listarPorId(@PathVariable("id") int id) {
@@ -39,22 +75,44 @@ public class ProductoController {
 		}		
 		return new ResponseEntity<Producto>(unaProducto,HttpStatus.OK);
 	}
+
+	@GetMapping("/iup/{iup}")
+	public ResponseEntity<List<Producto>> listarPorIup(@PathVariable("iup") String iup) {
+		List<Producto> unaProducto = service.listarxIUP(iup);
+		if(unaProducto == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + iup);
+		}
+		return new ResponseEntity<List<Producto>>(unaProducto,HttpStatus.OK);
+	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar( @RequestBody Producto dato) {
-		Producto unaProducto = service.listarxID(dato.getIdProduct());
+	public ResponseEntity<Object> registrar( @RequestBody Producto dato) throws IOException, WriterException {
+		dato.setIUP();
+		dato.setExistente();
+		IUP = dato.getIUP();
+		String cadena = IUP;
+		int unaProducto = service.listarxIUP(cadena).size();
 		URI location = null;
-		if(unaProducto != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
+		if(unaProducto != 0) {
+			//location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
 			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
 		} else {
 			service.registrar(dato);
+			System.out.println("tallas " + dato.getIdTalla());
+			List<ProductoTalla> obj = new ArrayList<>();
+			for (Talla talla : dato.getIdTalla()) {
+				ProductoTalla productoTalla = new ProductoTalla(dato,talla,50);
+				obj.add(productoTalla);
+			}
+			serviceTalla.registroMasivo(obj);
+
+			generadorQR(dato);
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
 		}		
 		
 		return ResponseEntity.created(location).build();
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<Producto> modificar( @RequestBody Producto dato) {		
 		return new ResponseEntity<Producto>(service.modificar(dato),HttpStatus.OK);
@@ -89,5 +147,69 @@ public class ProductoController {
 		System.out.println("colores '"+String.join("', '", colores)+"'");
 		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, colores,menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
+
+	/*public void generadorQR(Producto producto) throws IOException {
+
+		//producto.setIUP();
+		// Generar el código QR con el dato IUP
+		String iup = IUP;
+		String contenidoQR = 	"IUP: " + producto.getIUP() + "\n" +
+								"Nombre: " + producto.getNombreProduct() + "\n" +
+								"Precio: " + producto.getPrecioUni() + "\n" +
+								"Descripción: " + producto.getDescripcionProduct() + "\n" +
+								"Categorias: " + producto.getIdCateg() + "\n" +
+								"Marcas: " + producto.getIdMarca().getVistaItem() + "\n" +
+								"Etiquetas: " + producto.concatenarEtiqueta(producto.getIdEtiqueta()) + "\n" +
+								"Tallas: " + producto.concatenarTalla(producto.getIdTalla()) + "\n" +
+								"Colores: " + producto.concatenarColor(producto.getIdColor()) ;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		QRCode.from(contenidoQR).to(ImageType.PNG).withSize(550, 550).writeTo(baos);
+
+		// Crear el directorio si no existe
+		rootLocation = Paths.get(mediaLocation);
+		Path productosQr = rootLocation.resolve("productosQr");
+		if (!Files.exists(productosQr)) {
+			Files.createDirectories(productosQr);
+		}
+
+		// Crear el archivo con el nombre del IUP
+		Path qrFile = productosQr.resolve(iup + ".png");
+		Files.write(qrFile, baos.toByteArray());
+
+		// Obtener la ruta absoluta del archivo guardado
+		String rutaArchivo = qrFile.toAbsolutePath().toString();
+
+		System.out.println("Qr generado: IUP|"+IUP+" - Ruta|"+rutaArchivo);
+	}*/
+
+
+	public void generadorQR(Producto producto) throws IOException, WriterException {
+		//producto.setIUP();
+		// Generar el código QR con el dato IUP
+		String iup = IUP;
+		// Generar el código QR con los datos del producto en formato JSON
+		Gson gson = new Gson();
+		String productoJson = gson.toJson(producto);
+		MultiFormatWriter writer = new MultiFormatWriter();
+		BitMatrix bitMatrix = writer.encode(productoJson, BarcodeFormat.QR_CODE, 550, 550);
+
+		// Crear el directorio si no existe
+		rootLocation = Paths.get(mediaLocation);
+		Path productosQr = rootLocation.resolve("productosQr");
+		if (!Files.exists(productosQr)) {
+			Files.createDirectories(productosQr);
+		}
+
+		// Crear el archivo con el nombre del IUP
+		Path qrFile = productosQr.resolve(iup + ".png");
+		MatrixToImageWriter.writeToPath(bitMatrix, "PNG", qrFile);
+
+		// Obtener la ruta absoluta del archivo guardado
+		String rutaArchivo = qrFile.toAbsolutePath().toString();
+
+		System.out.println("Qr generado: IUP|"+IUP+" - Ruta|"+rutaArchivo);
+	}
+
+
 
 }

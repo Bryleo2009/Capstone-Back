@@ -1,6 +1,7 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Mapper.Filter.TallaFilter;
 import com.ofsystem.Model.Talla;
 import com.ofsystem.Service.Imple.TallaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class TallaController {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
 		}		
 		return new ResponseEntity<Talla>(unaTalla,HttpStatus.OK);
+	}
+
+	@GetMapping("/activas/{id}")
+	public ResponseEntity<List<Talla>> listarPorIdActivas(@PathVariable("id") int id) {
+		List<Talla> unaTalla = service.listarTallasxID(id);
+		System.out.println(unaTalla);
+		if(unaTalla == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
+		}
+		return new ResponseEntity<List<Talla>>(unaTalla,HttpStatus.OK);
 	}
 	
 	@PostMapping

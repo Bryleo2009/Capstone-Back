@@ -48,6 +48,9 @@ public class Runner implements CommandLineRunner {
     @Autowired
     private EstComproServiceImpl EstComproService;
 
+    @Autowired
+    private ProductoTallaServiceImpl productoTallaService;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -217,8 +220,6 @@ public class Runner implements CommandLineRunner {
                 unproducto.setDescripcionProduct("Tipo de cuello: Redondo | Modelo: WANNAWEB MAY21 | Estilo: Casual");
                 unproducto.setNombreProduct(nombreProducto);
                 unproducto.setPrecioUni(52.99);
-                unproducto.setStockComproProduct(50);
-                unproducto.setStockRealProduct(50);
                 unproducto.setPrecioDescProduct(true);
                 unproducto.setPrecioDescuProduct(40.56);
                 unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
@@ -239,12 +240,24 @@ public class Runner implements CommandLineRunner {
                 tallas.add(tallaService.findByNombre(TallaName.SMALL));
                 unproducto.setIdTalla(tallas);
 
+
                 List<Color> colores = new ArrayList<>();
                 colores.add(colorService.findByIdentItem(ColorName.COLOR_HUESO));
                 colores.add(colorService.findByIdentItem(ColorName.COLOR_BLANCO));
                 unproducto.setIdColor(colores);
 
+                unproducto.setIUP();
+
                 productoService.registrar(unproducto);
+
+                // Crear objetos ProductoTalla para cada talla
+                for (Talla talla : tallas) {
+                    ProductoTalla productoTalla = new ProductoTalla();
+                    productoTalla.setProducto_id_product(unproducto);
+                    productoTalla.setId_talla_id_talla(talla);
+                    productoTalla.setStock(50, 0); // Establecer valores iniciales de stock
+                    productoTallaService.registrar(productoTalla);
+                }
             } else {
                 // el producto ya existe
                 System.out.println("El producto ya existe en la base de datos.");

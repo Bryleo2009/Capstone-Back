@@ -3,6 +3,7 @@ package com.ofsystem.Service.Imple;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Mapper.IProductoMapper;
 import com.ofsystem.Model.Producto;
+import com.ofsystem.Model.Talla;
 import com.ofsystem.Repo.IProductoRepo;
 import com.ofsystem.Service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,11 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 		List<ProductoFilter> lista = repoMapper.busquedaFiltrada("'"+categoria+"'", "'"+String.join("', '", tipos)+"'","'"+String.join("', '", etiquetas)+"'" , "'" + String.join("', '", tallas) + "'", "'"+String.join("', '", marcas)+"'", "'"+String.join("', '", colores)+"'",menorPrecio, mayorPrecio, cantidad, pagina);
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
+
+	public List<Producto> listarxIUP(String iup){
+		return repo.findProductoByIUPContaining(iup.substring(0, iup.length()-6));
+	}
+
+
 
 }
