@@ -208,8 +208,6 @@ public class Runner implements CommandLineRunner {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
 
-
-
         //producto temporal
         try {
             String nombreProducto = "Polo Manga Corta Hombre";
