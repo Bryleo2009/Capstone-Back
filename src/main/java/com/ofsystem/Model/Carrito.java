@@ -20,7 +20,8 @@ public class Carrito {
     public int cantidadCompraCarrito;
     @Column(name = "montoTotalCarrito", nullable = false)
     public double montoTotalCarrito;
-
+    @Column(name = "isPedidoAct", nullable = false)
+    public boolean isPedidoAct;
     @ManyToOne
     @JoinColumn(name="idProduct", referencedColumnName = "idProduct")
     public Producto idProduct;
@@ -29,25 +30,16 @@ public class Carrito {
     @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
     public Cliente idCliente;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name="idTalla", referencedColumnName = "idTalla")
-    public List<Talla> idTalla;
+    public Talla idTalla;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name="idColor", referencedColumnName = "idColor")
-    public List<Color> idColor;
+    public Color idColor;
 
     public Carrito() {
 
     }
-    public Carrito(int idCarrito, Date fechaCompraCarrito, int cantidadCompraCarrito, double montoTotalCarrito, Producto idProduct, Cliente idCliente, List<Talla> idTalla, List<Color> idColor) {
-        this.idCarrito = idCarrito;
-        this.fechaCompraCarrito = fechaCompraCarrito;
-        this.cantidadCompraCarrito = cantidadCompraCarrito;
-        this.montoTotalCarrito = montoTotalCarrito;
-        this.idProduct = idProduct;
-        this.idCliente = idCliente;
-        this.idTalla = idTalla;
-        this.idColor = idColor;
-    }
+
 }

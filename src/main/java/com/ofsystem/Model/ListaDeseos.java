@@ -1,6 +1,8 @@
 package com.ofsystem.Model;
 
 import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
 @Entity
@@ -12,9 +14,9 @@ public class ListaDeseos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idListaDeseo;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name="idProduct", referencedColumnName = "idProduct")
-    public Producto idProduct;
+    public List<Producto> idProduct;
 
     @ManyToOne
     @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
@@ -22,10 +24,5 @@ public class ListaDeseos {
 
     public ListaDeseos() {
 
-    }
-    public ListaDeseos(int idListaDeseo, Producto idProduct, Cliente idCliente) {
-        this.idListaDeseo = idListaDeseo;
-        this.idProduct = idProduct;
-        this.idCliente = idCliente;
     }
 }

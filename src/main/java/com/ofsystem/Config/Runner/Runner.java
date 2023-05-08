@@ -3,7 +3,6 @@ package com.ofsystem.Config.Runner;
 import com.ofsystem.Enums.*;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Model.*;
-import com.ofsystem.Service.IRolService;
 import com.ofsystem.Service.Imple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -43,7 +42,7 @@ public class Runner implements CommandLineRunner {
     private RolServiceImpl rolService;
 
     @Autowired
-    private EstEnvioProductServiceImpl EstEnvioProductService;
+    private EstProductServiceImpl EstEnvioProductService;
 
     @Autowired
     private EstComproServiceImpl EstComproService;
@@ -187,10 +186,10 @@ public class Runner implements CommandLineRunner {
 
         //crear EstEnvioProduct
         try {
-            for (EstEnvioProductName name : EstEnvioProductName.values()) {
+            for (EstProductName name : EstProductName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!EstEnvioProductService.existsByNombreCateg(name)) {
-                    EstEnvioProduct objeto = new EstEnvioProduct(name);
+                    EstProduct objeto = new EstProduct(name);
                     EstEnvioProductService.registrar(objeto);
                 }
             }
@@ -222,6 +221,7 @@ public class Runner implements CommandLineRunner {
                 unproducto.setPrecioUni(52.99);
                 unproducto.setPrecioDescProduct(true);
                 unproducto.setPrecioDescuProduct(40.56);
+                unproducto.setExistente();
                 unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
                 unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
                 unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));

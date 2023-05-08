@@ -140,6 +140,7 @@ public class ProductoController {
 																 @RequestParam(defaultValue = "10") Integer cantidad,
 																 @RequestParam(defaultValue = "0") Integer pagina) {
 		System.out.println("****de FROM*****");
+		System.out.println("categoria '"+categoria+"'");
 		System.out.println("tipos '"+String.join("', '", tipos)+"'");
 		System.out.println("etiquetas '"+String.join("', '", etiquetas)+"'");
 		System.out.println("tallas '"+String.join("', '", tallas)+"'");

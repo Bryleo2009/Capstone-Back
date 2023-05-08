@@ -44,6 +44,7 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 
 		PageRequest pageRequest = PageRequest.of(pagina, cantidad);
 		System.out.println("****de BACK*****");
+		System.out.println("categoria '"+categoria+"'");
 		System.out.println("tipos '"+String.join("', '", tipos)+"'");
 		System.out.println("etiquetas '"+String.join("', '", etiquetas)+"'");
 		System.out.println("tallas '"+String.join("', '", tallas)+"'");

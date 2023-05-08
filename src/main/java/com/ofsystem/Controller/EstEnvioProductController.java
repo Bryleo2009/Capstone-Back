@@ -1,8 +1,8 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.EstEnvioProduct;
-import com.ofsystem.Service.Imple.EstEnvioProductServiceImpl;
+import com.ofsystem.Model.EstProduct;
+import com.ofsystem.Service.Imple.EstProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +18,28 @@ import java.util.List;
 public class EstEnvioProductController {
 
 	@Autowired
-	private EstEnvioProductServiceImpl service;
+	private EstProductServiceImpl service;
 	
 	@GetMapping
-	public ResponseEntity<List<EstEnvioProduct>> listar() {
-		return new ResponseEntity<List<EstEnvioProduct>>(service.listar(),HttpStatus.OK);
+	public ResponseEntity<List<EstProduct>> listar() {
+		return new ResponseEntity<List<EstProduct>>(service.listar(),HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<EstEnvioProduct> listarPorId(@PathVariable("id") int id) {
-		EstEnvioProduct unaEstEnvioProduct = service.listarxID(id);
-		if(unaEstEnvioProduct == null) {
+	public ResponseEntity<EstProduct> listarPorId(@PathVariable("id") int id) {
+		EstProduct unaEstProduct = service.listarxID(id);
+		if(unaEstProduct == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
 		}		
-		return new ResponseEntity<EstEnvioProduct>(unaEstEnvioProduct,HttpStatus.OK);
+		return new ResponseEntity<EstProduct>(unaEstProduct,HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> registrar( @RequestBody EstEnvioProduct dato) {
-		EstEnvioProduct unaEstEnvioProduct = service.listarxID(dato.getIdEstEnvioProduct());
+	public ResponseEntity<Object> registrar( @RequestBody EstProduct dato) {
+		EstProduct unaEstProduct = service.listarxID(dato.getIdEstEnvioProduct());
 		URI location = null;
-		if(unaEstEnvioProduct != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaEstEnvioProduct.getIdEstEnvioProduct()).toUri();
+		if(unaEstProduct != null) {
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaEstProduct.getIdEstEnvioProduct()).toUri();
 			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdEstEnvioProduct() + " --- " + location);
 		} else {
 			service.registrar(dato);
@@ -50,14 +50,14 @@ public class EstEnvioProductController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<EstEnvioProduct> modificar( @RequestBody EstEnvioProduct dato) {		
-		return new ResponseEntity<EstEnvioProduct>(service.modificar(dato),HttpStatus.OK);
+	public ResponseEntity<EstProduct> modificar(@RequestBody EstProduct dato) {
+		return new ResponseEntity<EstProduct>(service.modificar(dato),HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") int id) {
-		EstEnvioProduct unaEstEnvioProduct = service.listarxID(id);
-		if(unaEstEnvioProduct == null) {
+		EstProduct unaEstProduct = service.listarxID(id);
+		if(unaEstProduct == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
 		} else {
 			service.eliminar(id);

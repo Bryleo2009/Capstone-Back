@@ -29,18 +29,7 @@ public enum TallaName {
     NUM_40("40","N40","40"),
     NUM_40M("40.5","N40M","40.5"),
     NUM_41("41","N41","41"),
-    NUM_41M("41.5","N41M","41.5"),
-    NUM_42("42","N42","42"),
-    NUM_42M("42.5","N42M","42.5"),
-    NUM_43("43","N43","43"),
-    NUM_43M("43.5","N43M","43.5"),
-    NUM_44("44","N44","44"),
-    NUM_44M("44.5","N44M","44.5"),
-    NUM_45("45","N45","45"),
-    NUM_45M("45.5","N45M","45.5"),
-    NUM_46("46","N46","46"),
-    NUM_46M("46.5","N46M","46.5"),
-    UNICA("UNICA","UNI","Talla unica"),;
+    UNICA("UNICA","UNI","Talla unica");
 
 
     private final Object value;

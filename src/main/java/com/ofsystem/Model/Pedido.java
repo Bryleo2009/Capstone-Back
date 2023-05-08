@@ -15,7 +15,10 @@ public class Pedido {
     public int idPedido;
 
     @ManyToMany
-    @JoinColumn(name="idProduct", referencedColumnName = "idProduct")
+    @JoinTable(
+            name = "idPedido",
+            joinColumns = @JoinColumn(name = "idProduct"),
+            inverseJoinColumns = @JoinColumn(name = "idPedido"))
     public List<Producto> idProduct;
 
     @Column(name="cantidad", nullable = false)
@@ -31,5 +34,5 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name="idEstEnvioProduct", referencedColumnName = "idEstEnvioProduct")
-    public EstEnvioProduct idEstEnvioProduct;
+    public EstProduct idEstProduct;
 }

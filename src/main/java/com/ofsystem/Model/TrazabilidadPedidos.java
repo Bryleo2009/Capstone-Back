@@ -20,11 +20,11 @@ public class TrazabilidadPedidos {
 
     @ManyToOne
     @JoinColumn(name="idProceActual", referencedColumnName = "idEstEnvioProduct")
-    public EstEnvioProduct idProceActual;
+    public EstProduct idProceActual;
 
     @ManyToOne
     @JoinColumn(name="idProceAnterior", referencedColumnName = "idEstEnvioProduct")
-    public EstEnvioProduct idProceAnterior;
+    public EstProduct idProceAnterior;
 
     @Column(name="fechaIniProc", nullable = false)
     public Date fechaIniProc;

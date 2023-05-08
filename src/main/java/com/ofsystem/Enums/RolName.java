@@ -16,6 +16,8 @@ public enum RolName {
         this.abreviatura = abreviatura;
         this.vista = vista;
     }
+
+
     public String getValue() {
         return this.value.toString();
     }

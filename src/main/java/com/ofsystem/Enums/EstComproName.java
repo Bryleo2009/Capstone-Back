@@ -2,9 +2,9 @@ package com.ofsystem.Enums;
 
 public enum EstComproName {
 
-    EMITIDO ( "", "EMT", "Comprobante emitido"),
-    PAGADO ( "", "PGD", "Comprobante pagado"),
-    ANULADO ( "", "ANL", "Comprobante anulado");
+    EMITIDO ( "EMITIDO", "EMT", "Comprobante emitido"),
+    PAGADO ( "PAGADO", "PGD", "Comprobante pagado"),
+    ANULADO ( "ANULADO", "ANL", "Comprobante anulado");
 
     private final Object value;
     private final String abreviatura;
