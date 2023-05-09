@@ -40,7 +40,8 @@ public class Producto {
 	@ManyToMany
 	@JoinColumn(name="idEtiqueta", referencedColumnName = "idEtiqueta")
 	public List<Etiquetas> idEtiqueta;
-	@ManyToMany
+
+	/*@ManyToMany
 	@JoinTable(
 			name = "idTalla",
 			joinColumns = @JoinColumn(name = "idProduct"),
@@ -48,7 +49,8 @@ public class Producto {
 	public List<Talla> idTalla;
 	@ManyToMany
 	@JoinColumn(name="idColor", referencedColumnName = "idColor")
-	public List<Color> idColor;
+	public List<Color> idColor;*/
+
 	@Column(name = "isExistente", nullable = false)
 	public boolean isExistente;
 

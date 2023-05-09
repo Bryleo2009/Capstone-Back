@@ -27,19 +27,19 @@ public class ProductoTallaColorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductoTallaColor> listarPorId(@PathVariable("id") Integer id) {
-        ProductoTallaColor unaCarrito = service.listarxID(id);
-        if(unaCarrito == null) {
+        ProductoTallaColor unaProductoTallaColor = service.listarxID(id);
+        if(unaProductoTallaColor == null) {
             throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
         }
-        return new ResponseEntity<ProductoTallaColor>(unaCarrito,HttpStatus.OK);
+        return new ResponseEntity<ProductoTallaColor>(unaProductoTallaColor,HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Object> registrar( @RequestBody ProductoTallaColor dato) {
-        ProductoTallaColor unaCarrito = service.listarxID(dato.getIdProductoTallaColor());
+        ProductoTallaColor unaProductoTallaColor = service.listarxID(dato.getIdProductoTallaColor());
         URI location = null;
-        if(unaCarrito != null) {
-            location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaCarrito.getIdProductoTallaColor()).toUri();
+        if(unaProductoTallaColor != null) {
+            location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProductoTallaColor.getIdProductoTallaColor()).toUri();
             throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProductoTallaColor() + " --- " + location);
         } else {
             service.registrar(dato);
@@ -56,8 +56,8 @@ public class ProductoTallaColorController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> eliminar(@PathVariable("id") Integer id) {
-        ProductoTallaColor unaCarrito = service.listarxID(id);
-        if(unaCarrito == null) {
+        ProductoTallaColor unaProductoTallaColor = service.listarxID(id);
+        if(unaProductoTallaColor == null) {
             throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
         } else {
             service.eliminar(id);
