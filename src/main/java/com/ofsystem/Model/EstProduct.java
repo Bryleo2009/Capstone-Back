@@ -2,11 +2,14 @@ package com.ofsystem.Model;
 
 import com.ofsystem.Enums.EstProductName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "estProduct")
 @Data
+@AllArgsConstructor
 public class EstProduct {
 
     @Id

@@ -13,7 +13,7 @@ import java.util.List;
 public interface IProductoMapper {
        @Select("SELECT \n" +
                "    p.id_product, \n" +
-               "    p.iup, \n" +
+               "\tp.iup, \n" +
                "    p.nombre_product, \n" +
                "    p.imagen, \n" +
                "    p.precio_uni,\n" +
@@ -28,26 +28,29 @@ public interface IProductoMapper {
                "INNER JOIN public.tipo_producto tp ON tp.id_tipo_produc = p.id_tipo_produc\n" +
                "INNER JOIN public.producto_id_etiqueta ON producto_id_etiqueta.producto_id_product = p.id_product\n" +
                "INNER JOIN public.etiquetas e ON e.id_etiqueta = producto_id_etiqueta.id_etiqueta_id_etiqueta\n" +
-               "INNER JOIN public.producto_id_talla ON producto_id_talla.producto_id_product = p.id_product\n" +
-               "INNER JOIN public.talla t ON t.id_talla = producto_id_talla.id_talla_id_talla\n" +
-               "INNER JOIN public.producto_id_color ON producto_id_color.producto_id_product = p.id_product\n" +
-               "INNER JOIN public.colores c ON c.id_color = producto_id_color.id_color_id_color\n" +
+               "INNER JOIN public.producto_talla_color ptc ON ptc.producto_id_product = p.id_product\n" +
+               "INNER JOIN public.talla t ON t.id_talla = ptc.id_talla_id_talla\n" +
+               "INNER JOIN public.color c ON c.id_color = ptc.id_color_id_color\n" +
                "INNER JOIN public.marcas m ON m.id_marca = p.id_marca\n" +
                "WHERE \n" +
-               "(ct.abrevi_item = ${categoria}  OR COALESCE(${categoria} , '') = '')\n" +
+               "    (ct.abrevi_item = ${categoria}  OR COALESCE(${categoria} , '') = '')\n" +
                "AND (tp.abrevi_item IN ( ${tipos} ) OR COALESCE(${tipos}, '') = '')\n" +
                "AND (e.abrevi_item IN ( ${etiquetas} ) OR COALESCE(${etiquetas}, '') = '')\n" +
+               "AND (c.abrevi_item IN ( ${colores} ) OR COALESCE(${colores}, '') = '')\n" +
                "AND (t.abrevi_item IN ( ${tallas} ) OR COALESCE(${tallas}, '') = '')\n" +
                "AND (m.abrevi_item IN ( ${marcas} ) OR COALESCE(${marcas}, '') = '')\n" +
-               "AND (c.abrevi_item IN ( ${colores} ) OR COALESCE(${colores}, '') = '')\n" +
                "AND ((p.is_precio_desc_product AND p.precio_descu_product BETWEEN ${menorPrecio} AND ${mayorPrecio}) OR\n" +
                "(NOT p.is_precio_desc_product AND p.precio_uni BETWEEN ${menorPrecio} AND ${mayorPrecio}))\n" +
                "AND p.is_existente = true\n" +
                "GROUP BY p.id_product, m.vista_item\n" +
                "HAVING (\n" +
-               "\tSELECT SUM(stock_real_product) FROM public.producto_id_talla\n" +
-               "\tinner join public.talla t ON t.id_talla = producto_id_talla.id_talla_id_talla\n" +
-               "\twhere (t.abrevi_item IN ( ${tallas} ) OR COALESCE(${tallas}, '') = '') and producto_id_product = p.id_product\n" +
+               "\tSELECT SUM(stock_real_product) FROM public.producto_talla_color\n" +
+               "\tinner join public.talla t ON t.id_talla = producto_talla_color.id_talla_id_talla\n" +
+               "\tinner join public.color c ON c.id_color = producto_talla_color.id_color_id_color\n" +
+               "\twhere \n" +
+               "\t\t(t.abrevi_item IN ( ${categoria} ) OR COALESCE(${categoria}, '') = '')\n" +
+               "\tAND (c.abrevi_item IN ( ${categoria} ) OR COALESCE(${categoria}, '') = '')\n" +
+               "\tAND producto_id_product = p.id_product\n" +
                ") > 0\n" +
                "ORDER BY p.id_product LIMIT ${cantidad} OFFSET ${pagina};")
     List<ProductoFilter> busquedaFiltrada (@Param("categoria") String categoria,

@@ -4,11 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table (name = "carrito")
 @Data
+@AllArgsConstructor
 public class Carrito {
 
     @Id

@@ -2,10 +2,14 @@ package com.ofsystem.Model;
 
 import com.ofsystem.Enums.EtiquetaName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "etiquetas")
 @Data
+@AllArgsConstructor
 public class Etiquetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

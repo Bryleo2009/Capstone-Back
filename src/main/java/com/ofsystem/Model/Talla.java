@@ -3,11 +3,13 @@ package com.ofsystem.Model;
 import com.ofsystem.Enums.EtiquetaName;
 import com.ofsystem.Enums.TallaName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "talla")
 @Data
+@AllArgsConstructor
 public class Talla {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

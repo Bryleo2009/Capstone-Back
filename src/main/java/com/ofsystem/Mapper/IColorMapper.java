@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface IColorMapper {
     @Select("SELECT abrevi_item, nombre_item, vista_item\n" +
-            "\tFROM public.colores\n" +
+            "\tFROM public.color\n" +
             "\twhere ident_item like '%COLOR%';")
     List<ColorFilter> getColor();
 }

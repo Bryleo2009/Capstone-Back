@@ -3,11 +3,14 @@ package com.ofsystem.Model;
 
 import com.ofsystem.Enums.TipoDocName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table (name = "tipoDoc")
 @Data
+@AllArgsConstructor
 public class TipoDoc {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

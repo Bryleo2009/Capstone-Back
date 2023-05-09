@@ -48,7 +48,7 @@ public class Runner implements CommandLineRunner {
     private EstComproServiceImpl EstComproService;
 
     @Autowired
-    private ProductoTallaColorServiceImpl productoTallaService;
+    private ProductoTallaColorServiceImpl productoTallaColorService;
 
 
     @Override
@@ -233,31 +233,11 @@ public class Runner implements CommandLineRunner {
                 etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MAT_ALGODON));
                 unproducto.setIdEtiqueta(etiquetas);
 
-                List<Talla> tallas = new ArrayList<>();
-                tallas.add(tallaService.findByNombre(TallaName.LARGE));
-                tallas.add(tallaService.findByNombre(TallaName.MEDIUM));
-                tallas.add(tallaService.findByNombre(TallaName.EXTRA_LARGE));
-                tallas.add(tallaService.findByNombre(TallaName.SMALL));
-                unproducto.setIdTalla(tallas);
-
-
-                List<Color> colores = new ArrayList<>();
-                colores.add(colorService.findByIdentItem(ColorName.COLOR_HUESO));
-                colores.add(colorService.findByIdentItem(ColorName.COLOR_BLANCO));
-                unproducto.setIdColor(colores);
-
+                Talla tallas = tallaService.findByNombre(TallaName.LARGE);
+                Color color = colorService.findByIdentItem(ColorName.COLOR_BLANCO);
                 unproducto.setIUP();
-
                 productoService.registrar(unproducto);
-
-                // Crear objetos ProductoTalla para cada talla
-                for (Talla talla : tallas) {
-                    ProductoTallaColor productoTalla = new ProductoTallaColor();
-                    productoTalla.setProducto_id_product(unproducto);
-                    productoTalla.setId_talla_id_talla(talla);
-                    productoTalla.setStock(50, 0); // Establecer valores iniciales de stock
-                    productoTallaService.registrar(productoTalla);
-                }
+                productoTallaColorService.registrar(new ProductoTallaColor(unproducto,tallas,color,50));
             } else {
                 // el producto ya existe
                 System.out.println("El producto ya existe en la base de datos.");

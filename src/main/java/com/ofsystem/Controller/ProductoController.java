@@ -92,14 +92,14 @@ public class ProductoController {
 			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
 		} else {
 			service.registrar(dato);
-			System.out.println("tallas " + dato.getIdTalla());
+			/*System.out.println("tallas " + dato.());
 			List<ProductoTallaColor> obj = new ArrayList<>();
 			for (Talla talla : dato.getIdTalla()) {
 				ProductoTallaColor productoTalla = new ProductoTallaColor(dato,talla,50);
 				obj.add(productoTalla);
 			}
 			serviceTalla.registroMasivo(obj);
-
+			*/
 			generadorQR(dato);
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
 		}		

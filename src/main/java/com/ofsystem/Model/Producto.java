@@ -2,6 +2,7 @@ package com.ofsystem.Model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Random;
 @Entity
 @Table (name = "producto")
 @Data
+@AllArgsConstructor
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

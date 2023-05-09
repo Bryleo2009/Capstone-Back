@@ -4,11 +4,14 @@ import com.ofsystem.Enums.CategoriaName;
 import com.ofsystem.Enums.EtiquetaName;
 import com.ofsystem.Enums.TipoProductoName;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "tipo_producto")
 @Data
+@AllArgsConstructor
 public class TipoProducto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,13 +1,17 @@
 package com.ofsystem.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "pedido")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pedido {
 
     @Id
@@ -28,6 +32,6 @@ public class Pedido {
     @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
     public Cliente idCliente;
     @ManyToOne
-    @JoinColumn(name="idEstEnvioProduct", referencedColumnName = "idEstEnvioProduct")
+    @JoinColumn(name="idEstProduct", referencedColumnName = "idEstProduct")
     public EstProduct idEstProduct;
 }

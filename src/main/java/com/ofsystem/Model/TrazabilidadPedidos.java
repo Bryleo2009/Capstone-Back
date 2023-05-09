@@ -1,13 +1,17 @@
 package com.ofsystem.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "trazaPedidos")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TrazabilidadPedidos {
 
     @Id
@@ -19,11 +23,11 @@ public class TrazabilidadPedidos {
     public Pedido idPedido;
 
     @ManyToOne
-    @JoinColumn(name="idProceActual", referencedColumnName = "idEstEnvioProduct")
+    @JoinColumn(name="idProceActual", referencedColumnName = "idEstProduct")
     public EstProduct idProceActual;
 
     @ManyToOne
-    @JoinColumn(name="idProceAnterior", referencedColumnName = "idEstEnvioProduct")
+    @JoinColumn(name="idProceAnterior", referencedColumnName = "idEstProduct")
     public EstProduct idProceAnterior;
 
     @Column(name="fechaIniProc", nullable = false)

@@ -3,6 +3,8 @@ package com.ofsystem.Model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -10,6 +12,8 @@ import lombok.Data;
 @Entity
 @Table (name = "trabajador")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Trabajador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
