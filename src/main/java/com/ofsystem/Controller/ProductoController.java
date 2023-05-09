@@ -6,28 +6,22 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Model.Producto;
-import com.ofsystem.Model.ProductoTalla;
+import com.ofsystem.Model.ProductoTallaColor;
 import com.ofsystem.Model.Talla;
 import com.ofsystem.Service.Imple.ProductoServiceImpl;
-import com.ofsystem.Service.Imple.ProductoTallaServiceImpl;
-import net.glxn.qrgen.QRCode;
-import net.glxn.qrgen.image.ImageType;
+import com.ofsystem.Service.Imple.ProductoTallaColorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
 import java.nio.file.Files;
@@ -49,7 +43,7 @@ public class ProductoController {
 	private ProductoServiceImpl service;
 
 	@Autowired
-	private ProductoTallaServiceImpl serviceTalla;
+	private ProductoTallaColorServiceImpl serviceTalla;
 
 	String IUP="";
 	
@@ -99,9 +93,9 @@ public class ProductoController {
 		} else {
 			service.registrar(dato);
 			System.out.println("tallas " + dato.getIdTalla());
-			List<ProductoTalla> obj = new ArrayList<>();
+			List<ProductoTallaColor> obj = new ArrayList<>();
 			for (Talla talla : dato.getIdTalla()) {
-				ProductoTalla productoTalla = new ProductoTalla(dato,talla,50);
+				ProductoTallaColor productoTalla = new ProductoTallaColor(dato,talla,50);
 				obj.add(productoTalla);
 			}
 			serviceTalla.registroMasivo(obj);

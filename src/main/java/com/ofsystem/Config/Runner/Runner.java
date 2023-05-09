@@ -48,7 +48,7 @@ public class Runner implements CommandLineRunner {
     private EstComproServiceImpl EstComproService;
 
     @Autowired
-    private ProductoTallaServiceImpl productoTallaService;
+    private ProductoTallaColorServiceImpl productoTallaService;
 
 
     @Override
@@ -252,7 +252,7 @@ public class Runner implements CommandLineRunner {
 
                 // Crear objetos ProductoTalla para cada talla
                 for (Talla talla : tallas) {
-                    ProductoTalla productoTalla = new ProductoTalla();
+                    ProductoTallaColor productoTalla = new ProductoTallaColor();
                     productoTalla.setProducto_id_product(unproducto);
                     productoTalla.setId_talla_id_talla(talla);
                     productoTalla.setStock(50, 0); // Establecer valores iniciales de stock
