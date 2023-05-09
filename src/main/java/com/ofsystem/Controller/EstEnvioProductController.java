@@ -36,14 +36,14 @@ public class EstEnvioProductController {
 	
 	@PostMapping
 	public ResponseEntity<Object> registrar( @RequestBody EstProduct dato) {
-		EstProduct unaEstProduct = service.listarxID(dato.getIdEstEnvioProduct());
+		EstProduct unaEstProduct = service.listarxID(dato.getIdEstProduct());
 		URI location = null;
 		if(unaEstProduct != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaEstProduct.getIdEstEnvioProduct()).toUri();
-			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdEstEnvioProduct() + " --- " + location);
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaEstProduct.getIdEstProduct()).toUri();
+			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdEstProduct() + " --- " + location);
 		} else {
 			service.registrar(dato);
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdEstEnvioProduct()).toUri();
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdEstProduct()).toUri();
 		}		
 		
 		return ResponseEntity.created(location).build();

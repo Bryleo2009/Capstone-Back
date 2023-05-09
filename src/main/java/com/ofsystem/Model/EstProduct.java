@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "estEnvioProduct")
+@Table(name = "estProduct")
 @Data
 public class EstProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int idEstEnvioProduct;
+    public int idEstProduct;
     @Enumerated(EnumType.STRING)
     @Column(name = "identItem", nullable = false)
     private EstProductName identItem;

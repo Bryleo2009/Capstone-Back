@@ -29,20 +29,19 @@ public class Comprobante {
 	public double montoTotalComp; //incluido igv
 	@Column(name = "fechaEmiComp", nullable = false)
 	public Date fechaEmiComp; //21/01/2021
-
+	@Column(name = "direccionComp", nullable = false)
+	public String direccionComp;
+	@Column(name = "ubigeoComp", nullable = false)
+	public String ubigeoComp;
 	@ManyToOne
 	@JoinColumn(name="idEstCompro", referencedColumnName = "idEstCompro")
 	public EstCompro idEstCompro;
-
-
 	@ManyToOne
     @JoinColumn(name="idTp", referencedColumnName = "idTp")
 	public TipoPago idTp;
-
 	@ManyToOne
     @JoinColumn(name="idTc", referencedColumnName = "idTc")
 	public TipoCompro idTc;
-
 	@ManyToOne
     @JoinColumn(name="idUser", referencedColumnName = "idUser")
 	public Usuario idUser;

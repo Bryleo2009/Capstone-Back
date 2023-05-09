@@ -22,7 +22,18 @@ public class PaymentController {
 
     @PostMapping("/checkout")
     public ResponseEntity<Result<Transaction>> checkout(@RequestBody PurchaseFilter purchaseFilter){
-        return ResponseEntity.ok(paymentService.checkout(purchaseFilter));
+        Result<Transaction> result = paymentService.checkout(purchaseFilter);
+
+        if (result.isSuccess()) {
+            // El pago se realizó exitosamente
+            Transaction transaction = result.getTarget();
+            // Puedes realizar acciones adicionales o enviar una respuesta adecuada
+            return ResponseEntity.ok(result);
+        } else {
+            // El pago falló
+            // Puedes manejar el error según tus necesidades
+            return ResponseEntity.badRequest().body(result);
+        }
     }
 
 

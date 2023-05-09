@@ -28,6 +28,7 @@ public class PaymentService {
     }
 
     public Result<Transaction> checkout (PurchaseFilter filter) {
+        System.out.println(filter);
         TransactionRequest request = new TransactionRequest()
                 .amount(filter.getAmount())
                 .paymentMethodNonce(filter.getNonce())
