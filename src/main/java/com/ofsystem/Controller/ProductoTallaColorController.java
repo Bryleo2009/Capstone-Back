@@ -87,15 +87,12 @@ public class ProductoTallaColorController {
             ProductoTallaColor productoTallaColor = service.findByProductoAndTallaAndColor(unproducto,unatalla,uncolor);
 
             if (productoTallaColor != null) {
-                if (productoTallaColor.getStockVirtualProduct() >= cantidad && productoTallaColor.getColor().equals(color) && productoTallaColor.getTalla().equals(talla)) {
+                if (productoTallaColor.getStockVirtualProduct() >= cantidad && (productoTallaColor.getTalla().getIdTalla()==talla) && (productoTallaColor.getColor().getIdColor()==color)) {
                     productoTallaColor.setStockVirtualProduct(productoTallaColor.getStockVirtualProduct() - cantidad);
                     productoTallaColor.setIdProductoTallaColor(productoTallaColor.getIdProductoTallaColor());
                     service.modificar(productoTallaColor);
                 }
             }
-            System.out.println("Valor Producto: " + unproducto);
-            System.out.println("Valor Talla: " + unatalla);
-            System.out.println("Valor Color: " + uncolor);
         }
         return new ResponseEntity<Object>(HttpStatus.OK);
     }
