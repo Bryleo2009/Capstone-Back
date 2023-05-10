@@ -5,9 +5,14 @@ import com.ofsystem.Model.Etiquetas;
 import com.ofsystem.Model.Talla;
 import com.ofsystem.Model.TipoProducto;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductoFilter {
     public int id_product;
     public String iup;

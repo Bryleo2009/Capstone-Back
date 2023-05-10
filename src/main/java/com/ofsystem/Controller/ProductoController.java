@@ -9,11 +9,15 @@ import com.google.zxing.common.BitMatrix;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.CarritoFilter;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
+import com.ofsystem.Mapper.Filter.RegistroProductFilter;
+import com.ofsystem.Mapper.Filter.TallaColorFilter;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Model.ProductoTallaColor;
 import com.ofsystem.Model.Talla;
+import com.ofsystem.Service.Imple.ColorServiceImpl;
 import com.ofsystem.Service.Imple.ProductoServiceImpl;
 import com.ofsystem.Service.Imple.ProductoTallaColorServiceImpl;
+import com.ofsystem.Service.Imple.TallaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -44,7 +48,13 @@ public class ProductoController {
 	private ProductoServiceImpl service;
 
 	@Autowired
-	private ProductoTallaColorServiceImpl serviceTalla;
+	private ProductoTallaColorServiceImpl servicePTC;
+
+	@Autowired
+	private TallaServiceImpl serviceTalla;
+
+	@Autowired
+	private ColorServiceImpl serviceColor;
 
 	String IUP="";
 	
@@ -79,9 +89,12 @@ public class ProductoController {
 		}
 		return new ResponseEntity<List<Producto>>(unaProducto,HttpStatus.OK);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<Object> registrar( @RequestBody Producto dato) throws IOException, WriterException {
+	public ResponseEntity<Object> registrar(@RequestBody RegistroProductFilter registroProductFilter) throws IOException, WriterException {
+		Producto dato = registroProductFilter.getUnProducto();
+		System.out.println(dato);
+		List<TallaColorFilter> tallaColorFilters = registroProductFilter.getTallaColorFilters();
 		dato.setIUP();
 		dato.setExistente();
 		IUP = dato.getIUP();
@@ -93,18 +106,20 @@ public class ProductoController {
 			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
 		} else {
 			service.registrar(dato);
-			/*System.out.println("tallas " + dato.());
-			List<ProductoTallaColor> obj = new ArrayList<>();
-			for (Talla talla : dato.getIdTalla()) {
-				ProductoTallaColor productoTalla = new ProductoTallaColor(dato,talla,50);
-				obj.add(productoTalla);
-			}
-			serviceTalla.registroMasivo(obj);
-			*/
 			generadorQR(dato);
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
-		}		
-		
+
+			for (TallaColorFilter tallaColorFilter: tallaColorFilters){
+				ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
+						serviceTalla.listarxID(tallaColorFilter.getTalla()),
+						serviceColor.listarxID(tallaColorFilter.getColor()),
+						tallaColorFilter.getCantidad());
+
+				servicePTC.registrar(productoTallaColor);
+			}
+
+		}
+
 		return ResponseEntity.created(location).build();
 	}
 
@@ -144,7 +159,11 @@ public class ProductoController {
 		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, colores,menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
 
-	@GetMapping("/ramdon/{id}")
+	@GetMapping("/random")
+	public ResponseEntity<List<ProductoFilter>> randomProduct (@RequestParam(required = true, value="categoria") String categoria,
+															   @RequestParam(defaultValue = "10") Integer cantidad){
+		return new ResponseEntity<>(service.randomProduct(cantidad,categoria),HttpStatus.OK);
+	}
 
 	/*public void generadorQR(Producto producto) throws IOException {
 

@@ -5,7 +5,6 @@ public class CarritoFilter {
     public int idproduct;
     public int cantidad;
     public int talla;
-
     public int color;
 
     public int getIdproduct() {
