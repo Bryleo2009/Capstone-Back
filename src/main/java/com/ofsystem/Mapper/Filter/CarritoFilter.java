@@ -2,40 +2,40 @@ package com.ofsystem.Mapper.Filter;
 
 public class CarritoFilter {
 
-    public int idproduct;
-    public int cantidad;
-    public int talla;
-    public int color;
+    public int idProduct;
+    public int cantProduct;
+    public int tallaid;
+    public int colorid;
 
-    public int getIdproduct() {
-        return idproduct;
+    public int getIdProduct() {
+        return idProduct;
     }
 
-    public void setIdproduct(int idproduct) {
-        this.idproduct = idproduct;
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getCantProduct() {
+        return cantProduct;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setCantProduct(int cantProduct) {
+        this.cantProduct = cantProduct;
     }
 
-    public int getTalla() {
-        return talla;
+    public int getTallaid() {
+        return tallaid;
     }
 
-    public void setTalla(int talla) {
-        this.talla = talla;
+    public void setTallaid(int tallaid) {
+        this.tallaid = tallaid;
     }
 
-    public int getColor() {
-        return color;
+    public int getColorid() {
+        return colorid;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setColorid(int colorid) {
+        this.colorid = colorid;
     }
 }

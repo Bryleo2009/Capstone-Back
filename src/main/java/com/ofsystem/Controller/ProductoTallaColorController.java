@@ -75,14 +75,17 @@ public class ProductoTallaColorController {
 
         for (CarritoFilter carritoFilter : dato) {
 
-            int idProduct = carritoFilter.getIdproduct();
-            int cantidad = carritoFilter.getCantidad();
-            int talla = carritoFilter.getTalla();
-            int color = carritoFilter.getColor();
+            int idProduct = carritoFilter.getIdProduct();
+            int cantidad = carritoFilter.getCantProduct();
+            int talla = carritoFilter.getTallaid();
+            int color = carritoFilter.getColorid();
 
             Producto unproducto = serviceProduct.listarxID(idProduct);
+            System.out.println(unproducto);
             Talla unatalla = serviceTalla.listarxID(talla);
+            System.out.println(unatalla);
             Color uncolor = serviceColor.listarxID(color);
+            System.out.println(uncolor);
 
             ProductoTallaColor productoTallaColor = service.findByProductoAndTallaAndColor(unproducto,unatalla,uncolor);
 
@@ -90,6 +93,7 @@ public class ProductoTallaColorController {
                 if (productoTallaColor.getStockVirtualProduct() >= cantidad && (productoTallaColor.getTalla().getIdTalla()==talla) && (productoTallaColor.getColor().getIdColor()==color)) {
                     productoTallaColor.setStockVirtualProduct(productoTallaColor.getStockVirtualProduct() - cantidad);
                     productoTallaColor.setIdProductoTallaColor(productoTallaColor.getIdProductoTallaColor());
+                    System.out.println("disminuio");
                     service.modificar(productoTallaColor);
                 }
             }
