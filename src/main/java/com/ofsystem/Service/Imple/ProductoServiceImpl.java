@@ -60,6 +60,11 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}
 
+	public List<ProductoFilter> randomProduct (int catidad, String categoria){
+		return repoMapper.randomProduct(catidad,categoria);
+	}
+
+
 	public List<Producto> listarxIUP(String iup){
 		return repo.findProductoByIUPContaining(iup.substring(0, iup.length()-6));
 	}

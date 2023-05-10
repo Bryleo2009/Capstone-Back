@@ -144,6 +144,8 @@ public class ProductoController {
 		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, colores,menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
 
+	@GetMapping("/ramdon/{id}")
+
 	/*public void generadorQR(Producto producto) throws IOException {
 
 		//producto.setIUP();
