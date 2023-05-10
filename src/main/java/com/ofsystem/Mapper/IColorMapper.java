@@ -18,6 +18,6 @@ public interface IColorMapper {
 
     @Select("select c.* from producto_talla_color ptc\n" +
             "inner join color c ON c.id_color = ptc.id_color_id_color\n" +
-            "where ptc.stock_virtual_product > 0 and ptc.existe_noexiste = true and ptc.producto_id_product = 1")
+            "where ptc.stock_virtual_product > 0 and ptc.existe_noexiste = true and ptc.producto_id_product =  #{id}")
     List<ColorFilter> listarColoresxID(@Param("id") int id);
 }
