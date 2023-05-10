@@ -1,12 +1,15 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Enums.ColorName;
 import com.ofsystem.Mapper.Filter.ColorFilter;
 import com.ofsystem.Model.Color;
+import com.ofsystem.Model.Talla;
 import com.ofsystem.Service.Imple.ColorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -69,5 +72,11 @@ public class ColorController {
 	@GetMapping("/colors")
 	public ResponseEntity<List<ColorFilter>> getColor() {
 		return new ResponseEntity<List<ColorFilter>>(service.getColor(),HttpStatus.OK);
+	}
+
+	@GetMapping("/activas/{id}")
+	public ResponseEntity<List<ColorFilter>> listarPorIdActivas(@PathVariable("id") int id) {
+		System.out.println(service.listarColoresxID(id));
+		return new ResponseEntity<List<ColorFilter>>( service.listarColoresxID(id),HttpStatus.OK);
 	}
 }

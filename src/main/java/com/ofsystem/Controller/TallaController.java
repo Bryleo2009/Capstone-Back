@@ -1,6 +1,7 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Enums.TallaName;
 import com.ofsystem.Mapper.Filter.TallaFilter;
 import com.ofsystem.Model.Talla;
 import com.ofsystem.Service.Imple.TallaServiceImpl;
@@ -36,13 +37,13 @@ public class TallaController {
 	}
 
 	@GetMapping("/activas/{id}")
-	public ResponseEntity<List<Talla>> listarPorIdActivas(@PathVariable("id") int id) {
-		List<Talla> unaTalla = service.listarTallasxID(id);
+	public ResponseEntity<List<TallaFilter>> listarPorIdActivas(@PathVariable("id") int id) {
+		List<TallaFilter> unaTalla = service.listarTallasxID(id);
 		System.out.println(unaTalla);
 		if(unaTalla == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
 		}
-		return new ResponseEntity<List<Talla>>(unaTalla,HttpStatus.OK);
+		return new ResponseEntity<List<TallaFilter>>(unaTalla,HttpStatus.OK);
 	}
 	
 	@PostMapping

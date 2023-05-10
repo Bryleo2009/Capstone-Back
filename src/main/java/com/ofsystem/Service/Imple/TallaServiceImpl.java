@@ -37,7 +37,7 @@ public class TallaServiceImpl extends CRUDServiceImpl<Talla, Integer> implements
 		return  repo.findByIdentItem(name);
 	}
 
-	public List<Talla> listarTallasxID (int id){
+	public List<TallaFilter> listarTallasxID (int id){
 		return repoMapper.listarTallasxID(id);
 	}
 

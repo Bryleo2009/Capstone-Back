@@ -1,7 +1,15 @@
 package com.ofsystem.Mapper.Filter;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ColorFilter {
-    public String abrevi_item;
-    public String nombre_item;
-    public String vista_item;
+    int id_color;
+    String abrevi_item;
+    String ident_item;
+    String nombre_item;
 }

@@ -4,6 +4,7 @@ import com.ofsystem.Enums.ColorName;
 import com.ofsystem.Mapper.Filter.ColorFilter;
 import com.ofsystem.Mapper.IColorMapper;
 import com.ofsystem.Model.Color;
+import com.ofsystem.Model.Talla;
 import com.ofsystem.Repo.IColorRepo;
 import com.ofsystem.Service.IColorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,10 @@ public class ColorServiceImpl extends CRUDServiceImpl<Color, Integer> implements
 
 	public List<ColorFilter> getColor(){
 		return repoMapper.getColor();
+	}
+
+	public List<ColorFilter> listarColoresxID (int id){
+		System.out.println(repoMapper.listarColoresxID(id));
+		return repoMapper.listarColoresxID(id);
 	}
 }

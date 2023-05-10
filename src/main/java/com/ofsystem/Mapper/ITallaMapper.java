@@ -1,5 +1,6 @@
 package com.ofsystem.Mapper;
 
+import com.ofsystem.Enums.TallaName;
 import com.ofsystem.Mapper.Filter.TallaFilter;
 import com.ofsystem.Model.Talla;
 import org.apache.ibatis.annotations.Mapper;
@@ -9,8 +10,10 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 @Mapper
 public interface ITallaMapper {
-    @Select("SELECT abrevi_item, nombre_item, vista_item FROM public.producto_id_talla\n" +
-            "inner join public.talla t ON t.id_talla = producto_id_talla.id_talla_id_talla\n" +
-            ";")
-    List<Talla> listarTallasxID(@Param("id") int id);
+    @Select("select t.* from producto_talla_color ptc\n" +
+            "inner join talla t ON t.id_talla = ptc.id_talla_id_talla\n" +
+            "where ptc.stock_virtual_product > 0 and ptc.existe_noexiste = true and ptc.producto_id_product = 1")
+    List<TallaFilter> listarTallasxID(@Param("id") int id);
+
+
 }
