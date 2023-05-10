@@ -55,7 +55,9 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 		System.out.println("etiquetas '"+String.join("', '", etiquetas)+"'");
 		System.out.println("tallas '"+String.join("', '", tallas)+"'");
 		System.out.println("marcas '"+String.join("', '", marcas)+"'");
-		System.out.println("marcas '"+String.join("', '", colores)+"'");
+		System.out.println("colores '"+String.join("', '", colores)+"'");
+		System.out.println("cantidad '"+cantidad+"'");
+		System.out.println("página '"+pagina+"'");
 		List<ProductoFilter> lista = repoMapper.busquedaFiltrada("'"+categoria+"'", "'"+String.join("', '", tipos)+"'","'"+String.join("', '", etiquetas)+"'" , "'" + String.join("', '", tallas) + "'", "'"+String.join("', '", marcas)+"'", "'"+String.join("', '", colores)+"'",menorPrecio, mayorPrecio, cantidad, pagina);
 		return new PageImpl<>(lista, pageRequest, repo.findAll().size());
 	}

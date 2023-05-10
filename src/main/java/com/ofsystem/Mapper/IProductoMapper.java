@@ -52,7 +52,7 @@ public interface IProductoMapper {
                "\tAND (c.abrevi_item IN ( ${colores} ) OR COALESCE(${colores}, '') = '')\n" +
                "\tAND producto_id_product = p.id_product\n" +
                ") > 0\n" +
-               "ORDER BY p.id_product LIMIT ${cantidad} OFFSET ${pagina};")
+               "ORDER BY p.id_product LIMIT ${cantidad} OFFSET ${pagina} * ${cantidad};")
     List<ProductoFilter> busquedaFiltrada (@Param("categoria") String categoria,
                                            @Param("tipos") String tipos,
                                            @Param("etiquetas") String etiquetas,

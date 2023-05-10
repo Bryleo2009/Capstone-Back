@@ -188,6 +188,8 @@ public class ProductoController {
 		System.out.println("tallas '"+String.join("', '", tallas)+"'");
 		System.out.println("marcas '"+String.join("', '", marcas)+"'");
 		System.out.println("colores '"+String.join("', '", colores)+"'");
+		System.out.println("cantidad '"+cantidad+"'");
+		System.out.println("página '"+pagina+"'");
 		return new ResponseEntity<>(service.busquedaFiltrada(categoria, tipos, etiquetas, tallas, marcas, colores,menorPrecio, mayorPrecio, cantidad, pagina), HttpStatus.OK);
 	}
 
