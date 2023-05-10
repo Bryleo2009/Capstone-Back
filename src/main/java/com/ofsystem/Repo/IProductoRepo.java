@@ -13,9 +13,6 @@ import java.util.List;
 @Repository
 public interface IProductoRepo extends JpaRepository<Producto, Integer> {
     boolean existsByNombreProduct(String name);
-
     List<Producto> findProductoByIUPContaining(String iup);
-
-
 
 }

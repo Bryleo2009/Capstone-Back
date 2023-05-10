@@ -1,10 +1,16 @@
 package com.ofsystem.Service.Imple;
 
+import com.ofsystem.Mapper.Filter.CarritoFilter;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Mapper.IProductoMapper;
+import com.ofsystem.Model.Color;
 import com.ofsystem.Model.Producto;
+import com.ofsystem.Model.ProductoTallaColor;
 import com.ofsystem.Model.Talla;
+import com.ofsystem.Repo.IColorRepo;
 import com.ofsystem.Repo.IProductoRepo;
+import com.ofsystem.Repo.IProductoTallaColorRepo;
+import com.ofsystem.Repo.ITallaRepo;
 import com.ofsystem.Service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,7 +63,4 @@ public class ProductoServiceImpl extends CRUDServiceImpl<Producto, Integer> impl
 	public List<Producto> listarxIUP(String iup){
 		return repo.findProductoByIUPContaining(iup.substring(0, iup.length()-6));
 	}
-
-
-
 }

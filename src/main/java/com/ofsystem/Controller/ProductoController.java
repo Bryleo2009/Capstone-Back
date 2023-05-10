@@ -7,6 +7,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Mapper.Filter.CarritoFilter;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Model.Producto;
 import com.ofsystem.Model.ProductoTallaColor;
