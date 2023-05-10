@@ -48,8 +48,8 @@ public interface IProductoMapper {
                "\tinner join public.talla t ON t.id_talla = producto_talla_color.id_talla_id_talla\n" +
                "\tinner join public.color c ON c.id_color = producto_talla_color.id_color_id_color\n" +
                "\twhere \n" +
-               "\t\t(t.abrevi_item IN ( ${categoria} ) OR COALESCE(${categoria}, '') = '')\n" +
-               "\tAND (c.abrevi_item IN ( ${categoria} ) OR COALESCE(${categoria}, '') = '')\n" +
+               "\t\t(t.abrevi_item IN ( ${tallas} ) OR COALESCE(${tallas}, '') = '')\n" +
+               "\tAND (c.abrevi_item IN ( ${colores} ) OR COALESCE(${colores}, '') = '')\n" +
                "\tAND producto_id_product = p.id_product\n" +
                ") > 0\n" +
                "ORDER BY p.id_product LIMIT ${cantidad} OFFSET ${pagina};")
