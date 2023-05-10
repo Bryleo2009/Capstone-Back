@@ -12,4 +12,5 @@ public class TallaFilter {
     String abrevi_item;
     String ident_item;
     String nombre_item;
+    String vista_item;
 }
