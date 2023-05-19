@@ -18,4 +18,9 @@ public class UsuarioServiceImpl extends CRUDServiceImpl<Usuario, Integer> implem
 		return repo;
 	}
 
+	@Override
+	public Usuario findByUsername(String username) {
+		return repo.findByUsername(username);
+	}
+
 }

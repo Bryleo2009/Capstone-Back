@@ -3,7 +3,7 @@ package com.ofsystem.Model;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +23,7 @@ public class ListaDeseos {
     public List<Producto> idProduct;
 
     @ManyToOne
-    @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
+    @JoinColumn(name="idCliente", referencedColumnName = "id")
     public Cliente idCliente;
 
     public ListaDeseos() {

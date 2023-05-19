@@ -1,7 +1,7 @@
 package com.ofsystem.Model;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

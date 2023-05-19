@@ -23,5 +23,8 @@ public class RolServiceImpl extends CRUDServiceImpl<Rol, Integer> implements IRo
 	public boolean existsByIdent(RolName name){
 		return repo.existsByIdentItem(name);
 	}
+	public Rol findByNombreItem(String name){
+		return repo.findByNombreItem(name);
+	}
 
 }

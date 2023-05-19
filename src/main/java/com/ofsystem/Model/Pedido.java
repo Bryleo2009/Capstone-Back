@@ -1,6 +1,6 @@
 package com.ofsystem.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,7 @@ public class Pedido {
     @JoinColumn(name="idComp", referencedColumnName = "idComp")
     public Comprobante idComp;
     @ManyToOne
-    @JoinColumn(name="idCliente", referencedColumnName = "idCliente")
+    @JoinColumn(name="idCliente", referencedColumnName = "id")
     public Cliente idCliente;
     @ManyToOne
     @JoinColumn(name="idEstProduct", referencedColumnName = "idEstProduct")
