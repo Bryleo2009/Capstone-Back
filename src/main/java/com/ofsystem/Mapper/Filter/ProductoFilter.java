@@ -4,7 +4,7 @@ import com.ofsystem.Model.Categoria;
 import com.ofsystem.Model.Etiquetas;
 import com.ofsystem.Model.Talla;
 import com.ofsystem.Model.TipoProducto;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

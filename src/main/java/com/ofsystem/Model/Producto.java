@@ -1,12 +1,13 @@
 package com.ofsystem.Model;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 import java.util.Random;
+
 
 @Entity
 @Table (name = "producto")
