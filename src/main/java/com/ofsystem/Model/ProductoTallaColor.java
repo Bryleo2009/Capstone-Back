@@ -4,6 +4,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
 @Entity
 @Table(name = "producto_talla_color")
 @Data

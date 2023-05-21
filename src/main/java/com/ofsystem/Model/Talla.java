@@ -6,6 +6,7 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
 @Entity
 @Table(name = "talla")
 @Data

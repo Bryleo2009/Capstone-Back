@@ -5,6 +5,7 @@ import com.ofsystem.Config.JWT.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -55,7 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .authorizeRequests().antMatchers("/login","/Productos/**").permitAll()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET).permitAll()
+                .antMatchers(
+                        "/login","/Productos/**", "/swagger-ui.html", "/swagger-ui/**","/swagger-resources/**",
+                        "/v3/api-docs/**", "/webjars/**","/media/**"
+                )
+                .permitAll()
                 .antMatchers("/Usuarios/**").hasAnyRole("SOPORTE")
                 .anyRequest().authenticated()
                 .and()

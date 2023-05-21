@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+
 @Entity
 @Table(name = "trazaPedidos")
 @Data
