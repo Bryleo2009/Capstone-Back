@@ -77,7 +77,7 @@ public class TrazabilidadComprobantesController {
 			trazabilidadComprob.setObservac(Observac);
 
 			trazabilidadComprob.setFechaIniProc(new Date("22/05/2023")); // Asignar la fecha inicial actual
-			trazabilidadComprob.setFechaFinProc(null);
+			trazabilidadComprob.setFechaFinProc(new Date("22/05/2024"));
 
 			TrazabilidadComprobantes trazabilidadRegistrada = service.registrar(trazabilidadComprob);
 			trazabilidadComprobantesList.add(trazabilidadRegistrada);
