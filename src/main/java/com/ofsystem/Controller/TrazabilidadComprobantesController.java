@@ -67,8 +67,8 @@ public class TrazabilidadComprobantesController {
 			String Observac = trazabilidadComprobFilter.getObservac();
 
 			Comprobante unComprobante = serviceComprob.listarxID(idComp.getIdComp());
-			Cliente unCliente = serviceCli.listarxID(idCliente.getIdCliente());
-			Trabajador unTrabajador = serviceTra.listarxID(idTrabajador.getIdtraba());
+			Cliente unCliente = serviceCli.listarxID(idCliente.getId());
+			Trabajador unTrabajador = serviceTra.listarxID(idTrabajador.getId());
 
 			TrazabilidadComprobantes trazabilidadComprob = new TrazabilidadComprobantes();
 			trazabilidadComprob.setIdComp(idComp);
@@ -76,8 +76,8 @@ public class TrazabilidadComprobantesController {
 			trazabilidadComprob.setIdTraba(idTrabajador);
 			trazabilidadComprob.setObservac(Observac);
 
-			trazabilidadComprob.setFechaIniProc(new Date("22/05/2023")); // Asignar la fecha inicial actual
-			trazabilidadComprob.setFechaFinProc(new Date("22/05/2024"));
+			trazabilidadComprob.setFechaIniProc(new Date()); // Asignar la fecha inicial actual
+			trazabilidadComprob.setFechaFinProc(new Date());
 
 			TrazabilidadComprobantes trazabilidadRegistrada = service.registrar(trazabilidadComprob);
 			trazabilidadComprobantesList.add(trazabilidadRegistrada);

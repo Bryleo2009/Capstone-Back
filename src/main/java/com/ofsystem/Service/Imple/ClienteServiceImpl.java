@@ -22,4 +22,11 @@ public class ClienteServiceImpl extends CRUDServiceImpl<Cliente, Integer> implem
 	public Cliente findByNumDocumento(String numDoc) {
 		return repo.findByNumDocumento(numDoc);
 	}
+
+	@Override
+	public Cliente findByIdUserCliente_Username(String nombre) {
+		return repo.findByIdUserCliente_Username(nombre);
+	}
+
+
 }

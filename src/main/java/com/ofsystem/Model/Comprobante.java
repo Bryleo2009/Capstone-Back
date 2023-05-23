@@ -26,8 +26,6 @@ public class Comprobante {
 	public String idComp;
 	@Column(name = "nomClientComp", nullable = false, length = 45)
 	public String nomClientComp; //Juan Alkexander
-	@Column(name = "identClientComp", nullable = false, length = 15)
-	public String identClientComp; //ruc o dni
 	@Column(name = "montoSubtotalComp", nullable = false)
 	public double montoSubtotalComp; //suma de los totales de items sin igv
 	@Column(name = "montoTotalComp", nullable = false)
@@ -52,9 +50,4 @@ public class Comprobante {
 	public Usuario idUser;
 
 
-	
-
-
-	
-	
 }
