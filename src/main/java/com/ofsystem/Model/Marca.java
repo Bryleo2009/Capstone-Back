@@ -2,10 +2,11 @@ package com.ofsystem.Model;
 
 import com.ofsystem.Enums.EtiquetaName;
 import com.ofsystem.Enums.MarcaName;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "marcas")

@@ -1,11 +1,12 @@
 package com.ofsystem.Model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+
 
 @Entity
 @Table(name = "trazaCompro")
@@ -40,11 +41,11 @@ public class TrazabilidadComprobantes {
     public String Observac;
 
     @ManyToOne
-    @JoinColumn(name="idCliente",referencedColumnName = "idCliente")
+    @JoinColumn(name="idCliente",referencedColumnName = "id")
     public Cliente idCliente;
 
     @ManyToOne
-    @JoinColumn(name="idTraba",referencedColumnName = "idTraba")
+    @JoinColumn(name="idTraba",referencedColumnName = "id")
     public Trabajador idTraba;
 
 }

@@ -13,4 +13,6 @@ public interface IRolRepo extends JpaRepository<Rol, Integer> {
     boolean existsByIdentItem( RolName nombreCateg);
     Rol findByIdentItem(RolName name);
 
+    Rol findByNombreItem(String name);
+
 }

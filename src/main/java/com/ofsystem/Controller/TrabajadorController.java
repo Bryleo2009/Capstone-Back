@@ -36,14 +36,14 @@ public class TrabajadorController {
 	
 	@PostMapping
 	public ResponseEntity<Object> registrar( @RequestBody Trabajador dato) {
-		Trabajador unaTrabajador = service.listarxID(dato.getIdTp());
+		Trabajador unaTrabajador = service.listarxID(dato.getId());
 		URI location = null;
 		if(unaTrabajador != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaTrabajador.getIdTp()).toUri();
-			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdTp() + " --- " + location);
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaTrabajador.getId()).toUri();
+			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getId() + " --- " + location);
 		} else {
 			service.registrar(dato);
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdTp()).toUri();
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getId()).toUri();
 		}		
 		
 		return ResponseEntity.created(location).build();

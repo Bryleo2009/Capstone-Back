@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.CannotCreateTransactionException;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.security.SignatureException;
 import java.util.Date;
 
 @ControllerAdvice
@@ -52,7 +53,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 
 
 	@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		Status = HttpStatus.INTERNAL_SERVER_ERROR;
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false),Status.toString());
 		return new ResponseEntity<Object>(exceptionResponse, Status);
@@ -80,7 +81,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 
 
 	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
 		Status = HttpStatus.INTERNAL_SERVER_ERROR;
 		String errores = "";
 		for(ObjectError e : ex.getBindingResult().getAllErrors()) {
@@ -105,4 +106,6 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler{
 		}
 		return "";
 	}
+
+
 }
