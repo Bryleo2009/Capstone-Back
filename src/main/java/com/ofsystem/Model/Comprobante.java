@@ -1,15 +1,14 @@
 package com.ofsystem.Model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import com.ofsystem.Enums.EstComproName;
 import com.ofsystem.Enums.TipoComproName;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,8 +25,6 @@ public class Comprobante {
 	public String idComp;
 	@Column(name = "nomClientComp", nullable = false, length = 45)
 	public String nomClientComp; //Juan Alkexander
-	@Column(name = "identClientComp", nullable = false, length = 15)
-	public String identClientComp; //ruc o dni
 	@Column(name = "montoSubtotalComp", nullable = false)
 	public double montoSubtotalComp; //suma de los totales de items sin igv
 	@Column(name = "montoTotalComp", nullable = false)
@@ -39,9 +36,6 @@ public class Comprobante {
 	@Column(name = "ubigeoComp", nullable = false)
 	public String ubigeoComp;
 	@ManyToOne
-	@JoinColumn(name="idEstCompro", referencedColumnName = "idEstCompro")
-	public EstCompro idEstCompro;
-	@ManyToOne
     @JoinColumn(name="idTp", referencedColumnName = "idTp")
 	public TipoPago idTp;
 	@ManyToOne
@@ -52,7 +46,22 @@ public class Comprobante {
 	public Usuario idUser;
 
 
-	
+	private static int ultimoNumeroComprobante = 0;
+
+	@PrePersist
+	public void generarNumeroComprobante() {
+		// Incrementar el número de comprobante correlativo
+		ultimoNumeroComprobante++;
+
+		// Obtener la fecha actual
+		LocalDate fecha = LocalDate.now();
+
+		// Formatear la fecha en formato 'yyyyMMdd'
+		String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+		// Generar el número de comprobante correlativo
+		idComp = fechaFormateada + String.format("%04d", ultimoNumeroComprobante);
+	}
 
 
 	
