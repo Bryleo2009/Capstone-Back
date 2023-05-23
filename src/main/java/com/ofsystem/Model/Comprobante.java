@@ -45,7 +45,6 @@ public class Comprobante {
     @JoinColumn(name="idUser", referencedColumnName = "idUser")
 	public Usuario idUser;
 
-
 	private static int ultimoNumeroComprobante = 0;
 
 	@PrePersist
@@ -63,7 +62,4 @@ public class Comprobante {
 		idComp = fechaFormateada + String.format("%04d", ultimoNumeroComprobante);
 	}
 
-
-	
-	
 }

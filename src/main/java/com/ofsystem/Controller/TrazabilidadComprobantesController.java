@@ -62,6 +62,7 @@ public class TrazabilidadComprobantesController {
 	@PostMapping("/trazabilidad/comprobantes")
 	public ResponseEntity<Object> RegistrarTrazabilidadComprob(@RequestBody TrazabilidadComprobFilter dato) {
 
+    //corregir la logica de esto y el generador de id
 			Comprobante idComp = dato.getIdComp();
 			Cliente idCliente = dato.getIdCliente();
 			Trabajador idTrabajador = dato.getIdTrabajador();
@@ -73,7 +74,6 @@ public class TrazabilidadComprobantesController {
 			trazabilidadComprob.setIdCliente(idCliente);
 			trazabilidadComprob.setIdTraba(idTrabajador);
 			trazabilidadComprob.setObservac(Observac);
-
 			trazabilidadComprob.setFechaIniProc(new Date());
 
 			service.registrar(trazabilidadComprob);

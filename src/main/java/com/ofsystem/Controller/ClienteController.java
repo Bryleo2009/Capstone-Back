@@ -84,4 +84,17 @@ public class ClienteController {
 		}
 		return new ResponseEntity<Cliente>(unaEmpleado,HttpStatus.OK);
 	}
+
+	@GetMapping("/devolverCliente/{username}")
+	public ResponseEntity<Cliente> findByIdUserCliente_Username (@PathVariable("username") String username) {
+		Cliente unaEmpleado = service.findByIdUserCliente_Username(username);
+		if(username.equals("admin")){
+			Rol rol = serviceRol.findByNombreItem("ROLE_SOPORTE");
+			Usuario usuario = new Usuario("admin","admin123",true,rol);
+			unaEmpleado = new Cliente("ofSystem - Nombre","Ofsystem - Apellido", new Date(2000,8,24),"994271287","Sin direccion","150101","71850926",usuario);
+		} else if(unaEmpleado == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + username);
+		}
+		return new ResponseEntity<Cliente>(unaEmpleado,HttpStatus.OK);
+	}
 }
