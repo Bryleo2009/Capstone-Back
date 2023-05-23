@@ -27,6 +27,9 @@ public class TrazabilidadComprobantesController {
 	private TrabajadorServiceImpl serviceTra;
 	@Autowired
 	private ComprobanteServiceImpl serviceComprob;
+
+	@Autowired
+	private EstComproServiceImpl estComproService;
 	@GetMapping
 	public ResponseEntity<List<TrazabilidadComprobantes>> listar() {
 		return new ResponseEntity<List<TrazabilidadComprobantes>>(service.listar(),HttpStatus.OK);
@@ -57,33 +60,25 @@ public class TrazabilidadComprobantesController {
 	}*/
 
 	@PostMapping("/trazabilidad/comprobantes")
-	public ResponseEntity<Object> RegistrarTrazabilidadComprob(@RequestBody List<TrazabilidadComprobFilter> dato) {
-		List<TrazabilidadComprobantes> trazabilidadComprobantesList = new ArrayList<>();
-		for (TrazabilidadComprobFilter trazabilidadComprobFilter : dato) {
+	public ResponseEntity<Object> RegistrarTrazabilidadComprob(@RequestBody TrazabilidadComprobFilter dato) {
 
-			Comprobante idComp = trazabilidadComprobFilter.getIdComp();
-			Cliente idCliente = trazabilidadComprobFilter.getIdCliente();
-			Trabajador idTrabajador = trazabilidadComprobFilter.getIdTrabajador();
-			String Observac = trazabilidadComprobFilter.getObservac();
-
-			Comprobante unComprobante = serviceComprob.listarxID(idComp.getIdComp());
-			Cliente unCliente = serviceCli.listarxID(idCliente.getId());
-			Trabajador unTrabajador = serviceTra.listarxID(idTrabajador.getId());
+    //corregir la logica de esto y el generador de id
+			Comprobante idComp = dato.getIdComp();
+			Cliente idCliente = dato.getIdCliente();
+			Trabajador idTrabajador = dato.getIdTrabajador();
+			String Observac = dato.getObservac();
 
 			TrazabilidadComprobantes trazabilidadComprob = new TrazabilidadComprobantes();
 			trazabilidadComprob.setIdComp(idComp);
+			trazabilidadComprob.setIdProceActual(estComproService.listarxID(1));
 			trazabilidadComprob.setIdCliente(idCliente);
 			trazabilidadComprob.setIdTraba(idTrabajador);
 			trazabilidadComprob.setObservac(Observac);
+			trazabilidadComprob.setFechaIniProc(new Date());
 
-			trazabilidadComprob.setFechaIniProc(new Date()); // Asignar la fecha inicial actual
-			trazabilidadComprob.setFechaFinProc(new Date());
+			service.registrar(trazabilidadComprob);
 
-			TrazabilidadComprobantes trazabilidadRegistrada = service.registrar(trazabilidadComprob);
-			trazabilidadComprobantesList.add(trazabilidadRegistrada);
-
-		}
-		return ResponseEntity.ok(trazabilidadComprobantesList);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping
