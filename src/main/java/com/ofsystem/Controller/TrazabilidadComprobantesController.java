@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -74,6 +75,9 @@ public class TrazabilidadComprobantesController {
 			trazabilidadComprob.setIdCliente(idCliente);
 			trazabilidadComprob.setIdTraba(idTrabajador);
 			trazabilidadComprob.setObservac(Observac);
+
+			trazabilidadComprob.setFechaIniProc(new Date("22/05/2023")); // Asignar la fecha inicial actual
+			trazabilidadComprob.setFechaFinProc(null);
 
 			TrazabilidadComprobantes trazabilidadRegistrada = service.registrar(trazabilidadComprob);
 			trazabilidadComprobantesList.add(trazabilidadRegistrada);
