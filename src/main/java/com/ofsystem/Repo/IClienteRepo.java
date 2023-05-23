@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface IClienteRepo extends JpaRepository<Cliente, Integer> {
 
     Cliente findByNumDocumento(String numDoc);
+
 }
