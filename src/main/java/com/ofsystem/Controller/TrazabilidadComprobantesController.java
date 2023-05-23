@@ -1,15 +1,16 @@
 package com.ofsystem.Controller;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.TrazabilidadComprobantes;
-import com.ofsystem.Service.Imple.TrazabilidadComprobantesServiceImpl;
+import com.ofsystem.Mapper.Filter.TrazabilidadComprobFilter;
+import com.ofsystem.Model.*;
+import com.ofsystem.Service.Imple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -19,7 +20,13 @@ public class TrazabilidadComprobantesController {
 
 	@Autowired
 	private TrazabilidadComprobantesServiceImpl service;
-	
+	@Autowired
+	private ClienteServiceImpl serviceCli;
+
+	@Autowired
+	private TrabajadorServiceImpl serviceTra;
+	@Autowired
+	private ComprobanteServiceImpl serviceComprob;
 	@GetMapping
 	public ResponseEntity<List<TrazabilidadComprobantes>> listar() {
 		return new ResponseEntity<List<TrazabilidadComprobantes>>(service.listar(),HttpStatus.OK);
@@ -34,7 +41,7 @@ public class TrazabilidadComprobantesController {
 		return new ResponseEntity<TrazabilidadComprobantes>(unaTrazabilidadComprobantes,HttpStatus.OK);
 	}
 	
-	@PostMapping
+/*	@PostMapping
 	public ResponseEntity<Object> registrar( @RequestBody TrazabilidadComprobantes dato) {
 		TrazabilidadComprobantes unaTrazabilidadComprobantes = service.listarxID(dato.getIdTrazaCompro());
 		URI location = null;
@@ -47,8 +54,38 @@ public class TrazabilidadComprobantesController {
 		}		
 		
 		return ResponseEntity.created(location).build();
+	}*/
+
+	@PostMapping("/trazabilidad/comprobantes")
+	public ResponseEntity<Object> RegistrarTrazabilidadComprob(@RequestBody List<TrazabilidadComprobFilter> dato) {
+		List<TrazabilidadComprobantes> trazabilidadComprobantesList = new ArrayList<>();
+		for (TrazabilidadComprobFilter trazabilidadComprobFilter : dato) {
+
+			Comprobante idComp = trazabilidadComprobFilter.getIdComp();
+			Cliente idCliente = trazabilidadComprobFilter.getIdCliente();
+			Trabajador idTrabajador = trazabilidadComprobFilter.getIdTrabajador();
+			String Observac = trazabilidadComprobFilter.getObservac();
+
+			Comprobante unComprobante = serviceComprob.listarxID(idComp.getIdComp());
+			Cliente unCliente = serviceCli.listarxID(idCliente.getIdCliente());
+			Trabajador unTrabajador = serviceTra.listarxID(idTrabajador.getIdtraba());
+
+			TrazabilidadComprobantes trazabilidadComprob = new TrazabilidadComprobantes();
+			trazabilidadComprob.setIdComp(idComp);
+			trazabilidadComprob.setIdCliente(idCliente);
+			trazabilidadComprob.setIdTraba(idTrabajador);
+			trazabilidadComprob.setObservac(Observac);
+
+			trazabilidadComprob.setFechaIniProc(new Date("22/05/2023")); // Asignar la fecha inicial actual
+			trazabilidadComprob.setFechaFinProc(new Date("22/05/2024"));
+
+			TrazabilidadComprobantes trazabilidadRegistrada = service.registrar(trazabilidadComprob);
+			trazabilidadComprobantesList.add(trazabilidadRegistrada);
+
+		}
+		return ResponseEntity.ok(trazabilidadComprobantesList);
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<TrazabilidadComprobantes> modificar( @RequestBody TrazabilidadComprobantes dato) {		
 		return new ResponseEntity<TrazabilidadComprobantes>(service.modificar(dato),HttpStatus.OK);
