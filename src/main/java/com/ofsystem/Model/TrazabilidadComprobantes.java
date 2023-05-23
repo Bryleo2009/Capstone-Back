@@ -30,10 +30,10 @@ public class TrazabilidadComprobantes {
     @JoinColumn(name="idProceAnterior", referencedColumnName = "idEstCompro")
     public EstCompro idProceAnterior;
 
-    @Column(name="fechaIniProc")
+    @Column(name="fechaIniProc", nullable = false)
     public Date fechaIniProc;
 
-    @Column(name="fechaFinProc")
+    @Column(name="fechaFinProc", nullable = false)
     public Date fechaFinProc;
 
     @Column (name="Observac", nullable = true)
