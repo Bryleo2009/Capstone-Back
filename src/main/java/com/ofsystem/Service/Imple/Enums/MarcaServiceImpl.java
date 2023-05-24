@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.MarcaName;
 import com.ofsystem.Model.Enums.Marca;
-import com.ofsystem.Repo.IMarcaRepo;
-import com.ofsystem.Service.IMarcaService;
+import com.ofsystem.Repo.Enums.IMarcaRepo;
+import com.ofsystem.Service.Service.Enums.IMarcaService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

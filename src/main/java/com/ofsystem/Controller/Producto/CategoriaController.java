@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Producto;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.Categoria;
-import com.ofsystem.Service.Imple.CategoriaServiceImpl;
+import com.ofsystem.Model.Enums.Categoria;
+import com.ofsystem.Service.Imple.Enums.CategoriaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

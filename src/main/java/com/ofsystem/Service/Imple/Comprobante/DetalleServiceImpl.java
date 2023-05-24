@@ -1,8 +1,9 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Comprobante;
 
-import com.ofsystem.Model.Detalle;
-import com.ofsystem.Repo.IDetalleRepo;
-import com.ofsystem.Service.IDetalleService;
+import com.ofsystem.Model.Comprobante.Detalle;
+import com.ofsystem.Repo.Comprobante.IDetalleRepo;
+import com.ofsystem.Service.Service.Comprobante.IDetalleService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,8 @@ public class DetalleServiceImpl extends CRUDServiceImpl<Detalle, Integer> implem
 		return repo;
 	}
 
+	@Override
+	public int idDetalle() {
+		return repo.idDetalle();
+	}
 }

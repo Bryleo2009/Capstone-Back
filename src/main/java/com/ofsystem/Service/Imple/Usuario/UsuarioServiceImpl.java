@@ -1,8 +1,9 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Usuario;
 
 import com.ofsystem.Model.Usuario.Usuario;
-import com.ofsystem.Repo.IUsuarioRepo;
-import com.ofsystem.Service.IUsuarioService;
+import com.ofsystem.Repo.Usuario.IUsuarioRepo;
+import com.ofsystem.Service.Service.Usuario.IUsuarioService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

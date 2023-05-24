@@ -1,8 +1,9 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Comprobante;
 
-import com.ofsystem.Model.TrazabilidadComprobantes;
-import com.ofsystem.Repo.ITrazabilidadComprobantesRepo;
-import com.ofsystem.Service.ITrazabilidadComprobantesService;
+import com.ofsystem.Model.Comprobante.TrazabilidadComprobantes;
+import com.ofsystem.Repo.Comprobante.ITrazabilidadComprobantesRepo;
+import com.ofsystem.Service.Service.Comprobante.ITrazabilidadComprobantesService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.ofsystem.Repo;
+package com.ofsystem.Repo.Usuario;
 
 import com.ofsystem.Model.Usuario.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;

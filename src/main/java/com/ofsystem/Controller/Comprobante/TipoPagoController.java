@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Comprobante;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.TipoPago;
-import com.ofsystem.Service.Imple.TipoPagoServiceImpl;
+import com.ofsystem.Model.Enums.TipoPago;
+import com.ofsystem.Service.Imple.Enums.TipoPagoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

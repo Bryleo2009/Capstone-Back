@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.EstComproName;
 import com.ofsystem.Model.Enums.EstCompro;
-import com.ofsystem.Repo.IEstComproRepo;
-import com.ofsystem.Service.IEstComproService;
+import com.ofsystem.Repo.Enums.IEstComproRepo;
+import com.ofsystem.Service.Service.Enums.IEstComproService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

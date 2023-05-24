@@ -1,9 +1,9 @@
 package com.ofsystem.Config.Security;
 
-import com.ofsystem.Model.Rol;
-import com.ofsystem.Model.Usuario;
-import com.ofsystem.Service.Imple.RolServiceImpl;
-import com.ofsystem.Service.Imple.UsuarioServiceImpl;
+import com.ofsystem.Model.Enums.Rol;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.GrantedAuthority;

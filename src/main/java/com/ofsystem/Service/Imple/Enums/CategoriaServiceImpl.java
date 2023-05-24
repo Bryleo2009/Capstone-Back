@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.CategoriaName;
 import com.ofsystem.Model.Enums.Categoria;
-import com.ofsystem.Repo.ICategoriaRepo;
-import com.ofsystem.Service.ICategoriaService;
+import com.ofsystem.Repo.Enums.ICategoriaRepo;
+import com.ofsystem.Service.Service.Enums.ICategoriaService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,9 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Cliente;
 
-import com.ofsystem.Model.ListaDeseos;
-import com.ofsystem.Repo.IListaDeseoRepo;
-import com.ofsystem.Service.IListaDeseoService;
+import com.ofsystem.Model.Cliente.ListaDeseos;
+import com.ofsystem.Repo.Cliente.IListaDeseoRepo;
+import com.ofsystem.Service.Service.Cliente.IListaDeseoService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

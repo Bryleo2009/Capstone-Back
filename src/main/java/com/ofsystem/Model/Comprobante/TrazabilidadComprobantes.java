@@ -1,4 +1,4 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Comprobante;
 
 import javax.persistence.*;
 
@@ -18,36 +18,24 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrazabilidadComprobantes {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int idTrazaCompro;
-
     @ManyToOne
     @JoinColumn(name="idComp", referencedColumnName = "idComp")
     public Comprobante idComp;
-
     @ManyToOne
     @JoinColumn(name="idProceActual", referencedColumnName = "idEstCompro")
     public EstCompro idProceActual;
-
     @ManyToOne(optional = true)
     @JoinColumn(name="idProceAnterior", referencedColumnName = "idEstCompro")
     public EstCompro idProceAnterior;
-
     @Column(name="fechaIniProc", nullable = false)
     public Date fechaIniProc;
-
     @Column(name="fechaFinProc", nullable = true)
     public Date fechaFinProc;
-
     @Column (name="Observac", nullable = true)
     public String Observac;
-
-    @ManyToOne
-    @JoinColumn(name="idCliente",referencedColumnName = "id")
-    public Cliente idCliente;
-
     @ManyToOne
     @JoinColumn(name="idTraba",referencedColumnName = "id")
     public Trabajador idTraba;

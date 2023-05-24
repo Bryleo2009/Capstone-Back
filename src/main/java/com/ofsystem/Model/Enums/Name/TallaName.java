@@ -1,4 +1,4 @@
-package com.ofsystem.Enums;
+package com.ofsystem.Model.Enums.Name;
 
 public enum TallaName {
     EXTRA_SMALL("EXTRA_SMALL","XS","XS"),

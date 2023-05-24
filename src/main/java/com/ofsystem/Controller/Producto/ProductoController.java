@@ -1,4 +1,4 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Producto;
 
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
@@ -11,14 +11,14 @@ import com.ofsystem.Mapper.Filter.CarritoFilter;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Mapper.Filter.RegistroProductFilter;
 import com.ofsystem.Mapper.Filter.TallaColorFilter;
-import com.ofsystem.Model.Color;
-import com.ofsystem.Model.Producto;
-import com.ofsystem.Model.ProductoTallaColor;
-import com.ofsystem.Model.Talla;
-import com.ofsystem.Service.Imple.ColorServiceImpl;
-import com.ofsystem.Service.Imple.ProductoServiceImpl;
-import com.ofsystem.Service.Imple.ProductoTallaColorServiceImpl;
-import com.ofsystem.Service.Imple.TallaServiceImpl;
+import com.ofsystem.Model.Enums.Color;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Producto.ProductoTallaColor;
+import com.ofsystem.Model.Enums.Talla;
+import com.ofsystem.Service.Imple.Enums.ColorServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoTallaColorServiceImpl;
+import com.ofsystem.Service.Imple.Enums.TallaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -33,7 +33,6 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 

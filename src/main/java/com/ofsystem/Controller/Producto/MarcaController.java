@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Producto;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.Marca;
-import com.ofsystem.Service.Imple.MarcaServiceImpl;
+import com.ofsystem.Model.Enums.Marca;
+import com.ofsystem.Service.Imple.Enums.MarcaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

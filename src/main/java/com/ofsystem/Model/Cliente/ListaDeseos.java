@@ -1,9 +1,10 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Cliente;
 
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Usuario.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;

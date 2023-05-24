@@ -1,8 +1,6 @@
 package com.ofsystem.Mapper;
 
-import com.ofsystem.Enums.TallaName;
 import com.ofsystem.Mapper.Filter.TallaFilter;
-import com.ofsystem.Model.Talla;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

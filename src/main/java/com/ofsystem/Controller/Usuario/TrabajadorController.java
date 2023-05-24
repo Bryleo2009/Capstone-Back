@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Usuario;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.Trabajador;
-import com.ofsystem.Service.Imple.TrabajadorServiceImpl;
+import com.ofsystem.Model.Usuario.Trabajador;
+import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

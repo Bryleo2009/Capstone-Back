@@ -1,9 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Producto;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.ColorFilter;
-import com.ofsystem.Model.Etiquetas;
-import com.ofsystem.Service.Imple.EtiquetasServiceImpl;
+import com.ofsystem.Model.Enums.Etiquetas;
+import com.ofsystem.Service.Imple.Enums.EtiquetasServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

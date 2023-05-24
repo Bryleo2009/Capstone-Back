@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Usuario;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.Usuario;
-import com.ofsystem.Service.Imple.UsuarioServiceImpl;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +31,15 @@ public class UsuarioController {
 		if(unaUsuario == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
 		}		
+		return new ResponseEntity<Usuario>(unaUsuario,HttpStatus.OK);
+	}
+
+	@GetMapping("/byUsername/{username}")
+	public ResponseEntity<Usuario> listarPorId(@PathVariable("username") String username) {
+		Usuario unaUsuario = service.findByUsername(username);
+		if(unaUsuario == null) {
+			throw new ModeloNotFoundException("username NO ENCONTRADO: " + username);
+		}
 		return new ResponseEntity<Usuario>(unaUsuario,HttpStatus.OK);
 	}
 	

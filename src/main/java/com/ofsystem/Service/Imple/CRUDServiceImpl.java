@@ -1,6 +1,6 @@
 package com.ofsystem.Service.Imple;
 
-import com.ofsystem.Service.ICRUDService;
+import com.ofsystem.Service.Service.ICRUDService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

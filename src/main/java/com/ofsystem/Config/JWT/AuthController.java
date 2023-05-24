@@ -1,8 +1,8 @@
 package com.ofsystem.Config.JWT;
 
 import com.ofsystem.Config.Security.UserDetailsServiceImpl;
-import com.ofsystem.Model.Usuario;
-import com.ofsystem.Service.Imple.UsuarioServiceImpl;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.ofsystem.Repo;
+package com.ofsystem.Repo.Enums;
 
 import com.ofsystem.Model.Enums.Name.TallaName;
 import com.ofsystem.Model.Enums.Talla;

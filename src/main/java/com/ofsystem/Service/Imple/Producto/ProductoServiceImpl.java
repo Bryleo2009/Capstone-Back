@@ -1,10 +1,11 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Producto;
 
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Mapper.IProductoMapper;
-import com.ofsystem.Model.Producto;
-import com.ofsystem.Repo.IProductoRepo;
-import com.ofsystem.Service.IProductoService;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Repo.Producto.IProductoRepo;
+import com.ofsystem.Service.Service.Producto.IProductoService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

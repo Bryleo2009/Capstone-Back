@@ -1,4 +1,4 @@
-package com.ofsystem.Repo;
+package com.ofsystem.Repo.Enums;
 
 import com.ofsystem.Model.Enums.Name.TipoPagoName;
 import com.ofsystem.Model.Enums.TipoPago;

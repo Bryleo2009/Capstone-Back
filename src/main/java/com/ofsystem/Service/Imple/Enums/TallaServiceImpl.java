@@ -1,11 +1,12 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.TallaName;
 import com.ofsystem.Mapper.Filter.TallaFilter;
 import com.ofsystem.Mapper.ITallaMapper;
 import com.ofsystem.Model.Enums.Talla;
-import com.ofsystem.Repo.ITallaRepo;
-import com.ofsystem.Service.ITallaService;
+import com.ofsystem.Repo.Enums.ITallaRepo;
+import com.ofsystem.Service.Service.Enums.ITallaService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

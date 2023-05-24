@@ -1,4 +1,4 @@
-package com.ofsystem.Enums;
+package com.ofsystem.Model.Enums.Name;
 
 public enum TipoProductoName {
     CAMISA("","CAM","Camisa"),

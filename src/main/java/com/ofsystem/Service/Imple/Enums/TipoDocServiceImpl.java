@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.TipoDocName;
 import com.ofsystem.Model.Enums.TipoDoc;
-import com.ofsystem.Repo.ITipoDocRepo;
-import com.ofsystem.Service.ITipoDocService;
+import com.ofsystem.Repo.Enums.ITipoDocRepo;
+import com.ofsystem.Service.Service.Enums.ITipoDocService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

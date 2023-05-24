@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.TipoPagoName;
 import com.ofsystem.Model.Enums.TipoPago;
-import com.ofsystem.Repo.ITipoPagoRepo;
-import com.ofsystem.Service.ITipoPagoService;
+import com.ofsystem.Repo.Enums.ITipoPagoRepo;
+import com.ofsystem.Service.Service.Enums.ITipoPagoService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package com.ofsystem.Repo;
+package com.ofsystem.Repo.Producto;
 
 import com.ofsystem.Model.Enums.Color;
-import com.ofsystem.Model.Producto;
-import com.ofsystem.Model.ProductoTallaColor;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Producto.ProductoTallaColor;
 import com.ofsystem.Model.Enums.Talla;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

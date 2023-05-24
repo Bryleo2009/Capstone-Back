@@ -1,10 +1,23 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Comprobante;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.CarritoFilter;
 import com.ofsystem.Mapper.Filter.ComprobanteFilter;
-import com.ofsystem.Model.*;
-import com.ofsystem.Service.Imple.*;
+import com.ofsystem.Model.Comprobante.Comprobante;
+import com.ofsystem.Model.Comprobante.Detalle;
+import com.ofsystem.Model.Comprobante.TrazabilidadComprobantes;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Usuario.Trabajador;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
+import com.ofsystem.Service.Imple.Comprobante.DetalleServiceImpl;
+import com.ofsystem.Service.Imple.Comprobante.TrazabilidadComprobantesServiceImpl;
+import com.ofsystem.Service.Imple.Enums.EstComproServiceImpl;
+import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
+import com.ofsystem.Service.Imple.Enums.TipoComproServiceImpl;
+import com.ofsystem.Service.Imple.Enums.TipoPagoServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +25,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +45,8 @@ public class ComprobanteController {
 
 	@Autowired
 	private TipoPagoServiceImpl tipoPagoService;
+	@Autowired
+	private TrabajadorServiceImpl trabajadorService;
 
 	@Autowired
 	private DetalleServiceImpl detalleService;
@@ -54,106 +73,95 @@ public class ComprobanteController {
 		}		
 		return new ResponseEntity<Comprobante>(unaComprobante,HttpStatus.OK);
 	}
-	
-	@PostMapping
-	public ResponseEntity<Object> registrar( @RequestBody Comprobante dato) {
-		Comprobante unaComprobante = service.listarxID(dato.getIdComp());
-		URI location = null;
-		if(unaComprobante != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaComprobante.getIdComp()).toUri();
-			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdComp() + " --- " + location);
-		} else {
-			service.registrar(dato);
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdComp()).toUri();
-		}		
-		
-		return ResponseEntity.created(location).build();
+
+
+	private String generarSiguienteIdComp(String lastIdComp) {
+		int lastNumber = Integer.parseInt(lastIdComp.substring(1)); // Extraer el número sin el prefijo 'N'
+		int nextNumber = lastNumber + 1;
+		return String.format("N%04d", nextNumber);
 	}
-	@PostMapping("/registrarXComprobanteFilter")
-	public ResponseEntity<Object> registrarXComprobanteFilter( @RequestBody ComprobanteFilter dato) {
 
-		System.out.println(dato);
-
+	@PostMapping
+	public ResponseEntity<Object> registrar( @RequestBody ComprobanteFilter dato) {
+		System.out.println("dato ComproControler: " + dato);
+		String lastIdComp = service.findLastIdComp();
+		System.out.println("anterior " + service.findLastIdComp());
+		String nextIdComp = generarSiguienteIdComp(lastIdComp);
+		System.out.println("nuevo " + nextIdComp);
 		Comprobante comprobantes = new Comprobante();
-
-		comprobantes.setNomClientComp(dato.getCliente().getNombre());
-		comprobantes.setMontoSubtotalComp(dato.getMontoProducto());
-		comprobantes.setMontoTotalComp(dato.getAmmount());
-		comprobantes.setFechaEmiComp(new Date("02/05/2023"));
-		comprobantes.setDireccionComp(dato.getDireccionComp());
-		comprobantes.setUbigeoComp(dato.getUbigeoComp());
-		comprobantes.setIdTp(tipoPagoService.listarxID(1));
-		if(dato.isIdTc()){ //true = factura
-			comprobantes.setIdTc(tipoComproService.listarxID(2));
-		}else {
-			comprobantes.setIdTc(tipoComproService.listarxID(1));
-		}
-		comprobantes.setIdUser(dato.getCliente().getIdUserCliente());
-
-		service.registrar(comprobantes);
-		System.out.println(comprobantes);
-		Detalle detalles = new Detalle();
-
-		detalles.setIdComp(comprobantes);
-
-		for (CarritoFilter carritoFilter : dato.getCarritoFilterList()){
-
-			int cantidad = carritoFilter.getCantProduct();
-			detalles.setCantProductDetalle(cantidad);
-
-			Producto producto = new Producto();
-
-			producto = productoService.listarxID(carritoFilter.getIdProduct());
-
-			detalles.setPrecioUniDetalle(producto.getPrecioUni());
-			detalles.setPrecioTotalDetalle(producto.getPrecioUni() * cantidad);
-			detalles.setProductoDetalle(producto.getDescripcionProduct());
-			detalles.setIdProduct(producto.getIdProduct());
-			detalles.setImagen(producto.getImagen());
-			detalles.setPrecioDescuento(producto.getPrecioDescuProduct());
-
-			detalleService.registrar(detalles);
-
-		}
-
+		Detalle detalle = new Detalle();
 		TrazabilidadComprobantes trazabilidadComprob = new TrazabilidadComprobantes();
 
-		trazabilidadComprob.setIdComp(comprobantes);
-		trazabilidadComprob.setIdProceActual(estComproService.listarxID(1));
-		trazabilidadComprob.setIdCliente(dato.getCliente());
+		try {
+			//comprobante
 
-		if(dato.getTrabajador()!= null){
-
-			trazabilidadComprob.setIdTraba(dato.getTrabajador());
-
-		}else {
-
-			Trabajador trabajador = new Trabajador();
-			Usuario usuario = new Usuario();
-
-			usuario.setUsername("Online");
-			usuario.setPassword("Online");
-			usuario.setIdRol(rolService.listarxID(1));
-			usuario.setEstadoUser(true);
-			trabajador.setIdUserTrabajador(usuario);
-			trabajador.setTrabajador(true);
-			trabajador.setNombre("Online");
-			trabajador.setApellido("Online");
-			trabajador.setTelefono("Online");
-			trabajador.setDireccion("Online");
-			trabajador.setUbigueo("Online");
-			trabajador.setNumDocumento("Online");
-
-			trazabilidadComprob.setIdTraba(trabajador);
+			comprobantes.setIdComp(nextIdComp);
+			comprobantes.setMontoSubtotalComp(dato.getMontoProducto());
+			comprobantes.setMontoTotalComp(dato.getAmmount());
+			comprobantes.setFechaEmiComp(new Date());
+			comprobantes.setDireccionComp(dato.getDireccionComp());
+			comprobantes.setUbigeoComp(dato.getUbigeoComp());
+			comprobantes.setIdTp(tipoPagoService.listarxID(1));
+			if(dato.isIdTc()){ //true = factura
+				comprobantes.setIdTc(tipoComproService.listarxID(2));
+				comprobantes.setRuc(dato.getRuc());
+				comprobantes.setRazonSocial(dato.getRazonSocial());
+			}else {
+				comprobantes.setIdTc(tipoComproService.listarxID(1));
+			}
+			comprobantes.setIdCliente(dato.getCliente());
+			comprobantes.setIuc();
+			service.registrar(comprobantes);
+			System.out.println("Comprobante creado");
+		}catch (Exception e) {
+			System.out.println("Comprobante no creado " + e);
 		}
 
-		trazabilidadComprob.setObservac("Online");
+		try {
+			//detalle
 
-		trazabilidadComprob.setFechaIniProc(new Date());
+			detalle.setIdComp(service.listarxID(nextIdComp));
+			for (CarritoFilter carritoFilter : dato.getCarritoFilterList()){
+				int cantidad = carritoFilter.getCantProduct();
+				detalle.setIdDcomp(detalleService.idDetalle() + 1);
+				detalle.setCantProductDetalle(cantidad);
+				Producto producto = productoService.listarxID(carritoFilter.getIdProduct());
+				System.out.println(producto.getIUP());
+				detalle.setPrecioUniDetalle(producto.getPrecioUni());
+				detalle.setPrecioTotalDetalle(producto.getPrecioUni() * cantidad);
+				detalle.setProductoDetalle(producto.getNombreProduct());
+				detalle.setIupProduct(producto.getIUP());
+				detalle.setImagen(producto.getImagen());
+				detalle.setPrecioDescuento(producto.getPrecioDescuProduct());
+				/**
+				 * ! esta reemplazando uno sobre el otro
+				 */
+				detalleService.registrar(detalle);
+				System.out.println(detalle);
+			}
+			System.out.println("Detalle creado");
+		}catch (Exception e) {
+			System.out.println("Detalle no creado" + e);
+		}
 
-		trazabilidadComprobantesService.registrar(trazabilidadComprob);
+		try {
+			//trazabilidad
+			trazabilidadComprob.setIdComp(service.listarxID(nextIdComp));
+			trazabilidadComprob.setIdProceActual(estComproService.listarxID(1));
+			trazabilidadComprob.setFechaIniProc(new Date());
+			trazabilidadComprob.setObservac("Online");
+			if(dato.getTrabajador().getNumDocumento()!= null){
+				trazabilidadComprob.setIdTraba(dato.getTrabajador());
+			}else {
+				trazabilidadComprob.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
+			}
+			trazabilidadComprobantesService.registrar(trazabilidadComprob);
+			System.out.println("Trazabilidad creado");
+		}catch (Exception e) {
+			System.out.println("Trazabilidad no creado" + e);
+		}
 
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(comprobantes.getIuc(),HttpStatus.OK);
 	}
 	@PutMapping
 	public ResponseEntity<Comprobante> modificar( @RequestBody Comprobante dato) {

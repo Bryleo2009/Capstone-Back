@@ -1,8 +1,6 @@
 package com.ofsystem.Mapper;
 
 import com.ofsystem.Mapper.Filter.ProductoFilter;
-import com.ofsystem.Model.Producto;
-import com.ofsystem.Model.Talla;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

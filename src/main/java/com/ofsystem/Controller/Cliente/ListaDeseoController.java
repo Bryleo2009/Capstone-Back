@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Cliente;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.ListaDeseos;
-import com.ofsystem.Service.Imple.ListaDeseoServiceImpl;
+import com.ofsystem.Model.Cliente.ListaDeseos;
+import com.ofsystem.Service.Imple.Cliente.ListaDeseoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

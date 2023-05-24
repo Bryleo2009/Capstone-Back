@@ -1,7 +1,6 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Enums;
 
-import com.ofsystem.Enums.EtiquetaName;
-import com.ofsystem.Enums.TallaName;
+import com.ofsystem.Model.Enums.Name.TallaName;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

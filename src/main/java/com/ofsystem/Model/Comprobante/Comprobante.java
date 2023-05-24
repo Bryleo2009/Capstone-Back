@@ -1,4 +1,4 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Comprobante;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import com.ofsystem.Model.Enums.TipoCompro;
 import com.ofsystem.Model.Enums.TipoPago;
+import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Usuario.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +24,8 @@ public class Comprobante {
 	@Id
 	@Column(length = 50)
 	public String idComp;
-	@Column(name = "nomClientComp", nullable = false, length = 45)
-	public String nomClientComp; //Juan Alkexander
+	@Column(name = "iuc", nullable = false)
+	public String iuc;
 	@Column(name = "montoSubtotalComp", nullable = false)
 	public double montoSubtotalComp; //suma de los totales de items sin igv
 	@Column(name = "montoTotalComp", nullable = false)
@@ -35,6 +36,10 @@ public class Comprobante {
 	public String direccionComp;
 	@Column(name = "ubigeoComp", nullable = false)
 	public String ubigeoComp;
+	@Column(name = "rucComp", nullable = true)
+	public String ruc;
+	@Column(name = "razonSocialComp", nullable = true)
+	public String razonSocial;
 	@ManyToOne
     @JoinColumn(name="idTp", referencedColumnName = "idTp")
 	public TipoPago idTp;
@@ -42,24 +47,35 @@ public class Comprobante {
     @JoinColumn(name="idTc", referencedColumnName = "idTc")
 	public TipoCompro idTc;
 	@ManyToOne
-    @JoinColumn(name="idUser", referencedColumnName = "idUser")
-	public Usuario idUser;
+    @JoinColumn(name="idCliente", referencedColumnName = "id")
+	public Cliente idCliente;
 
-	private static int ultimoNumeroComprobante = 0;
+//	private static int ultimoNumeroComprobante = 0;
+//
+//	@PrePersist
+//	public void generarNumeroComprobante() {
+//		// Incrementar el número de comprobante correlativo
+//		ultimoNumeroComprobante++;
+//
+//		// Obtener la fecha actual
+//		LocalDate fecha = LocalDate.now();
+//
+//		// Formatear la fecha en formato 'yyyyMMdd'
+//		String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+//
+//		// Generar el número de comprobante correlativo
+//		idComp = fechaFormateada + String.format("%04d", ultimoNumeroComprobante);
+//	}
 
-	@PrePersist
-	public void generarNumeroComprobante() {
-		// Incrementar el número de comprobante correlativo
-		ultimoNumeroComprobante++;
 
-		// Obtener la fecha actual
-		LocalDate fecha = LocalDate.now();
-
-		// Formatear la fecha en formato 'yyyyMMdd'
-		String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-
-		// Generar el número de comprobante correlativo
-		idComp = fechaFormateada + String.format("%04d", ultimoNumeroComprobante);
+	public void setIuc() {
+		this.iuc = generarIUC(montoSubtotalComp,montoTotalComp,fechaEmiComp,ubigeoComp,idTp,idTc,idCliente);
 	}
 
+	public String generarIUC (double montoSubtotalComp, double montoTotalComp, Date fechaEmiComp, String ubigeoComp, TipoPago idTp, TipoCompro idTc, Cliente idCliente){
+		String iuc = "";
+		iuc = "MS" + montoSubtotalComp + "MT" + montoTotalComp + "U" + ubigeoComp + "TP" + idTp.getIdTp() + "TC" + idTc.getIdTc() +
+				"C" + idCliente.getNumDocumento() + "-" + fechaEmiComp.getDate() + fechaEmiComp.getMonth() + fechaEmiComp.getYear() + fechaEmiComp.getHours() + fechaEmiComp.getMinutes();
+		return iuc;
+	}
 }

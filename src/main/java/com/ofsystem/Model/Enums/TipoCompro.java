@@ -1,12 +1,10 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Enums;
 
 
-import com.ofsystem.Enums.EtiquetaName;
-import com.ofsystem.Enums.TipoComproName;
+import com.ofsystem.Model.Enums.Name.TipoComproName;
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
 @Entity

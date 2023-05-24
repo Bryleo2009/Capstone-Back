@@ -1,6 +1,6 @@
 package com.ofsystem.Model.Enums.Name;
 
-public enum EstProductName {
+public enum EstPedidoName {
 
     PAQUETE_REGISTRADO ( "REGISTRADO", "RGS", "Paquete registrado"),
     ESPERA_ENVIO ( "ESPERA", "ESP", "Espera de envio"),
@@ -15,7 +15,7 @@ public enum EstProductName {
     private final String abreviatura;
     private final String vista;
 
-    private EstProductName(Object value, String abreviatura, String vista) {
+    private EstPedidoName(Object value, String abreviatura, String vista) {
         this.value = value;
         this.abreviatura = abreviatura;
         this.vista = vista;

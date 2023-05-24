@@ -1,17 +1,16 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Comprobante;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import com.ofsystem.Model.Enums.TipoCompro;
+import com.ofsystem.Model.Enums.TipoPago;
+import com.ofsystem.Model.Usuario.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 
 @Entity
@@ -31,14 +30,19 @@ public class Detalle {
 	public double precioTotalDetalle; //2.00
 	@Column(name = "productoDetalle", nullable = false)
 	public String productoDetalle;
-	@Column(name = "idProduct", nullable = true)
-	public int idProduct;
+	@Column(name = "iupProduct", nullable = true)
+	public String iupProduct;
 	public String imagen;
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name="idComp", referencedColumnName = "idComp")
 	public Comprobante idComp;
-
 	@Column(name = "precioDescuento", nullable = true)
 	public Double precioDescuento; //2.00
 
+	public String generarIUD (int cantProductDetalle, double precioUniDetalle, double precioTotalDetalle,  String iupProduct, Comprobante idComp, Double precioDescuento){
+		String iud = "";
+		iud = "CP" + cantProductDetalle + "PUT" + precioUniDetalle + "PTD" + precioTotalDetalle + "IUP" + iupProduct + "C" + idComp.getIdComp() + "PD" + precioDescuento +
+				"F" + new Date().getDate() + new Date().getMonth() + new Date().getYear() + new Date().getHours() + new Date().getMinutes();
+		return iud;
+	}
 }

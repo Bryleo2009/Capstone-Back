@@ -27,8 +27,6 @@ public class Cliente {
 	@Column(name = "apellido", nullable = false, length = 1000)
 	public String apellido; // Velazquez Soria
 	@Column(name = "fechaNac")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@JsonFormat(pattern = "dd/MM/yyyy", timezone = "GMT-5")
 	public Date fechaNac;
 	@Column(name = "telefono", nullable = false, length = 45)
 	public String telefono; //987474234
@@ -36,6 +34,8 @@ public class Cliente {
 	public String direccion; //Av.alarcon cercado de lima 45567
 	@Column(name = "ubigueoCliente", nullable = false, length = 45)
 	public String ubigueo;
+	@Column(name = "correoCliente", nullable = false, length = 1000)
+	public String correo;
 	@Column(name = "numDocumento", nullable = false, length = 1000)
 	public String numDocumento;
 	@OneToOne

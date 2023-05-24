@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.RolName;
 import com.ofsystem.Model.Enums.Rol;
-import com.ofsystem.Repo.IRolRepo;
-import com.ofsystem.Service.IRolService;
+import com.ofsystem.Repo.Enums.IRolRepo;
+import com.ofsystem.Service.Service.Enums.IRolService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

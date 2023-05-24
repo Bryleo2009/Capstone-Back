@@ -1,6 +1,6 @@
 package com.ofsystem.Mapper.Filter;
 
-import com.ofsystem.Model.Producto;
+import com.ofsystem.Model.Producto.Producto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

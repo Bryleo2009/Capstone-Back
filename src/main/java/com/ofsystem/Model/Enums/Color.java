@@ -1,7 +1,7 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Enums;
 
-import com.ofsystem.Enums.ColorName;
-import com.ofsystem.Enums.EtiquetaName;
+import com.ofsystem.Model.Enums.Name.ColorName;
+
 import javax.persistence.*;
 
 

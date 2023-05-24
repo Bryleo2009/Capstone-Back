@@ -1,8 +1,8 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Comprobante;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.Detalle;
-import com.ofsystem.Service.Imple.DetalleServiceImpl;
+import com.ofsystem.Model.Comprobante.Detalle;
+import com.ofsystem.Service.Imple.Comprobante.DetalleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package com.ofsystem.Repo;
+package com.ofsystem.Repo.Comprobante;
 
-import com.ofsystem.Model.TrazabilidadComprobantes;
+import com.ofsystem.Model.Comprobante.TrazabilidadComprobantes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,10 @@
-package com.ofsystem.Service.Imple;
+package com.ofsystem.Service.Imple.Enums;
 
 import com.ofsystem.Model.Enums.Name.EtiquetaName;
 import com.ofsystem.Model.Enums.Etiquetas;
-import com.ofsystem.Repo.IEtiquetasRepo;
-import com.ofsystem.Service.IEtiquetasService;
+import com.ofsystem.Repo.Enums.IEtiquetasRepo;
+import com.ofsystem.Service.Service.Enums.IEtiquetasService;
+import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

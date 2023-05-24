@@ -1,15 +1,21 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Comprobante;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.TrazabilidadComprobFilter;
-import com.ofsystem.Model.*;
-import com.ofsystem.Service.Imple.*;
+import com.ofsystem.Model.Comprobante.Comprobante;
+import com.ofsystem.Model.Comprobante.TrazabilidadComprobantes;
+import com.ofsystem.Model.Usuario.Cliente;
+import com.ofsystem.Model.Usuario.Trabajador;
+import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
+import com.ofsystem.Service.Imple.Comprobante.TrazabilidadComprobantesServiceImpl;
+import com.ofsystem.Service.Imple.Enums.EstComproServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +77,6 @@ public class TrazabilidadComprobantesController {
 			TrazabilidadComprobantes trazabilidadComprob = new TrazabilidadComprobantes();
 			trazabilidadComprob.setIdComp(idComp);
 			trazabilidadComprob.setIdProceActual(estComproService.listarxID(1));
-			trazabilidadComprob.setIdCliente(idCliente);
 			trazabilidadComprob.setIdTraba(idTrabajador);
 			trazabilidadComprob.setObservac(Observac);
 			trazabilidadComprob.setFechaIniProc(new Date());

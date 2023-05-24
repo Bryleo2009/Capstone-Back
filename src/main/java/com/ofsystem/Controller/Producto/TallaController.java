@@ -1,10 +1,9 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Producto;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Enums.TallaName;
 import com.ofsystem.Mapper.Filter.TallaFilter;
-import com.ofsystem.Model.Talla;
-import com.ofsystem.Service.Imple.TallaServiceImpl;
+import com.ofsystem.Model.Enums.Talla;
+import com.ofsystem.Service.Imple.Enums.TallaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

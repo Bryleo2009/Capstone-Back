@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers(
                         "/login","/Productos/**", "/swagger-ui.html", "/swagger-ui/**","/swagger-resources/**",
-                        "/v3/api-docs/**", "/webjars/**","/media/**"
+                        "/v3/api-docs/**", "/webjars/**","/media/**","/api/**"
                 )
                 .permitAll()
                 .antMatchers("/Usuarios/**").hasAnyRole("SOPORTE")

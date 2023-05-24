@@ -1,4 +1,4 @@
-package com.ofsystem.Model;
+package com.ofsystem.Model.Producto;
 
 
 import javax.persistence.*;

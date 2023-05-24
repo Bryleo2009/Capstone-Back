@@ -1,11 +1,11 @@
-package com.ofsystem.Controller;
+package com.ofsystem.Controller.Usuario;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.Cliente;
-import com.ofsystem.Model.Rol;
-import com.ofsystem.Model.Usuario;
-import com.ofsystem.Service.Imple.ClienteServiceImpl;
-import com.ofsystem.Service.Imple.RolServiceImpl;
+import com.ofsystem.Model.Usuario.Cliente;
+import com.ofsystem.Model.Enums.Rol;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
+import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -74,26 +74,13 @@ public class ClienteController {
 
 	@GetMapping("/byNum/{num}")
 	public ResponseEntity<Cliente> findByNum(@PathVariable("num") String num) {
-		Cliente unaEmpleado = service.findByNumDocumento(num);
+		Cliente unaEmpleado = service.findByIdUserCliente_Username(num);
 		if(num.equals("admin")){
 			Rol rol = serviceRol.findByNombreItem("ROLE_SOPORTE");
 			Usuario usuario = new Usuario("admin","admin123",true,rol);
 			unaEmpleado = new Cliente("ofSystem - Nombre","Ofsystem - Apellido", new Date(2000,8,24),"994271287","Sin direccion","150101","71850926",usuario);
 		} else if(unaEmpleado == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + num);
-		}
-		return new ResponseEntity<Cliente>(unaEmpleado,HttpStatus.OK);
-	}
-
-	@GetMapping("/devolverCliente/{username}")
-	public ResponseEntity<Cliente> findByIdUserCliente_Username (@PathVariable("username") String username) {
-		Cliente unaEmpleado = service.findByIdUserCliente_Username(username);
-		if(username.equals("admin")){
-			Rol rol = serviceRol.findByNombreItem("ROLE_SOPORTE");
-			Usuario usuario = new Usuario("admin","admin123",true,rol);
-			unaEmpleado = new Cliente("ofSystem - Nombre","Ofsystem - Apellido", new Date(2000,8,24),"994271287","Sin direccion","150101","71850926",usuario);
-		} else if(unaEmpleado == null) {
-			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + username);
 		}
 		return new ResponseEntity<Cliente>(unaEmpleado,HttpStatus.OK);
 	}
