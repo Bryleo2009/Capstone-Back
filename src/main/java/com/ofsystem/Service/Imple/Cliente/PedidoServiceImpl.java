@@ -20,6 +20,11 @@ public class PedidoServiceImpl extends CRUDServiceImpl<Pedido, Integer> implemen
     }
 
     @Override
+    public Pedido findByIdComp_Iuc(String iuc) {
+        return repo.findByIdComp_Iuc(iuc);
+    }
+
+    @Override
     public Pedido findByIdComp_IdComp(String idComp) {
         return repo.findByIdComp_IdComp(idComp);
     }

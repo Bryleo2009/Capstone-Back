@@ -7,7 +7,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.CarritoFilter;
+import com.ofsystem.Mapper.Filter.ProductoStorage;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Mapper.Filter.RegistroProductFilter;
 import com.ofsystem.Mapper.Filter.TallaColorFilter;
@@ -269,14 +269,14 @@ public class ProductoController {
 	}
 
 	@PutMapping("/carrito")
-	public ResponseEntity<Object> CarritoOperador( @RequestBody List<CarritoFilter> dato) {
+	public ResponseEntity<Object> CarritoOperador( @RequestBody List<ProductoStorage> dato) {
 
-		for (CarritoFilter carritoFilter : dato) {
+		for (ProductoStorage productoStorage : dato) {
 
-			int idProduct = carritoFilter.getIdProduct();
-			int cantidad = carritoFilter.getCantProduct();
-			int talla = carritoFilter.getTallaid();
-			int color = carritoFilter.getColorid();
+			int idProduct = productoStorage.getIdProduct();
+			int cantidad = productoStorage.getCantProduct();
+			int talla = productoStorage.getTallaid();
+			int color = productoStorage.getColorid();
 
 			Producto unproducto = service.listarxID(idProduct);
 			Talla unatalla = serviceTalla.listarxID(talla);

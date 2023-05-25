@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DetalleServiceImpl extends CRUDServiceImpl<Detalle, Integer> implements IDetalleService{
 
@@ -22,5 +24,10 @@ public class DetalleServiceImpl extends CRUDServiceImpl<Detalle, Integer> implem
 	@Override
 	public int idDetalle() {
 		return repo.idDetalle();
+	}
+
+	@Override
+	public List<Detalle> findByIdComp_Iuc(String iuc) {
+		return repo.findByIdComp_Iuc(iuc);
 	}
 }

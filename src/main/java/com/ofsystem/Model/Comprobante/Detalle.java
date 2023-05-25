@@ -3,8 +3,10 @@ package com.ofsystem.Model.Comprobante;
 
 import javax.persistence.*;
 
+import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Enums.TipoCompro;
 import com.ofsystem.Model.Enums.TipoPago;
+import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Usuario.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,7 @@ import java.util.Date;
 public class Detalle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int idDcomp;
+	public int idDetalle;
 	@Column(name = "cantProductDetalle", nullable = false)
 	public int cantProductDetalle; //10
 	@Column(name = "precioUniDetalle", nullable = false)
@@ -30,19 +32,25 @@ public class Detalle {
 	public double precioTotalDetalle; //2.00
 	@Column(name = "productoDetalle", nullable = false)
 	public String productoDetalle;
-	@Column(name = "iupProduct", nullable = true)
-	public String iupProduct;
-	public String imagen;
+	@OneToOne
+	@JoinColumn(name="idProduct", referencedColumnName = "idProduct")
+	public Producto idProduct;
 	@OneToOne
     @JoinColumn(name="idComp", referencedColumnName = "idComp")
 	public Comprobante idComp;
-	@Column(name = "precioDescuento", nullable = true)
-	public Double precioDescuento; //2.00
+	@Column(name = "precioDescuentoDetalle", nullable = true)
+	public Double precioDescuentoDetalle; //2.00
+	@ManyToOne
+	@JoinColumn(name = "id_pedido")
+	private Pedido pedido;
 
-	public String generarIUD (int cantProductDetalle, double precioUniDetalle, double precioTotalDetalle,  String iupProduct, Comprobante idComp, Double precioDescuento){
-		String iud = "";
-		iud = "CP" + cantProductDetalle + "PUT" + precioUniDetalle + "PTD" + precioTotalDetalle + "IUP" + iupProduct + "C" + idComp.getIdComp() + "PD" + precioDescuento +
-				"F" + new Date().getDate() + new Date().getMonth() + new Date().getYear() + new Date().getHours() + new Date().getMinutes();
-		return iud;
+	public Detalle(int cantProductDetalle, double precioUniDetalle, double precioTotalDetalle, String productoDetalle, Producto idProduct, Comprobante idComp, Double precioDescuentoDetalle) {
+		this.cantProductDetalle = cantProductDetalle;
+		this.precioUniDetalle = precioUniDetalle;
+		this.precioTotalDetalle = precioTotalDetalle;
+		this.productoDetalle = productoDetalle;
+		this.idProduct = idProduct;
+		this.idComp = idComp;
+		this.precioDescuentoDetalle = precioDescuentoDetalle;
 	}
 }

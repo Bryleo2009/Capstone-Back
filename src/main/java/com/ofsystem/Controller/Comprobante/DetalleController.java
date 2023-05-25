@@ -36,14 +36,14 @@ public class DetalleController {
 	
 	@PostMapping
 	public ResponseEntity<Object> registrar( @RequestBody Detalle dato) {
-		Detalle unaDetalle = service.listarxID(dato.getIdDcomp());
+		Detalle unaDetalle = service.listarxID(dato.getIdDetalle());
 		URI location = null;
 		if(unaDetalle != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaDetalle.getIdDcomp()).toUri();
-			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdDcomp() + " --- " + location);
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaDetalle.getIdDetalle()).toUri();
+			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdDetalle() + " --- " + location);
 		} else {
 			service.registrar(dato);
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdDcomp()).toUri();
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdDetalle()).toUri();
 		}		
 		
 		return ResponseEntity.created(location).build();

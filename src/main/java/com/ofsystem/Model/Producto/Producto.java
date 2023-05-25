@@ -42,8 +42,12 @@ public class Producto {
 	@ManyToOne
 	@JoinColumn(name="idTipoProduc", referencedColumnName = "idTipoProduc")
 	public TipoProducto idTipoProduc;
-	@ManyToMany
-	@JoinColumn(name="idEtiqueta", referencedColumnName = "idEtiqueta")
+	@ManyToMany(fetch = FetchType.EAGER )
+	@JoinTable(
+			name = "producto_etiqueta",
+			joinColumns = @JoinColumn(name = "idProduct"),
+			inverseJoinColumns = @JoinColumn(name = "idEtiqueta")
+	)
 	public List<Etiquetas> idEtiqueta;
 
 	/*@ManyToMany

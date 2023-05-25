@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import com.ofsystem.Model.Enums.TipoDoc;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,15 +42,20 @@ public class Cliente {
 	@OneToOne
 	@JoinColumn(name="idUserCliente", referencedColumnName = "idUser")
 	public Usuario idUserCliente;
+	@ManyToOne
+	@JoinColumn(name="idTipoDoc", referencedColumnName = "idTipoDoc")
+	public TipoDoc idTipoDoc;
 
-	public Cliente(String nombre, String apellido, Date fechaNac, String telefono, String direccion, String ubigueo, String numDocumento, Usuario idUserCliente) {
+	public Cliente(String nombre, String apellido, Date fechaNac, String telefono, String direccion, String ubigueo, String correo, String numDocumento, Usuario idUserCliente, TipoDoc idTipoDoc) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNac = fechaNac;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.ubigueo = ubigueo;
+		this.correo = correo;
 		this.numDocumento = numDocumento;
 		this.idUserCliente = idUserCliente;
+		this.idTipoDoc = idTipoDoc;
 	}
 }

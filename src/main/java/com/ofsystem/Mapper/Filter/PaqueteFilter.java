@@ -1,6 +1,5 @@
 package com.ofsystem.Mapper.Filter;
 
-import com.ofsystem.Model.Cliente.PaqueteProductos;
 import com.ofsystem.Model.Usuario.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaqueteFilter {
-    public List<CarritoFilter> paqueteProductos;
+    public List<ProductoStorage> paqueteProductos;
     public Cliente cliente;
 }

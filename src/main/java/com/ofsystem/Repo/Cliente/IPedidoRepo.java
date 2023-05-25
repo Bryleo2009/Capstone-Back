@@ -5,5 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IPedidoRepo extends JpaRepository<Pedido, Integer> {
 
-    Pedido findByIdComp_IdComp(String idComp);
+    Pedido findByIdComp_Iuc(String iuc);
+
+    Pedido findByIdComp_IdComp (String idComp);
 }

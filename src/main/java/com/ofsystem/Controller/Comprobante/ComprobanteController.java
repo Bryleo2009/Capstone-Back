@@ -1,14 +1,12 @@
 package com.ofsystem.Controller.Comprobante;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.CarritoFilter;
+import com.ofsystem.Mapper.Filter.ProductoStorage;
 import com.ofsystem.Mapper.Filter.ComprobanteFilter;
 import com.ofsystem.Model.Comprobante.Comprobante;
 import com.ofsystem.Model.Comprobante.Detalle;
 import com.ofsystem.Model.Comprobante.TrazabilidadComprobantes;
 import com.ofsystem.Model.Producto.Producto;
-import com.ofsystem.Model.Usuario.Trabajador;
-import com.ofsystem.Model.Usuario.Usuario;
 import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.DetalleServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.TrazabilidadComprobantesServiceImpl;
@@ -22,13 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -121,21 +113,17 @@ public class ComprobanteController {
 			//detalle
 
 			detalle.setIdComp(service.listarxID(nextIdComp));
-			for (CarritoFilter carritoFilter : dato.getCarritoFilterList()){
-				int cantidad = carritoFilter.getCantProduct();
-				detalle.setIdDcomp(detalleService.idDetalle() + 1);
+			for (ProductoStorage productoStorage : dato.getProductoStorageList()){
+				int cantidad = productoStorage.getCantProduct();
+				detalle.setIdDetalle(detalleService.idDetalle() + 1);
 				detalle.setCantProductDetalle(cantidad);
-				Producto producto = productoService.listarxID(carritoFilter.getIdProduct());
+				Producto producto = productoService.listarxID(productoStorage.getIdProduct());
 				System.out.println(producto.getIUP());
 				detalle.setPrecioUniDetalle(producto.getPrecioUni());
 				detalle.setPrecioTotalDetalle(producto.getPrecioUni() * cantidad);
-				detalle.setProductoDetalle(producto.getNombreProduct());
-				detalle.setIupProduct(producto.getIUP());
-				detalle.setImagen(producto.getImagen());
-				detalle.setPrecioDescuento(producto.getPrecioDescuProduct());
-				/**
-				 * ! esta reemplazando uno sobre el otro
-				 */
+				detalle.setProductoDetalle(producto.getIUP()+" | "+producto.getNombreProduct());
+				detalle.setPrecioDescuentoDetalle(producto.getPrecioDescuProduct());
+				detalle.setIdProduct(producto);
 				detalleService.registrar(detalle);
 				System.out.println(detalle);
 			}

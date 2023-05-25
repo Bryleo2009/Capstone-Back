@@ -24,8 +24,8 @@ public interface IProductoMapper {
                "FROM public.producto p\n" +
                "INNER JOIN public.categoria_product ct ON ct.id_categ = p.id_categ\n" +
                "INNER JOIN public.tipo_producto tp ON tp.id_tipo_produc = p.id_tipo_produc\n" +
-               "INNER JOIN public.producto_id_etiqueta ON producto_id_etiqueta.producto_id_product = p.id_product\n" +
-               "INNER JOIN public.etiquetas e ON e.id_etiqueta = producto_id_etiqueta.id_etiqueta_id_etiqueta\n" +
+               "INNER JOIN public.producto_etiqueta ON producto_etiqueta.id_product = p.id_product\n" +
+               "INNER JOIN public.etiquetas e ON e.id_etiqueta = producto_etiqueta.id_etiqueta\n" +
                "INNER JOIN public.producto_talla_color ptc ON ptc.producto_id_product = p.id_product\n" +
                "INNER JOIN public.talla t ON t.id_talla = ptc.id_talla_id_talla\n" +
                "INNER JOIN public.color c ON c.id_color = ptc.id_color_id_color\n" +
@@ -77,8 +77,8 @@ public interface IProductoMapper {
                "FROM public.producto p\n" +
                "INNER JOIN public.categoria_product ct ON ct.id_categ = p.id_categ\n" +
                "INNER JOIN public.tipo_producto tp ON tp.id_tipo_produc = p.id_tipo_produc\n" +
-               "INNER JOIN public.producto_id_etiqueta ON producto_id_etiqueta.producto_id_product = p.id_product\n" +
-               "INNER JOIN public.etiquetas e ON e.id_etiqueta = producto_id_etiqueta.id_etiqueta_id_etiqueta\n" +
+               "INNER JOIN public.producto_etiqueta ON producto_etiqueta.id_product = p.id_product\n" +
+               "INNER JOIN public.etiquetas e ON e.id_etiqueta = producto_etiqueta.id_etiqueta\n" +
                "INNER JOIN public.producto_talla_color ptc ON ptc.producto_id_product = p.id_product\n" +
                "INNER JOIN public.talla t ON t.id_talla = ptc.id_talla_id_talla\n" +
                "INNER JOIN public.color c ON c.id_color = ptc.id_color_id_color\n" +

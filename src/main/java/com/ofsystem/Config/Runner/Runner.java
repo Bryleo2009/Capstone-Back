@@ -1,7 +1,6 @@
 package com.ofsystem.Config.Runner;
 
 import com.ofsystem.Model.Cliente.Pedido;
-import com.ofsystem.Model.Cliente.PaqueteProductos;
 import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
 import com.ofsystem.Model.Comprobante.Comprobante;
 import com.ofsystem.Model.Comprobante.Detalle;
@@ -14,7 +13,6 @@ import com.ofsystem.Model.Producto.ProductoTallaColor;
 import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Usuario.Trabajador;
 import com.ofsystem.Model.Usuario.Usuario;
-import com.ofsystem.Service.Imple.Cliente.PaqueteProductosServiceImpl;
 import com.ofsystem.Service.Imple.Cliente.PedidoServiceImpl;
 import com.ofsystem.Service.Imple.Cliente.TrazabilidadPedidosServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
@@ -76,8 +74,6 @@ public class Runner implements CommandLineRunner {
     @Autowired
     private TrabajadorServiceImpl trabajadorService;
     @Autowired
-    private PaqueteProductosServiceImpl paqueteProductosService;
-    @Autowired
     private ComprobanteServiceImpl comprobanteService;
     @Autowired
     private DetalleServiceImpl detalleService;
@@ -107,6 +103,7 @@ public class Runner implements CommandLineRunner {
                     categoriaService.registrar(objeto);
                 }
             }
+            System.out.println("Categoria de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -120,6 +117,7 @@ public class Runner implements CommandLineRunner {
                     tipoProductoService.registrar(objeto);
                 }
             }
+            System.out.println("TipoProducto de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -133,6 +131,7 @@ public class Runner implements CommandLineRunner {
                     etiquetaService.registrar(objeto);
                 }
             }
+            System.out.println("Etiqueta de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -146,6 +145,7 @@ public class Runner implements CommandLineRunner {
                     tallaService.registrar(objeto);
                 }
             }
+            System.out.println("Talla de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -159,6 +159,7 @@ public class Runner implements CommandLineRunner {
                     marcaService.registrar(objeto);
                 }
             }
+            System.out.println("Marca de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -172,6 +173,7 @@ public class Runner implements CommandLineRunner {
                     colorService.registrar(objeto);
                 }
             }
+            System.out.println("Color de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -185,6 +187,7 @@ public class Runner implements CommandLineRunner {
                     tipoPagoService.registrar(objeto);
                 }
             }
+            System.out.println("TipoPago de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -198,6 +201,7 @@ public class Runner implements CommandLineRunner {
                     tipoDocService.registrar(objeto);
                 }
             }
+            System.out.println("TipoDoc de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -211,6 +215,7 @@ public class Runner implements CommandLineRunner {
                     tipoComproService.registrar(objeto);
                 }
             }
+            System.out.println("TipoCompro de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -224,6 +229,7 @@ public class Runner implements CommandLineRunner {
                     rolService.registrar(objeto);
                 }
             }
+            System.out.println("Rol de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -237,6 +243,7 @@ public class Runner implements CommandLineRunner {
                     EstEnvioProductService.registrar(objeto);
                 }
             }
+            System.out.println("EstEnvio de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -250,6 +257,7 @@ public class Runner implements CommandLineRunner {
                     EstComproService.registrar(objeto);
                 }
             }
+            System.out.println("EstCompro de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -260,28 +268,43 @@ public class Runner implements CommandLineRunner {
             //verificar si el producto ya existe
             if (!productoService.existsByNombre(nombreProducto)) {
                 Producto unproducto = new Producto();
-                unproducto.setDescripcionProduct("Tipo de cuello: Redondo | Modelo: WANNAWEB MAY21 | Estilo: Casual");
-                unproducto.setNombreProduct(nombreProducto);
-                unproducto.setPrecioUni(52.99);
-                unproducto.setPrecioDescProduct(true);
-                unproducto.setPrecioDescuProduct(40.56);
-                unproducto.setExistente();
-                unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
-                unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
-                unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));
-
                 List<Etiquetas> etiquetas = new ArrayList<>();
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.TIPO_MANGA_CORTA));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_VERANO));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_PRIMAVERA));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MAT_ALGODON));
-                unproducto.setIdEtiqueta(etiquetas);
+                try {
+                    unproducto.setDescripcionProduct("Tipo de cuello: Redondo | Modelo: WANNAWEB MAY21 | Estilo: Casual");
+                    unproducto.setNombreProduct(nombreProducto);
+                    unproducto.setPrecioUni(52.99);
+                    unproducto.setPrecioDescProduct(true);
+                    unproducto.setPrecioDescuProduct(40.56);
+                    unproducto.setExistente();
+                    unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
+                    unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
+                    unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));
+                    System.out.println("Producto de prueba creado");
 
-                Talla tallas = tallaService.findByNombre(TallaName.LARGE);
-                Color color = colorService.findByIdentItem(ColorName.COLOR_BLANCO);
-                unproducto.setIUP();
-                productoService.registrar(unproducto);
-                productoTallaColorService.registrar(new ProductoTallaColor(unproducto,tallas,color,50));
+                    try {
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.TIPO_MANGA_CORTA));
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_VERANO));
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_PRIMAVERA));
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MAT_ALGODON));
+                        unproducto.setIdEtiqueta(etiquetas);
+                        System.out.println("Etiquetas de prueba asignadas");
+
+                        try {
+                            Talla tallas = tallaService.findByNombre(TallaName.LARGE);
+                            Color color = colorService.findByIdentItem(ColorName.COLOR_BLANCO);
+                            unproducto.setIUP();
+                            productoService.registrar(unproducto);
+                            productoTallaColorService.registrar(new ProductoTallaColor(unproducto,tallas,color,50));
+                            System.out.println("ProductoTallaColor de prueba creado");
+                        }catch (Exception e){
+                            System.out.println("ProductoTallaColor de prueba no creado");
+                        }
+                    }catch (Exception e){
+                        System.out.println("Etiquetas de prueba no asignadas");
+                    }
+                } catch (Exception e){
+                    System.out.println("Producto de prueba no creado");
+                }
             } else {
                 // el producto ya existe
                 System.out.println("El producto ya existe en la base de datos.");
@@ -294,21 +317,32 @@ public class Runner implements CommandLineRunner {
         try {
             String nombreUsuario = "userCliente";
             if (!usuarioService.existsByUsername("userCliente")){
-                //contra= 12345
-                Usuario userCliente = new Usuario("userCliente","$2a$12$BClCi3YSMx1yFgcyO2kQuOrwl2L4J8uVPmjSPqM45V8hzVIS2jhfW",true,rolService.listarxID(3));
-                usuarioService.registrar(userCliente);
-
                 Cliente cliente = new Cliente();
-                cliente.setNombre("Bryan Andrés");
-                cliente.setApellido("Morán Vega");
-                cliente.setFechaNac(new Date("24/08/2000"));
-                cliente.setTelefono("994271287");
-                cliente.setDireccion("Los Olivos");
-                cliente.setUbigueo("150101");
-                cliente.setNumDocumento("71850926");
-                cliente.setCorreo("bryleo2009@hotmail.com");
-                cliente.setIdUserCliente(usuarioService.findByUsername("userCliente"));
-                clienteService.registrar(cliente);
+                try {
+                    //contra= 12345
+                    Usuario userCliente = new Usuario("userCliente","$2a$12$BClCi3YSMx1yFgcyO2kQuOrwl2L4J8uVPmjSPqM45V8hzVIS2jhfW",true,rolService.listarxID(3));
+                    usuarioService.registrar(userCliente);
+                    System.out.println("UserCliente de prueba creado");
+
+                    try {
+                        cliente.setNombre("Bryan Andrés");
+                        cliente.setApellido("Morán Vega");
+                        cliente.setFechaNac(new Date("24/08/2000"));
+                        cliente.setTelefono("994271287");
+                        cliente.setDireccion("Los Olivos");
+                        cliente.setUbigueo("150101");
+                        cliente.setNumDocumento("71850926");
+                        cliente.setCorreo("bryleo2009@hotmail.com");
+                        cliente.setIdUserCliente(usuarioService.findByUsername("userCliente"));
+                        cliente.setIdTipoDoc(tipoDocService.listarxID(1));
+                        clienteService.registrar(cliente);
+                        System.out.println("Cliente de prueba creado");
+                    }catch (Exception e){
+                        System.out.println("Cliente de prueba no creado");
+                    }
+                }catch (Exception e){
+                    System.out.println("UserCliente de prueba no creado");
+                }
             } else {
                 System.out.println("El cliente ya existe en la base de datos.");
             }
@@ -320,22 +354,33 @@ public class Runner implements CommandLineRunner {
         try {
             String nombreUsuario = "Online";
             if (!usuarioService.existsByUsername("Online")){
-                //contra= 12345
-                Usuario Online = new Usuario("Online","$2a$12$BClCi3YSMx1yFgcyO2kQuOrwl2L4J8uVPmjSPqM45V8hzVIS2jhfW",true,rolService.listarxID(2));
-                usuarioService.registrar(Online);
-
                 Trabajador trabajador = new Trabajador();
-                trabajador.setNombre("Online");
-                trabajador.setApellido("Online");
-                trabajador.setCorreo("Online");
-                trabajador.setFechaNac(new Date("24/08/2000"));
-                trabajador.setTelefono("Online");
-                trabajador.setDireccion("Online");
-                trabajador.setUbigueo("Online");
-                trabajador.setNumDocumento("Online");
-                trabajador.setIdUserTrabajador(usuarioService.findByUsername("Online"));
-                trabajador.setTrabajador(true);
-                trabajadorService.registrar(trabajador);
+                try {
+                    //contra= 12345
+                    Usuario Online = new Usuario("Online","$2a$12$BClCi3YSMx1yFgcyO2kQuOrwl2L4J8uVPmjSPqM45V8hzVIS2jhfW",true,rolService.listarxID(2));
+                    usuarioService.registrar(Online);
+                    System.out.println("UserTrabajador de prueba creado");
+
+                    try {
+                        trabajador.setNombre("Online");
+                        trabajador.setApellido("Online");
+                        trabajador.setCorreo("Online");
+                        trabajador.setFechaNac(new Date("24/08/2000"));
+                        trabajador.setTelefono("Online");
+                        trabajador.setDireccion("Online");
+                        trabajador.setUbigueo("Online");
+                        trabajador.setNumDocumento("Online");
+                        trabajador.setIdUserTrabajador(usuarioService.findByUsername("Online"));
+                        trabajador.setIdTipoDoc(tipoDocService.listarxID(1));
+                        trabajador.setTrabajador(true);
+                        trabajadorService.registrar(trabajador);
+                        System.out.println("Trabajador de prueba creado");
+                    }catch (Exception e){
+                        System.out.println("Trabajador de prueba no creado");
+                    }
+                }catch (Exception e){
+                    System.out.println("UserTrabajador de prueba no creado");
+                }
             } else {
                 System.out.println("El cliente ya existe en la base de datos.");
             }
@@ -343,104 +388,90 @@ public class Runner implements CommandLineRunner {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
 
-        //Paquieteria Producto
-        try {
-            //Pedido Producto
-            List<PaqueteProductos> paqueteProductos =  new ArrayList<>();
-            Date fecha = new Date();
-            LocalDateTime localDateTime = fecha.toInstant().atZone(ZoneId.of("America/Lima")).toLocalDateTime();
-            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            paqueteProductos.addAll(Arrays.asList(
-                    new PaqueteProductos(productoService.listarxID(1),5,
-                            clienteService.findByIdUserCliente_Username("userCliente"),
-                            new Date(localDateTime.format(formato)))));
-            paqueteProductosService.registroMasivo(paqueteProductos);
-        } catch (Exception ex) {
-            throw new ModeloNotFoundException(ex.getMessage().toString());
-        }
-
         //Comprobante, Detalle temporal y su Trazabilidad
         try {
             if (comprobanteService.listarxID("N0000") == null){
+                Producto producto = productoService.listarxID(1);
+                try {
+                    //comprobante
+                    Comprobante comprobante = new Comprobante();
+                    comprobante.setIdComp("N0000");
+                    comprobante.setMontoSubtotalComp(100);
+                    comprobante.setMontoTotalComp(118);
+                    comprobante.setFechaEmiComp(new Date());
+                    comprobante.setDireccionComp("Lima");
+                    comprobante.setUbigeoComp("150101");
+                    comprobante.setIdTp(tipoPagoService.listarxID(1));
+                    comprobante.setIdTc(tipoComproService.listarxID(1));
+                    comprobante.setIdCliente(clienteService.findByIdUserCliente_Username("userCliente"));
+                    comprobante.setIuc();
+                    comprobanteService.registrar(comprobante);
+                    System.out.println("Comprobante de prueba creado");
 
-                //comprobante
-                Comprobante comprobante = new Comprobante();
-                comprobante.setIdComp("N0000");
-                comprobante.setMontoSubtotalComp(100);
-                comprobante.setMontoTotalComp(118);
-                comprobante.setFechaEmiComp(new Date());
-                comprobante.setDireccionComp("Lima");
-                comprobante.setUbigeoComp("150101");
-                comprobante.setIdTp(tipoPagoService.listarxID(1));
-                comprobante.setIdTc(tipoComproService.listarxID(1));
-                comprobante.setIdCliente(clienteService.findByIdUserCliente_Username("userCliente"));
-                comprobante.setIuc();
-                comprobanteService.registrar(comprobante);
+                    try {
+                        //detalle
+                        List<Detalle> detalleList =  new ArrayList<>();
+                        detalleList.addAll(Arrays.asList(new Detalle(5,producto.getPrecioUni(),producto.getPrecioUni() * 5,
+                                        producto.getIUP()+" | "+producto.getNombreProduct(),
+                                        producto,comprobanteService.listarxID("N0000"),producto.getPrecioDescuProduct())
+                                ));
+                        detalleService.registroMasivo(detalleList);
+                        System.out.println("Detalle de prueba creado");
 
-                //detalle
-                Date fecha = new Date();
-                LocalDateTime localDateTime = fecha.toInstant().atZone(ZoneId.of("America/Lima")).toLocalDateTime();
-                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                Detalle detalle = new Detalle();
-                for(PaqueteProductos paqueteProducto : paqueteProductosService.findByIdClienteaAndAndFechaPedidoProduc(clienteService.findByIdUserCliente_Username("userCliente"),new Date(localDateTime.format(formato)))){
-                    detalle.setCantProductDetalle(paqueteProducto.getCantProduct());
-                    detalle.setPrecioUniDetalle(paqueteProducto.getProducto_id_product().getPrecioUni());
-                    detalle.setPrecioTotalDetalle(detalle.getPrecioUniDetalle() * detalle.getCantProductDetalle());
-                    detalle.setProductoDetalle(paqueteProducto.getProducto_id_product().getNombreProduct());
-                    detalle.setIupProduct(paqueteProducto.getProducto_id_product().getIUP());
-                    detalle.setImagen(paqueteProducto.getProducto_id_product().getImagen());
-                    detalle.setPrecioDescuento(paqueteProducto.getProducto_id_product().getPrecioDescuProduct());
-                    detalle.setIdComp(comprobanteService.listarxID("N0000"));
-                    detalleService.registrar(detalle);
+                        try {
+                            //trazabildiad
+                            TrazabilidadComprobantes trazabilidadComprobantes = new TrazabilidadComprobantes();
+                            trazabilidadComprobantes.setIdComp(comprobanteService.listarxID("N0000"));
+                            trazabilidadComprobantes.setIdProceActual(estComproService.listarxID(1));
+                            trazabilidadComprobantes.setFechaIniProc(new Date());
+                            trazabilidadComprobantes.setObservac("runner");
+                            trazabilidadComprobantes.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
+                            trazabilidadComprobantesService.registrar(trazabilidadComprobantes);
+                            System.out.println("TrazaCompro de prueba creado");
+
+                            try {
+                                //Pedido
+                                Pedido pedido = new Pedido();
+                                pedido.setFechaPedido(new Date());
+                                pedido.setObservacionesPedido("Online");
+                                pedido.setCantidadTotalPedido(pedido.cantidadTotal(detalleService.findByIdComp_Iuc(comprobanteService.listarxID("N0000").getIuc())));
+                                pedido.setNombreRecojoPedido("Bryan Andrés");
+                                pedido.setApellidoRecojoPedido("Morán Vega");
+                                pedido.setCelularRecojoPedido("994271287");
+                                pedido.setCorreoRecojoPedido("bryleo2009@hotmail.com");
+                                pedido.setDireccionRecojoPedido("Lima");
+                                pedido.setIdComp(comprobanteService.listarxID("N0000"));
+                                pedido.setIdDetalle(detalleService.findByIdComp_Iuc(comprobanteService.listarxID("N0000").getIuc()));
+                                pedidoService.registrar(pedido);
+                                System.out.println("Pedido de prueba creado");
+
+                                try {
+                                    //trazabildiad
+                                    TrazabilidadPedidos trazabilidadPedidos = new TrazabilidadPedidos();
+                                    trazabilidadPedidos.setIdPedido(pedidoService.findByIdComp_IdComp("N0000"));
+                                    trazabilidadPedidos.setIdProceActual(estPedidoService.listarxID(1));
+                                    trazabilidadPedidos.setFechaIniProc(new Date());
+                                    trazabilidadPedidos.setObservac("runner");
+                                    trazabilidadPedidos.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
+                                    trazabilidadPedidosService.registrar(trazabilidadPedidos);
+                                    System.out.println("TrazaPedido de prueba creado");
+                                }catch (Exception e) {
+                                    System.out.println("TrazaPedido de prueba no creado");
+                                }
+                            }catch (Exception e) {
+                                System.out.println("Pedido de prueba no creado " + e);
+                            }
+                        }catch (Exception e){
+                            System.out.println("TrazaCompro de prueba no creado");
+                        }
+                    } catch (Exception e){
+                        System.out.println("Detalle de prueba no creado "+e);
+                    }
+                }catch (Exception e){
+                    System.out.println("Comprobante de prueba no creado");
                 }
-
-                //trazabildiad
-                TrazabilidadComprobantes trazabilidadComprobantes = new TrazabilidadComprobantes();
-                trazabilidadComprobantes.setIdComp(comprobanteService.listarxID("N0000"));
-                trazabilidadComprobantes.setIdProceActual(estComproService.listarxID(1));
-                trazabilidadComprobantes.setFechaIniProc(new Date());
-                trazabilidadComprobantes.setObservac("runner");
-                trazabilidadComprobantes.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
-                trazabilidadComprobantesService.registrar(trazabilidadComprobantes);
             } else {
                 System.out.println("El comprobante ya existe en la base de datos.");
-            }
-
-        } catch (Exception ex) {
-            throw new ModeloNotFoundException(ex.getMessage().toString());
-        }
-
-        //Pedido temporal y su Trazabilidad
-        try {
-            if (pedidoService.findByIdComp_IdComp("N0000") == null){
-
-                //Pedido
-                Pedido pedido = new Pedido();
-                Date fecha = new Date();
-                LocalDateTime localDateTime = fecha.toInstant().atZone(ZoneId.of("America/Lima")).toLocalDateTime();
-                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                Detalle detalle = new Detalle();
-                pedido.setIdProduct(paqueteProductosService.findByIdClienteaAndAndFechaPedidoProduc(clienteService.findByIdUserCliente_Username("userCliente"),new Date(localDateTime.format(formato))));
-                pedido.setFechaCompra(new Date());
-                pedido.setNombreRecojo("Bryan Andrés");
-                pedido.setApellidoRecojo("Morán Vega");
-                pedido.setCelularRecojo("994271287");
-                pedido.setCorreoRecojo("bryleo2009@hotmail.com");
-                pedido.setCantidadCompra(pedido.cantidadTotal(pedido.getIdProduct()));
-                pedido.setIdComp(comprobanteService.listarxID("N0000"));
-                pedido.setDireccionRecojo("Lima");
-                pedidoService.registrar(pedido);
-
-                //trazabildiad
-                TrazabilidadPedidos trazabilidadPedidos = new TrazabilidadPedidos();
-                trazabilidadPedidos.setIdPedido(pedidoService.findByIdComp_IdComp("N0000"));
-                trazabilidadPedidos.setIdProceActual(estPedidoService.listarxID(1));
-                trazabilidadPedidos.setFechaIniProc(new Date());
-                trazabilidadPedidos.setObservac("runner");
-                trazabilidadPedidos.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
-                trazabilidadPedidosService.registrar(trazabilidadPedidos);
-            } else {
-                System.out.println("El pedido ya existe en la base de datos.");
             }
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());

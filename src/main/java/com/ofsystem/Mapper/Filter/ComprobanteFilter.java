@@ -13,7 +13,7 @@ import java.util.List;
 public class ComprobanteFilter {
 
     public Cliente cliente;
-    public List<CarritoFilter> carritoFilterList;//
+    public List<ProductoStorage> productoStorageList;//
     public double montoProducto; //
     public double igv;
     public double ammount; //

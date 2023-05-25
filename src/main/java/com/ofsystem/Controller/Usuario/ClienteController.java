@@ -1,9 +1,11 @@
 package com.ofsystem.Controller.Usuario;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Model.Enums.TipoDoc;
 import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Enums.Rol;
 import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Enums.TipoDocServiceImpl;
 import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
 import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class ClienteController {
 
 	@Autowired
 	private RolServiceImpl serviceRol;
+
+	@Autowired
+	private TipoDocServiceImpl tipoDocService;
 	
 	@GetMapping
 	public ResponseEntity<List<Cliente>> listar() {
@@ -78,7 +83,8 @@ public class ClienteController {
 		if(num.equals("admin")){
 			Rol rol = serviceRol.findByNombreItem("ROLE_SOPORTE");
 			Usuario usuario = new Usuario("admin","admin123",true,rol);
-			unaEmpleado = new Cliente("ofSystem - Nombre","Ofsystem - Apellido", new Date(2000,8,24),"994271287","Sin direccion","150101","71850926",usuario);
+			TipoDoc tipoDoc = tipoDocService.listarxID(1);
+			unaEmpleado = new Cliente("ofSystem - Nombre","Ofsystem - Apellido", new Date(2000,8,24),"994271287","Sin direccion","150101","bryleo2009@hotmail.com","71850926",usuario,tipoDoc);
 		} else if(unaEmpleado == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + num);
 		}

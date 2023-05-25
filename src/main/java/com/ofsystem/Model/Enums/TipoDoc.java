@@ -14,7 +14,7 @@ import lombok.Data;
 public class TipoDoc {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int idTdoc;
+    public int idTipoDoc;
     @Enumerated(EnumType.STRING)
     @Column(name = "identItem", nullable = false)
     private TipoDocName identItem;
