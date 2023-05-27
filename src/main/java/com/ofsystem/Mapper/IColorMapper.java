@@ -1,8 +1,6 @@
 package com.ofsystem.Mapper;
 
-import com.ofsystem.Enums.ColorName;
 import com.ofsystem.Mapper.Filter.ColorFilter;
-import com.ofsystem.Model.Color;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

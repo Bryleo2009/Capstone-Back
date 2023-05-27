@@ -33,7 +33,7 @@ public class JwtUtils {
     }
 
     public String generateToken(UserDetails userDetails) {
-        long expirationTime = 1000 * 60 * 60 * 2; // 2 hours
+        long expirationTime = 1000 * 60 * 60 * 3; // 3 hours
         //long expirationTime = 1000 * 60 * 1; // 1 minute
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expirationTime);

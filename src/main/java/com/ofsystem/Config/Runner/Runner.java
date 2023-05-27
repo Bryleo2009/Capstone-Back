@@ -1,14 +1,39 @@
 package com.ofsystem.Config.Runner;
 
-import com.ofsystem.Enums.*;
+import com.ofsystem.Model.Cliente.Pedido;
+import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
+import com.ofsystem.Model.Comprobante.Comprobante;
+import com.ofsystem.Model.Comprobante.Detalle;
+import com.ofsystem.Model.Comprobante.TrazabilidadComprobantes;
+import com.ofsystem.Model.Enums.*;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Model.*;
-import com.ofsystem.Service.Imple.*;
+import com.ofsystem.Model.Enums.Name.*;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Producto.ProductoTallaColor;
+import com.ofsystem.Model.Usuario.Cliente;
+import com.ofsystem.Model.Usuario.Trabajador;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Cliente.PedidoServiceImpl;
+import com.ofsystem.Service.Imple.Cliente.TrazabilidadPedidosServiceImpl;
+import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
+import com.ofsystem.Service.Imple.Comprobante.DetalleServiceImpl;
+import com.ofsystem.Service.Imple.Comprobante.TrazabilidadComprobantesServiceImpl;
+import com.ofsystem.Service.Imple.Enums.*;
+import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoTallaColorServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 @Component
 public class Runner implements CommandLineRunner {
@@ -28,27 +53,42 @@ public class Runner implements CommandLineRunner {
     private MarcaServiceImpl marcaService;
     @Autowired
     private ColorServiceImpl colorService;
-
     @Autowired
     private TipoPagoServiceImpl tipoPagoService;
-
     @Autowired
     private TipoDocServiceImpl tipoDocService;
-
     @Autowired
     private TipoComproServiceImpl tipoComproService;
-
     @Autowired
     private RolServiceImpl rolService;
-
     @Autowired
-    private EstProductServiceImpl EstEnvioProductService;
-
+    private EstPedidoServiceImpl EstEnvioProductService;
     @Autowired
     private EstComproServiceImpl EstComproService;
-
     @Autowired
     private ProductoTallaColorServiceImpl productoTallaColorService;
+    @Autowired
+    private UsuarioServiceImpl usuarioService;
+    @Autowired
+    private ClienteServiceImpl clienteService;
+    @Autowired
+    private TrabajadorServiceImpl trabajadorService;
+    @Autowired
+    private ComprobanteServiceImpl comprobanteService;
+    @Autowired
+    private DetalleServiceImpl detalleService;
+    @Autowired
+    private PedidoServiceImpl pedidoService;
+    @Autowired
+    private EstComproServiceImpl estComproService;
+    @Autowired
+    private EstPedidoServiceImpl estPedidoService;
+    @Autowired
+    private TrazabilidadComprobantesServiceImpl trazabilidadComprobantesService;
+    @Autowired
+    private TrazabilidadPedidosServiceImpl trazabilidadPedidosService;
+
+
 
 
     @Override
@@ -63,6 +103,7 @@ public class Runner implements CommandLineRunner {
                     categoriaService.registrar(objeto);
                 }
             }
+            System.out.println("Categoria de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -76,6 +117,7 @@ public class Runner implements CommandLineRunner {
                     tipoProductoService.registrar(objeto);
                 }
             }
+            System.out.println("TipoProducto de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -89,6 +131,7 @@ public class Runner implements CommandLineRunner {
                     etiquetaService.registrar(objeto);
                 }
             }
+            System.out.println("Etiqueta de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -102,6 +145,7 @@ public class Runner implements CommandLineRunner {
                     tallaService.registrar(objeto);
                 }
             }
+            System.out.println("Talla de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -115,6 +159,7 @@ public class Runner implements CommandLineRunner {
                     marcaService.registrar(objeto);
                 }
             }
+            System.out.println("Marca de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -128,6 +173,7 @@ public class Runner implements CommandLineRunner {
                     colorService.registrar(objeto);
                 }
             }
+            System.out.println("Color de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -141,6 +187,7 @@ public class Runner implements CommandLineRunner {
                     tipoPagoService.registrar(objeto);
                 }
             }
+            System.out.println("TipoPago de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -154,6 +201,7 @@ public class Runner implements CommandLineRunner {
                     tipoDocService.registrar(objeto);
                 }
             }
+            System.out.println("TipoDoc de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -167,6 +215,7 @@ public class Runner implements CommandLineRunner {
                     tipoComproService.registrar(objeto);
                 }
             }
+            System.out.println("TipoCompro de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -180,19 +229,21 @@ public class Runner implements CommandLineRunner {
                     rolService.registrar(objeto);
                 }
             }
+            System.out.println("Rol de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
 
         //crear EstEnvioProduct
         try {
-            for (EstProductName name : EstProductName.values()) {
+            for (EstPedidoName name : EstPedidoName.values()) {
                 // El enum ya está registrado en la base de datos, no se vuelve a registrar
                 if (!EstEnvioProductService.existsByNombreCateg(name)) {
-                    EstProduct objeto = new EstProduct(name);
+                    EstPedido objeto = new EstPedido(name);
                     EstEnvioProductService.registrar(objeto);
                 }
             }
+            System.out.println("EstEnvio de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -206,6 +257,7 @@ public class Runner implements CommandLineRunner {
                     EstComproService.registrar(objeto);
                 }
             }
+            System.out.println("EstCompro de prueba creado");
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
@@ -216,28 +268,43 @@ public class Runner implements CommandLineRunner {
             //verificar si el producto ya existe
             if (!productoService.existsByNombre(nombreProducto)) {
                 Producto unproducto = new Producto();
-                unproducto.setDescripcionProduct("Tipo de cuello: Redondo | Modelo: WANNAWEB MAY21 | Estilo: Casual");
-                unproducto.setNombreProduct(nombreProducto);
-                unproducto.setPrecioUni(52.99);
-                unproducto.setPrecioDescProduct(true);
-                unproducto.setPrecioDescuProduct(40.56);
-                unproducto.setExistente();
-                unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
-                unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
-                unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));
-
                 List<Etiquetas> etiquetas = new ArrayList<>();
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.TIPO_MANGA_CORTA));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_VERANO));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_PRIMAVERA));
-                etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MAT_ALGODON));
-                unproducto.setIdEtiqueta(etiquetas);
+                try {
+                    unproducto.setDescripcionProduct("Tipo de cuello: Redondo | Modelo: WANNAWEB MAY21 | Estilo: Casual");
+                    unproducto.setNombreProduct(nombreProducto);
+                    unproducto.setPrecioUni(52.99);
+                    unproducto.setPrecioDescProduct(true);
+                    unproducto.setPrecioDescuProduct(40.56);
+                    unproducto.setExistente();
+                    unproducto.setIdMarca(marcaService.findByNombre(MarcaName.ETIQ_DOOAUSTRA));
+                    unproducto.setIdCateg(categoriaService.findByNombreCateg(CategoriaName.CABALLERO));
+                    unproducto.setIdTipoProduc(tipoProductoService.findByNombre(TipoProductoName.POLO));
+                    System.out.println("Producto de prueba creado");
 
-                Talla tallas = tallaService.findByNombre(TallaName.LARGE);
-                Color color = colorService.findByIdentItem(ColorName.COLOR_BLANCO);
-                unproducto.setIUP();
-                productoService.registrar(unproducto);
-                productoTallaColorService.registrar(new ProductoTallaColor(unproducto,tallas,color,50));
+                    try {
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.TIPO_MANGA_CORTA));
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_VERANO));
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.ESTACION_PRIMAVERA));
+                        etiquetas.add(etiquetaService.findByNombre(EtiquetaName.MAT_ALGODON));
+                        unproducto.setIdEtiqueta(etiquetas);
+                        System.out.println("Etiquetas de prueba asignadas");
+
+                        try {
+                            Talla tallas = tallaService.findByNombre(TallaName.LARGE);
+                            Color color = colorService.findByIdentItem(ColorName.COLOR_BLANCO);
+                            unproducto.setIUP();
+                            productoService.registrar(unproducto);
+                            productoTallaColorService.registrar(new ProductoTallaColor(unproducto,tallas,color,50));
+                            System.out.println("ProductoTallaColor de prueba creado");
+                        }catch (Exception e){
+                            System.out.println("ProductoTallaColor de prueba no creado");
+                        }
+                    }catch (Exception e){
+                        System.out.println("Etiquetas de prueba no asignadas");
+                    }
+                } catch (Exception e){
+                    System.out.println("Producto de prueba no creado");
+                }
             } else {
                 // el producto ya existe
                 System.out.println("El producto ya existe en la base de datos.");
@@ -245,8 +312,169 @@ public class Runner implements CommandLineRunner {
         } catch (Exception ex) {
             throw new ModeloNotFoundException(ex.getMessage().toString());
         }
+
+        //Cliente temporal
+        try {
+            String nombreUsuario = "userCliente";
+            if (!usuarioService.existsByUsername("userCliente")){
+                Cliente cliente = new Cliente();
+                try {
+                    //contra= 12345
+                    Usuario userCliente = new Usuario("userCliente","$2a$12$BClCi3YSMx1yFgcyO2kQuOrwl2L4J8uVPmjSPqM45V8hzVIS2jhfW",true,rolService.listarxID(3));
+                    usuarioService.registrar(userCliente);
+                    System.out.println("UserCliente de prueba creado");
+
+                    try {
+                        cliente.setNombre("Bryan Andrés");
+                        cliente.setApellido("Morán Vega");
+                        cliente.setFechaNac(new Date("24/08/2000"));
+                        cliente.setTelefono("994271287");
+                        cliente.setDireccion("Los Olivos");
+                        cliente.setUbigueo("150101");
+                        cliente.setNumDocumento("71850926");
+                        cliente.setCorreo("bryleo2009@hotmail.com");
+                        cliente.setIdUserCliente(usuarioService.findByUsername("userCliente"));
+                        cliente.setIdTipoDoc(tipoDocService.listarxID(1));
+                        clienteService.registrar(cliente);
+                        System.out.println("Cliente de prueba creado");
+                    }catch (Exception e){
+                        System.out.println("Cliente de prueba no creado");
+                    }
+                }catch (Exception e){
+                    System.out.println("UserCliente de prueba no creado");
+                }
+            } else {
+                System.out.println("El cliente ya existe en la base de datos.");
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //Trabajador temporal
+        try {
+            String nombreUsuario = "Online";
+            if (!usuarioService.existsByUsername("Online")){
+                Trabajador trabajador = new Trabajador();
+                try {
+                    //contra= 12345
+                    Usuario Online = new Usuario("Online","$2a$12$BClCi3YSMx1yFgcyO2kQuOrwl2L4J8uVPmjSPqM45V8hzVIS2jhfW",true,rolService.listarxID(2));
+                    usuarioService.registrar(Online);
+                    System.out.println("UserTrabajador de prueba creado");
+
+                    try {
+                        trabajador.setNombre("Online");
+                        trabajador.setApellido("Online");
+                        trabajador.setCorreo("Online");
+                        trabajador.setFechaNac(new Date("24/08/2000"));
+                        trabajador.setTelefono("Online");
+                        trabajador.setDireccion("Online");
+                        trabajador.setUbigueo("Online");
+                        trabajador.setNumDocumento("Online");
+                        trabajador.setIdUserTrabajador(usuarioService.findByUsername("Online"));
+                        trabajador.setIdTipoDoc(tipoDocService.listarxID(1));
+                        trabajador.setTrabajador(true);
+                        trabajadorService.registrar(trabajador);
+                        System.out.println("Trabajador de prueba creado");
+                    }catch (Exception e){
+                        System.out.println("Trabajador de prueba no creado");
+                    }
+                }catch (Exception e){
+                    System.out.println("UserTrabajador de prueba no creado");
+                }
+            } else {
+                System.out.println("El cliente ya existe en la base de datos.");
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
+
+        //Comprobante, Detalle temporal y su Trazabilidad
+        try {
+            if (comprobanteService.listarxID("N0000") == null){
+                Producto producto = productoService.listarxID(1);
+                try {
+                    //comprobante
+                    Comprobante comprobante = new Comprobante();
+                    comprobante.setIdComp("N0000");
+                    comprobante.setMontoSubtotalComp(100);
+                    comprobante.setMontoTotalComp(118);
+                    comprobante.setFechaEmiComp(new Date());
+                    comprobante.setDireccionComp("Lima");
+                    comprobante.setUbigeoComp("150101");
+                    comprobante.setIdTp(tipoPagoService.listarxID(1));
+                    comprobante.setIdTc(tipoComproService.listarxID(1));
+                    comprobante.setIdCliente(clienteService.findByIdUserCliente_Username("userCliente"));
+                    comprobante.setIuc();
+                    comprobanteService.registrar(comprobante);
+                    System.out.println("Comprobante de prueba creado");
+
+                    try {
+                        //detalle
+                        List<Detalle> detalleList =  new ArrayList<>();
+                        detalleList.addAll(Arrays.asList(new Detalle(5,producto.getPrecioUni(),producto.getPrecioUni() * 5,
+                                        producto.getIUP()+" | "+producto.getNombreProduct(),
+                                        producto,comprobanteService.listarxID("N0000"),producto.getPrecioDescuProduct())
+                                ));
+                        detalleService.registroMasivo(detalleList);
+                        System.out.println("Detalle de prueba creado");
+
+                        try {
+                            //trazabildiad
+                            TrazabilidadComprobantes trazabilidadComprobantes = new TrazabilidadComprobantes();
+                            trazabilidadComprobantes.setIdComp(comprobanteService.listarxID("N0000"));
+                            trazabilidadComprobantes.setIdProceActual(estComproService.listarxID(1));
+                            trazabilidadComprobantes.setFechaIniProc(new Date());
+                            trazabilidadComprobantes.setObservac("runner");
+                            trazabilidadComprobantes.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
+                            trazabilidadComprobantesService.registrar(trazabilidadComprobantes);
+                            System.out.println("TrazaCompro de prueba creado");
+
+                            try {
+                                //Pedido
+                                Pedido pedido = new Pedido();
+                                pedido.setFechaPedido(new Date());
+                                pedido.setObservacionesPedido("Online");
+                                pedido.setCantidadTotalPedido(pedido.cantidadTotal(detalleService.findByIdComp_Iuc(comprobanteService.listarxID("N0000").getIuc())));
+                                pedido.setNombreRecojoPedido("Bryan Andrés");
+                                pedido.setApellidoRecojoPedido("Morán Vega");
+                                pedido.setCelularRecojoPedido("994271287");
+                                pedido.setCorreoRecojoPedido("bryleo2009@hotmail.com");
+                                pedido.setDireccionRecojoPedido("Lima");
+                                pedido.setIdComp(comprobanteService.listarxID("N0000"));
+                                pedido.setIdDetalle(detalleService.findByIdComp_Iuc(comprobanteService.listarxID("N0000").getIuc()));
+                                pedidoService.registrar(pedido);
+                                System.out.println("Pedido de prueba creado");
+
+                                try {
+                                    //trazabildiad
+                                    TrazabilidadPedidos trazabilidadPedidos = new TrazabilidadPedidos();
+                                    trazabilidadPedidos.setIdPedido(pedidoService.findByIdComp_IdComp("N0000"));
+                                    trazabilidadPedidos.setIdProceActual(estPedidoService.listarxID(1));
+                                    trazabilidadPedidos.setFechaIniProc(new Date());
+                                    trazabilidadPedidos.setObservac("runner");
+                                    trazabilidadPedidos.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
+                                    trazabilidadPedidosService.registrar(trazabilidadPedidos);
+                                    System.out.println("TrazaPedido de prueba creado");
+                                }catch (Exception e) {
+                                    System.out.println("TrazaPedido de prueba no creado");
+                                }
+                            }catch (Exception e) {
+                                System.out.println("Pedido de prueba no creado " + e);
+                            }
+                        }catch (Exception e){
+                            System.out.println("TrazaCompro de prueba no creado");
+                        }
+                    } catch (Exception e){
+                        System.out.println("Detalle de prueba no creado "+e);
+                    }
+                }catch (Exception e){
+                    System.out.println("Comprobante de prueba no creado");
+                }
+            } else {
+                System.out.println("El comprobante ya existe en la base de datos.");
+            }
+        } catch (Exception ex) {
+            throw new ModeloNotFoundException(ex.getMessage().toString());
+        }
     }
-
-
-
 }
