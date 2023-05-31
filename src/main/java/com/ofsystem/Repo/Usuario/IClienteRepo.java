@@ -10,5 +10,6 @@ public interface IClienteRepo extends JpaRepository<Cliente, Integer> {
     Cliente findByNumDocumento(String numDoc);
     Cliente findByIdUserCliente_Username(String nombre);
     boolean existsByCorreo(String correo);
+    Cliente findByCorreo (String correo);
 
 }
