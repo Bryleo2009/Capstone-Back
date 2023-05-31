@@ -33,14 +33,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("admin".equals(username)) {
-            // Este es el usuario por defecto
-            List<GrantedAuthority> authorities = new ArrayList<>();
-
-            //serviceRol.findByNombreItem("ROLE_SOPORTE");
-            authorities.add(new SimpleGrantedAuthority("ROLE_SOPORTE"));
-            return new User("admin", passwordEncoder.encode("admin123"), authorities);
-        }
+//        if ("admin".equals(username)) {
+//            // Este es el usuario por defecto
+//            List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//            //serviceRol.findByNombreItem("ROLE_SOPORTE");
+//            authorities.add(new SimpleGrantedAuthority("ROLE_SOPORTE"));
+//            return new User("admin", passwordEncoder.encode("admin123"), authorities);
+//        }
         Usuario usuario = service.findByUsername(username);
 
         if (usuario == null) {

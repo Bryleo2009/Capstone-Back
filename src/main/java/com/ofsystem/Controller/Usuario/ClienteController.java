@@ -8,6 +8,7 @@ import com.ofsystem.Model.Usuario.Usuario;
 import com.ofsystem.Service.Imple.Enums.TipoDocServiceImpl;
 import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
 import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,7 +59,7 @@ public class ClienteController {
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getId()).toUri();
 		}		
 		
-		return ResponseEntity.created(location).build();
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PutMapping
@@ -89,5 +90,10 @@ public class ClienteController {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + num);
 		}
 		return new ResponseEntity<Cliente>(unaEmpleado,HttpStatus.OK);
+	}
+
+	@GetMapping("/existencia")
+	public ResponseEntity<Boolean> exitenciaXCorreo (@Param("correo") String correo){
+		return new ResponseEntity<Boolean>(service.existsByCorreo(correo),HttpStatus.OK);
 	}
 }

@@ -6,6 +6,6 @@ import com.ofsystem.Service.Service.ICRUDService;
 public interface IClienteService extends ICRUDService<Cliente, Integer> {
 
     Cliente findByNumDocumento(String numDoc);
-
     Cliente findByIdUserCliente_Username(String nombre);
+    boolean existsByCorreo(String correo);
 }
