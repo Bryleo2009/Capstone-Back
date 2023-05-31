@@ -8,9 +8,12 @@ import com.ofsystem.Model.Usuario.Usuario;
 import com.ofsystem.Service.Imple.Enums.TipoDocServiceImpl;
 import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
 import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.UsuarioServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,12 +28,14 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteServiceImpl service;
-
 	@Autowired
 	private RolServiceImpl serviceRol;
-
 	@Autowired
 	private TipoDocServiceImpl tipoDocService;
+	@Autowired
+	private UsuarioServiceImpl usuarioService;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping
 	public ResponseEntity<List<Cliente>> listar() {
@@ -48,17 +53,15 @@ public class ClienteController {
 	
 	@PostMapping
 	public ResponseEntity<Object> registrar( @RequestBody Cliente dato) {
-		Cliente unaCliente = service.listarxID(dato.getId());
-		URI location = null;
-		if(unaCliente != null) {
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaCliente.getId()).toUri();
-			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getId() + " --- " + location);
-		} else {
-			service.registrar(dato);
-			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getId()).toUri();
-		}		
+		Usuario usuario = new Usuario();
+		usuario = dato.getIdUserCliente();
+		usuario.setEstadoUser(true);
+		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+		usuarioService.registrar(usuario);
+		dato.setIdUserCliente(usuarioService.findByUsername(usuario.getUsername()));
+		service.registrar(dato);
 		
-		return ResponseEntity.created(location).build();
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PutMapping
@@ -89,5 +92,10 @@ public class ClienteController {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + num);
 		}
 		return new ResponseEntity<Cliente>(unaEmpleado,HttpStatus.OK);
+	}
+
+	@GetMapping("/existencia")
+	public ResponseEntity<Boolean> exitenciaXCorreo (@Param("correo") String correo){
+		return new ResponseEntity<Boolean>(service.existsByCorreo(correo),HttpStatus.OK);
 	}
 }

@@ -2,6 +2,7 @@ package com.ofsystem.Controller.Cliente;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Mapper.Filter.PedidoFilter;
+import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
 import com.ofsystem.Service.Imple.Cliente.PedidoServiceImpl;
@@ -112,4 +113,10 @@ public class PedidoController {
         }
         return new ResponseEntity<Object>(HttpStatus.OK);
     }
+
+    @GetMapping("/seguimiento/{idUser}")
+    public ResponseEntity<List<SeguimientoPedidoFilter>> listarPedido(@PathVariable("idUser")int idUser){
+        return new ResponseEntity<>(service.listarPedido(idUser),HttpStatus.OK);
+    }
+
 }

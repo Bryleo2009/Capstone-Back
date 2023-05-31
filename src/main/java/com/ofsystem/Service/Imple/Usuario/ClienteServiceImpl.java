@@ -29,5 +29,10 @@ public class ClienteServiceImpl extends CRUDServiceImpl<Cliente, Integer> implem
 		return repo.findByIdUserCliente_Username(nombre);
 	}
 
+	@Override
+	public boolean existsByCorreo(String correo) {
+		return repo.existsByCorreo(correo);
+	}
+
 
 }
