@@ -18,7 +18,6 @@ public class ReportService {
     private IComprobanteService service;
 
     public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
-        String path = "C:\\Users\\Adrian\\Desktop\\Report";
         List<Comprobante> comprobantes = service.findAll();
         // cargar datos
         File file = ResourceUtils.getFile("classpath:comprobante.jrxml");
@@ -29,12 +28,12 @@ public class ReportService {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
         if(reportFormat.equalsIgnoreCase("html")){
-            JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\comprobante.html");
+            JasperExportManager.exportReportToHtmlFile(jasperPrint,"C:\\Users\\Adrian\\Desktop\\Report"+"\\comprobante.html");
         }
         if (reportFormat.equalsIgnoreCase("pdf")){
-            JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\comprobante.pdf");
+
         }
 
-        return "report generated in path: " + path;
+        return "";
     }
 }

@@ -10,5 +10,4 @@ import java.util.List;
 public interface IComprobanteService extends ICRUDService<Comprobante, String> {
     String findLastIdComp();
     Comprobante findByIuc(String iuc);
-    List<Comprobante> findAll();
 }
