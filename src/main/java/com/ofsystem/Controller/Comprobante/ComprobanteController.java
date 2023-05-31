@@ -16,11 +16,13 @@ import com.ofsystem.Service.Imple.Enums.TipoComproServiceImpl;
 import com.ofsystem.Service.Imple.Enums.TipoPagoServiceImpl;
 import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
 import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
+import com.ofsystem.Service.Service.Comprobante.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
@@ -155,7 +157,14 @@ public class ComprobanteController {
 	public ResponseEntity<Comprobante> modificar( @RequestBody Comprobante dato) {
 		return new ResponseEntity<Comprobante>(service.modificar(dato),HttpStatus.OK);
 	}
-	
+	@Autowired
+	private ReportService services;
+	public  String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
+		return services.exportReport(format);
+	}
+
+
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") String id) {
 		Comprobante unaComprobante = service.listarxID(id);
