@@ -56,6 +56,26 @@ public class AuthController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
+    @PostMapping("/login/google")
+    public ResponseEntity<?> createAuthenticationTokenUsernameGoogle(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        // Buscar al usuario en la base de datos
+        final Usuario user = userRepository.findByUsername(authenticationRequest.getUsername());
+
+        if (user == null) {
+            throw new Exception("Nombre de usuario incorrecto");
+        }
+
+        // Crear los detalles del usuario para el token de JWT
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+
+        // Generar el token de JWT
+        final String jwt = jwtUtils.generateToken(userDetails);
+
+        // Devolver la respuesta con el token de JWT
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+
 
     @GetMapping("/check-token")
     public ResponseEntity<Void> checkToken(@RequestHeader("Authorization") String authorizationHeader) {
