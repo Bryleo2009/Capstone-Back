@@ -1,6 +1,9 @@
-package com.ofsystem.Service.Service.Comprobante;
+package com.ofsystem.Model.Comprobante;
 
 import com.ofsystem.Model.Comprobante.Comprobante;
+import com.ofsystem.Service.Service.Comprobante.IComprobanteService;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -18,7 +21,8 @@ public class ReportService {
     private IComprobanteService service;
 
     public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
-        List<Comprobante> comprobantes = service.findAll();
+        String path = "C:\\Users\\Adrian Rondan\\Desktop\\Report";
+        List<Comprobante> comprobantes = service.listar();
         // cargar datos
         File file = ResourceUtils.getFile("classpath:comprobante.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -28,12 +32,12 @@ public class ReportService {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
         if(reportFormat.equalsIgnoreCase("html")){
-            JasperExportManager.exportReportToHtmlFile(jasperPrint,"C:\\Users\\Adrian\\Desktop\\Report"+"\\comprobante.html");
+            JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\comprobante.html");
         }
         if (reportFormat.equalsIgnoreCase("pdf")){
-
+            JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\comprobante.pdf");
         }
 
-        return "";
+        return "report generated in path: " + path ;
     }
 }

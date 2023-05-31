@@ -16,7 +16,8 @@ import com.ofsystem.Service.Imple.Enums.TipoComproServiceImpl;
 import com.ofsystem.Service.Imple.Enums.TipoPagoServiceImpl;
 import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
 import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
-import com.ofsystem.Service.Service.Comprobante.ReportService;
+import com.ofsystem.Model.Comprobante.ReportService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -157,8 +158,10 @@ public class ComprobanteController {
 	public ResponseEntity<Comprobante> modificar( @RequestBody Comprobante dato) {
 		return new ResponseEntity<Comprobante>(service.modificar(dato),HttpStatus.OK);
 	}
+
 	@Autowired
 	private ReportService services;
+
 	public  String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
 		return services.exportReport(format);
 	}
