@@ -95,7 +95,12 @@ public class ClienteController {
 	}
 
 	@GetMapping("/existencia")
-	public ResponseEntity<Boolean> exitenciaXCorreo (@Param("correo") String correo){
+	public ResponseEntity<Boolean> exitenciaXCorreo (@RequestParam("correo") String correo){
 		return new ResponseEntity<Boolean>(service.existsByCorreo(correo),HttpStatus.OK);
+	}
+
+	@GetMapping("/byCorreo/{correo}")
+	public ResponseEntity<Cliente> findByCorreo (@PathVariable("correo") String correo){
+		return new ResponseEntity<Cliente>(service.findByCorreo(correo),HttpStatus.OK);
 	}
 }
