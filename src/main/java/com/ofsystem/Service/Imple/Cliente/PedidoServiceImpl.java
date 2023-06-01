@@ -1,6 +1,7 @@
 package com.ofsystem.Service.Imple.Cliente;
 
 import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
+import com.ofsystem.Mapper.Filter.TrazabilidadPedidoFilter;
 import com.ofsystem.Mapper.IPedidoMapper;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Repo.Cliente.IPedidoRepo;
@@ -40,4 +41,11 @@ public class PedidoServiceImpl extends CRUDServiceImpl<Pedido, Integer> implemen
     public List<SeguimientoPedidoFilter> listarPedido(int idUser) {
         return repoMapper.listarPedido(idUser);
     }
+
+    @Override
+    public List<TrazabilidadPedidoFilter> TrazaPedido(int idPedido) {
+        return repoMapper.TrazaPedido(idPedido);
+    }
+
+
 }
