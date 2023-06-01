@@ -1,6 +1,7 @@
 package com.ofsystem.Service.Service.Cliente;
 
 import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
+import com.ofsystem.Mapper.Filter.TrazabilidadPedidoFilter;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Service.Service.ICRUDService;
 import org.apache.ibatis.annotations.Param;
@@ -13,4 +14,8 @@ public interface IPedidoService extends ICRUDService<Pedido, Integer> {
     Pedido findByIdComp_IdComp (String idComp);
 
     List<SeguimientoPedidoFilter> listarPedido (int idUser);
+
+    List<TrazabilidadPedidoFilter>TrazaPedido(int idPedido);
+
+
 }

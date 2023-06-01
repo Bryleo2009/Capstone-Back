@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +17,6 @@ public class SeguimientoPedidoFilter {
             public String direccion_recojo_pedido;
             public String nombre_recojo_pedido;
             public String id_comp;
+            List<TrazabilidadPedidoFilter> trazabilidad;
 
 }
