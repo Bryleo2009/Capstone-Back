@@ -59,15 +59,26 @@ public class ComprobanteController {
 	public ResponseEntity<List<Comprobante>> listar() {
 		return new ResponseEntity<List<Comprobante>>(service.listar(),HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Comprobante> listarPorId(@PathVariable("id") String id) {
 		Comprobante unaComprobante = service.listarxID(id);
 		if(unaComprobante == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
-		}		
+		}
 		return new ResponseEntity<Comprobante>(unaComprobante,HttpStatus.OK);
 	}
+
+
+	@Autowired
+	private ReportService services;
+
+	@GetMapping("/report/{format}")
+	public  String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
+		return services.exportReport(format);
+	}
+
+
 
 
 	private String generarSiguienteIdComp(String lastIdComp) {
@@ -159,12 +170,6 @@ public class ComprobanteController {
 		return new ResponseEntity<Comprobante>(service.modificar(dato),HttpStatus.OK);
 	}
 
-	@Autowired
-	private ReportService services;
-
-	public  String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
-		return services.exportReport(format);
-	}
 
 
 
