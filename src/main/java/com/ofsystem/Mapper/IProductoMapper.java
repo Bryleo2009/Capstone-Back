@@ -1,5 +1,6 @@
 package com.ofsystem.Mapper;
 
+import com.ofsystem.Mapper.Filter.ColorTallaFilter;
 import com.ofsystem.Mapper.Filter.ProductoFilter;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -98,6 +99,17 @@ public interface IProductoMapper {
                "LIMIT #{cantidad};")
        List<ProductoFilter> randomProduct(  @Param("cantidad") int cantidad,
                                             @Param("categoria") String categoria);
+
+
+    @Select("SELECT ptc.existe_noexiste as existente, ptc.stock_virtual_product as cantidad, co.vista_item as color, ta.vista_item as talla FROM producto_talla_color ptc\n" +
+            "inner join color co\n" +
+            "on ptc.id_color_id_color = co.id_color\n" +
+            "inner join talla ta\n" +
+            "on ta.id_talla = ptc.id_talla_id_talla\n" +
+            "inner join producto pe\n" +
+            "on pe.id_product = ptc.producto_id_product where pe.id_product =#{idProduct} and ptc.existe_noexiste = true\n" +
+            "order by talla,color asc;")
+    List<ColorTallaFilter>colorTalla(@Param("idProduct") int idProduct);
 
 
 }

@@ -7,10 +7,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.ProductoStorage;
-import com.ofsystem.Mapper.Filter.ProductoFilter;
-import com.ofsystem.Mapper.Filter.RegistroProductFilter;
-import com.ofsystem.Mapper.Filter.TallaColorFilter;
+import com.ofsystem.Mapper.Filter.*;
 import com.ofsystem.Model.Enums.Color;
 import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Producto.ProductoTallaColor;
@@ -19,6 +16,7 @@ import com.ofsystem.Service.Imple.Enums.ColorServiceImpl;
 import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
 import com.ofsystem.Service.Imple.Producto.ProductoTallaColorServiceImpl;
 import com.ofsystem.Service.Imple.Enums.TallaServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -59,6 +57,8 @@ public class ProductoController {
 	@Autowired
 	private ProductoTallaColorServiceImpl productoTallaColorService;
 
+
+
 	String IUP="";
 	
 	/*@GetMapping
@@ -74,7 +74,7 @@ public class ProductoController {
 	public ResponseEntity<List<Producto>> listar() {
 		return new ResponseEntity<List<Producto>>(service.listar(),HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Producto> listarPorId(@PathVariable("id") int id) {
 		Producto unaProducto = service.listarxID(id);
@@ -293,6 +293,11 @@ public class ProductoController {
 			}
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+	@GetMapping("/stockPrendas/{id}")
+	public ResponseEntity<List<ColorTallaFilter>>ColorTalla(@PathVariable("id") int id){
+		return new ResponseEntity<>(productoTallaColorService.colorTalla(id),HttpStatus.OK);
 	}
 
 }
