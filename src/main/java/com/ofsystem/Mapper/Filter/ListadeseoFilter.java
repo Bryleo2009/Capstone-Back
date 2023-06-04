@@ -1,5 +1,7 @@
 package com.ofsystem.Mapper.Filter;
 
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Usuario.Trabajador;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +14,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListadeseoFilter {
-    public PaqueteFilter idProduct;
-    public Date fechaCompra;
-    public String nombreRecojo;
-    public String apellidoRecojo;
-    public String celularRecojo;
-    public String correoRecojo;
-    public String direccionRecojo;
-    public Trabajador idTraba;
+    public int idListaDeseo;
+    public Date fechaListaDeseo;
+    public String observacionesListaDeseo;
+
+    public Cliente id;
+
+    public Producto idProduct;
 }

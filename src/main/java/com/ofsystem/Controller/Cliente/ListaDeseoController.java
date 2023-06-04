@@ -8,12 +8,16 @@ import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
 import com.ofsystem.Model.Cliente.ListaDeseos;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Service.Imple.Cliente.ListaDeseoServiceImpl;
 import com.ofsystem.Service.Imple.Cliente.TrazabilidadPedidosServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.DetalleServiceImpl;
 import com.ofsystem.Service.Imple.Enums.EstPedidoServiceImpl;
 import com.ofsystem.Service.Imple.Enums.RolServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
+import com.ofsystem.Service.Imple.Usuario.ClienteServiceImpl;
 import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,18 +36,12 @@ public class ListaDeseoController {
 
     @Autowired
     private ListaDeseoServiceImpl service;
+
     @Autowired
-    private DetalleServiceImpl detalleService;
+    private ClienteServiceImpl serviceCliente;
+
     @Autowired
-    private ComprobanteServiceImpl comprobanteService;
-    @Autowired
-    private EstPedidoServiceImpl estPedidoService;
-    @Autowired
-    private TrabajadorServiceImpl trabajadorService;
-    @Autowired
-    private RolServiceImpl rolService;
-    @Autowired
-    private TrazabilidadPedidosServiceImpl trazabilidadPedidosService;
+    private ProductoServiceImpl serviceProducto;
 
     @GetMapping
     public ResponseEntity<List<ListaDeseos>> listar() {
@@ -73,30 +71,28 @@ public class ListaDeseoController {
 
         return ResponseEntity.created(location).build();
     }*/
-    @PostMapping
-    public ResponseEntity<Object> registrar( @RequestBody ListadeseoFilter dato,
-                                             @RequestParam("iuc") String iuc) {
+    @PostMapping("/registrar")
+    public ResponseEntity<Object> registrar(@RequestBody ListadeseoFilter dato, @RequestParam("iuc") String iuc) {
         System.out.println("dato ListadeseoControler: " + dato);
-        System.out.println("iuc: " + iuc);
+
         ListaDeseos listadeseo = new ListaDeseos();
-        TrazabilidadPedidos trazabilidadPedidos = new TrazabilidadPedidos();
+        Cliente cliente = new Cliente();
+        Producto producto = new Producto();
         try {
-            //listadeseo
+
             listadeseo.setFechaListaDeseo(new Date());
-            listadeseo.setObservacionesListaDeseo("Online");
-            listadeseo.setCantidadTotalListaDeseo(listadeseo.cantidadTotal(detalleService.findByIdComp_Iuc(iuc)));
-            listadeseo.setNombreRecojoListaDeseo(dato.getNombreRecojo());
-            listadeseo.setApellidoRecojoListaDeseo(dato.getApellidoRecojo());
-            listadeseo.setCelularRecojoListaDeseo(dato.getCelularRecojo());
-            listadeseo.setCorreoRecojoListaDeseo(dato.getCorreoRecojo());
-            listadeseo.setDireccionRecojoListaDeseo(dato.getDireccionRecojo());
-            listadeseo.setIdComp(comprobanteService.findByIuc(iuc));
-            listadeseo.setIdDetalle(detalleService.findByIdComp_Iuc(iuc));
+            listadeseo.setObservacionesListaDeseo(dato.getObservacionesListaDeseo());
+
+            listadeseo.setCliente(serviceCliente.listarxID(1));
+            listadeseo.setProductos((List<Producto>) serviceProducto.listarxID(1));
+
             service.registrar(listadeseo);
-            System.out.println("Pedido creado");
+            System.out.println("lista creado");
+
         } catch (Exception e) {
-            System.out.println("Pedido no creado");
+            System.out.println("lista no creado");
         }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping
@@ -113,9 +109,5 @@ public class ListaDeseoController {
             service.eliminar(id);
         }
         return new ResponseEntity<Object>(HttpStatus.OK);
-    }
-    @GetMapping("/seguimiento/{idUser}")
-    public ResponseEntity<List<SeguimientoListadeseosFilter>> listarListadeseo(@PathVariable("idUser")int idUser){
-        return new ResponseEntity<>(service.listarListadeseo(idUser),HttpStatus.OK);
     }
 }

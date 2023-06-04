@@ -29,19 +29,4 @@ public class ListaDeseoServiceImpl extends CRUDServiceImpl<ListaDeseos, Integer>
         return repo;
     }
 
-
-    @Override
-    public ListaDeseos findByIdComp_Iuc(String iuc) {
-        return repo.findByIdComp_Iuc(iuc);
-    }
-
-    @Override
-    public ListaDeseos findByIdComp_IdComp(String idComp) {
-        return repo.findByIdComp_IdComp(idComp);
-    }
-
-    @Override
-    public List<SeguimientoListadeseosFilter> listarListadeseo(int idUser) {
-        return repoMapper.listarListaDeseo(idUser);
-    }
 }
