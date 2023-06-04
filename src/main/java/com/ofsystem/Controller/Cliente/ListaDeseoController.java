@@ -29,6 +29,40 @@ import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Mapper.Filter.ProductoStorage;
+import com.ofsystem.Mapper.Filter.ProductoFilter;
+import com.ofsystem.Mapper.Filter.RegistroProductFilter;
+import com.ofsystem.Mapper.Filter.TallaColorFilter;
+import com.ofsystem.Model.Enums.Color;
+import com.ofsystem.Model.Producto.Producto;
+import com.ofsystem.Model.Producto.ProductoTallaColor;
+import com.ofsystem.Model.Enums.Talla;
+import com.ofsystem.Service.Imple.Enums.ColorServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
+import com.ofsystem.Service.Imple.Producto.ProductoTallaColorServiceImpl;
+import com.ofsystem.Service.Imple.Enums.TallaServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+
+import java.io.*;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 @RestController
 @RequestMapping("/ListaDeseos")
@@ -72,7 +106,7 @@ public class ListaDeseoController {
         return ResponseEntity.created(location).build();
     }*/
     @PostMapping("/registrar")
-    public ResponseEntity<Object> registrar(@RequestBody ListadeseoFilter dato, @RequestParam("iuc") String iuc) {
+    public ResponseEntity<Object> registrar(@RequestBody ListadeseoFilter dato) {
         System.out.println("dato ListadeseoControler: " + dato);
 
         ListaDeseos listadeseo = new ListaDeseos();
