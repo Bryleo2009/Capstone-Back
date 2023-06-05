@@ -34,15 +34,9 @@ public class ListaDeseos {
     @ManyToOne
     @JoinColumn(name = "id")
     public Cliente cliente;
-    @OneToMany(mappedBy = "listaDeseos", cascade = CascadeType.ALL)
-    private List<Detalle> detalles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "listadeseo_producto",
-            joinColumns = @JoinColumn(name = "idListaDeseo"),
-            inverseJoinColumns = @JoinColumn(name = "idProduct")
-    )
-    private List<Producto> productos;
+    @ManyToOne
+    @JoinColumn(name = "idProduct")
+    public Producto producto;
 
 }

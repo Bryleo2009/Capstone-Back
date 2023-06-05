@@ -107,26 +107,15 @@ public class ListaDeseoController {
     }*/
     @PostMapping("/registrar")
     public ResponseEntity<Object> registrar(@RequestBody ListadeseoFilter dato) {
-        System.out.println("dato ListadeseoControler: " + dato);
 
-        ListaDeseos listadeseo = new ListaDeseos();
-        Cliente cliente = new Cliente();
-        Producto producto = new Producto();
-        try {
+        ListaDeseos listaDeseos = new ListaDeseos();
+        listaDeseos.setIdListaDeseo(dato.getIdListaDeseo());
+        listaDeseos.setFechaListaDeseo(dato.getFechaListaDeseo());
+        listaDeseos.setObservacionesListaDeseo(dato.getObservacionesListaDeseo());
+        listaDeseos.setCliente(serviceCliente.listarxID(1));
+        listaDeseos.setProducto(serviceProducto.listarxID(1));
 
-            listadeseo.setFechaListaDeseo(new Date());
-            listadeseo.setObservacionesListaDeseo(dato.getObservacionesListaDeseo());
-
-            listadeseo.setCliente(serviceCliente.listarxID(1));
-            listadeseo.setProductos((List<Producto>) serviceProducto.listarxID(1));
-
-            service.registrar(listadeseo);
-            System.out.println("lista creado");
-
-        } catch (Exception e) {
-            System.out.println("lista no creado");
-        }
-
+        service.registrar(listaDeseos);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @PutMapping
