@@ -21,7 +21,7 @@ public class ReportService {
     private IComprobanteService service;
 
     public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
-        String path = "C:\\Users\\Adrian Rondan\\Desktop\\Report";
+        String path = "C:\\Users\\Adrian Rondan\\Desktop";
         List<Comprobante> comprobantes = service.listar();
         // cargar datos
         File file = ResourceUtils.getFile("classpath:comprobante.jrxml");

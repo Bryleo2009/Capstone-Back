@@ -8,7 +8,7 @@
     </field>
     <field name="montoTotalComp" class="java.lang.Double">
     </field>
-    <field name="fechaEmiComp" class="java.lang.Date">
+    <field name="ubigeoComp" class="java.lang.String">
     </field>
     <field name="direccionComp" class="java.lang.String">
     </field>
@@ -78,7 +78,7 @@
                 <textElement textAlignment="Center">
                     <font size="14" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Fecha Emision]]></text>
+                <text><![CDATA[Ubigeo]]></text>
             </staticText>
             <staticText>
                 <reportElement mode="Opaque" x="444" y="0" width="111" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="aa865c81-f467-4713-b67e-03af6fd0bbac">
@@ -130,7 +130,7 @@
                 <textElement>
                     <font size="14"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{fechaEmiComp}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ubigeoComp}]]></textFieldExpression>
             </textField>
             <textField textAdjust="StretchHeight">
                 <reportElement x="444" y="0" width="111" height="20" uuid="a3e335d5-b0e2-43e9-9578-9fe6d21e8b51">
