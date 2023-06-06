@@ -1,15 +1,13 @@
 package com.ofsystem.Controller.Cliente;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.ListadeseoFilter;
-import com.ofsystem.Mapper.Filter.PedidoFilter;
-import com.ofsystem.Mapper.Filter.SeguimientoListadeseosFilter;
-import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
+import com.ofsystem.Mapper.Filter.*;
 import com.ofsystem.Model.Cliente.ListaDeseos;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
 import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Usuario.Cliente;
+import com.ofsystem.Model.Usuario.Usuario;
 import com.ofsystem.Service.Imple.Cliente.ListaDeseoServiceImpl;
 import com.ofsystem.Service.Imple.Cliente.TrazabilidadPedidosServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
@@ -36,10 +34,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.ProductoStorage;
-import com.ofsystem.Mapper.Filter.ProductoFilter;
-import com.ofsystem.Mapper.Filter.RegistroProductFilter;
-import com.ofsystem.Mapper.Filter.TallaColorFilter;
 import com.ofsystem.Model.Enums.Color;
 import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Producto.ProductoTallaColor;
@@ -70,12 +64,10 @@ public class ListaDeseoController {
 
     @Autowired
     private ListaDeseoServiceImpl service;
-
     @Autowired
-    private ClienteServiceImpl serviceCliente;
-
+    private ClienteServiceImpl serviceCli;
     @Autowired
-    private ProductoServiceImpl serviceProducto;
+    private ProductoServiceImpl servicePro;
 
     @GetMapping
     public ResponseEntity<List<ListaDeseos>> listar() {
@@ -105,19 +97,32 @@ public class ListaDeseoController {
 
         return ResponseEntity.created(location).build();
     }*/
-    @PostMapping("/registrar")
-    public ResponseEntity<Object> registrar(@RequestBody ListadeseoFilter dato) {
 
-        ListaDeseos listaDeseos = new ListaDeseos();
-        listaDeseos.setIdListaDeseo(dato.getIdListaDeseo());
-        listaDeseos.setFechaListaDeseo(dato.getFechaListaDeseo());
-        listaDeseos.setObservacionesListaDeseo(dato.getObservacionesListaDeseo());
-        listaDeseos.setCliente(serviceCliente.listarxID(1));
-        listaDeseos.setProducto(serviceProducto.listarxID(1));
 
-        service.registrar(listaDeseos);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+
+
+    @PostMapping
+    public ResponseEntity<Object> registrar(@RequestBody ListaDeseos dato) {
+
+        System.out.println("dato ListadeseoControler: " + dato);
+        ListaDeseos unaListaDeseos = service.listarxID(dato.getIdListaDeseo());
+        if (unaListaDeseos != null) {
+            throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdListaDeseo());
+        } else {
+            Producto producto = new Producto();
+            ListaDeseos nuevaListaDeseos = new ListaDeseos();
+            nuevaListaDeseos.setFechaListaDeseo(new Date());
+            Cliente cliente = serviceCli.listarxID(dato.getId().getId());
+            nuevaListaDeseos.setId(cliente);
+            service.registrar(nuevaListaDeseos);
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(nuevaListaDeseos.getIdListaDeseo()).toUri();
+            return ResponseEntity.created(location).build();
+        }
+
     }
+
+
     @PutMapping
     public ResponseEntity<ListaDeseos> modificar( @RequestBody ListaDeseos dato) {
         return new ResponseEntity<ListaDeseos>(service.modificar(dato),HttpStatus.OK);
@@ -132,5 +137,15 @@ public class ListaDeseoController {
             service.eliminar(id);
         }
         return new ResponseEntity<Object>(HttpStatus.OK);
+    }
+
+    @GetMapping("/listadeseo/{id_lista_deseo}")
+    public ResponseEntity<List<ListadeseoFilter>> listarListadeseos(@PathVariable("id_lista_deseo") int id_lista_deseo) {
+        List<ListadeseoFilter> unaLista = service.listarListadeseos(id_lista_deseo);
+        System.out.println(unaLista);
+        if(unaLista == null) {
+            throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id_lista_deseo);
+        }
+        return new ResponseEntity<List<ListadeseoFilter>>(unaLista,HttpStatus.OK);
     }
 }

@@ -8,17 +8,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListadeseoFilter {
-    public int idListaDeseo;
-    public Date fechaListaDeseo;
-    public String observacionesListaDeseo;
+     public int id_lista_deseo;
+     public Date fecha_lista_deseo;
+     public int  idCliente_listadeseo;
+     public Producto id_product;
+     public Producto nombre_product;
 
-    public Cliente id;
+     public Producto imagen;
 
-    public Producto idProduct;
+     public Cliente id;
+
+     public Cliente apellido;
+
+
 }

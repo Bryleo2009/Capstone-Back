@@ -39,8 +39,8 @@ public class ColorServiceImpl extends CRUDServiceImpl<Color, Integer> implements
 		return repoMapper.getColor();
 	}
 
-	public List<ColorFilter> listarColoresxID (int id){
-		System.out.println(repoMapper.listarColoresxID(id));
-		return repoMapper.listarColoresxID(id);
+	public List<ColorFilter> listarColoresxID (int idLista){
+		System.out.println(repoMapper.listarColoresxID(idLista));
+		return repoMapper.listarColoresxID(idLista);
 	}
 }

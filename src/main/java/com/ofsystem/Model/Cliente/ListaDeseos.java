@@ -28,15 +28,15 @@ public class ListaDeseos {
     @Column(name = "fechaListaDeseo", nullable = false)
     public Date fechaListaDeseo;
 
-    @Column(name = "observacionesListaDeseo", nullable = true)
-    public String observacionesListaDeseo;
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    public Cliente id;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    public Cliente cliente;
+    @JoinColumn(name = "idProduct", referencedColumnName = "idProduct")
+    public Producto idProduct;
 
-    @ManyToOne
-    @JoinColumn(name = "idProduct")
-    public Producto producto;
+
+
 
 }
