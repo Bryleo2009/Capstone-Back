@@ -7,7 +7,6 @@ import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
 import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Usuario.Cliente;
-import com.ofsystem.Model.Usuario.Usuario;
 import com.ofsystem.Service.Imple.Cliente.ListaDeseoServiceImpl;
 import com.ofsystem.Service.Imple.Cliente.TrazabilidadPedidosServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
@@ -110,11 +109,11 @@ public class ListaDeseoController {
         if (unaListaDeseos != null) {
             throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdListaDeseo());
         } else {
-            Producto producto = new Producto();
+
             ListaDeseos nuevaListaDeseos = new ListaDeseos();
             nuevaListaDeseos.setFechaListaDeseo(new Date());
-            Cliente cliente = serviceCli.listarxID(dato.getId().getId());
-            nuevaListaDeseos.setId(cliente);
+            nuevaListaDeseos.setIdProduct(dato.getIdProduct());
+            nuevaListaDeseos.setId(dato.getId());
             service.registrar(nuevaListaDeseos);
             URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(nuevaListaDeseos.getIdListaDeseo()).toUri();
             return ResponseEntity.created(location).build();
