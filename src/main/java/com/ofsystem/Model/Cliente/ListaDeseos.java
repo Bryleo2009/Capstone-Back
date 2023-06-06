@@ -59,14 +59,4 @@ public class ListaDeseos {
         }
         return cant;
     }
-
-    public void agregarDetalle(List<Detalle> nuevosDetalles) {
-        if (idDetalle == null) {
-            idDetalle = new ArrayList<>();
-        }
-        idDetalle.addAll(nuevosDetalles);
-        for (Detalle detalle : nuevosDetalles) {
-            detalle.setListaDeseos(this);
-        }
-    }
 }

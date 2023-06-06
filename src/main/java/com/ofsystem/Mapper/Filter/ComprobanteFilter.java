@@ -1,5 +1,7 @@
 package com.ofsystem.Mapper.Filter;
 
+import com.ofsystem.Model.Comprobante.Comprobante;
+import com.ofsystem.Model.Comprobante.Detalle;
 import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Usuario.Trabajador;
 import lombok.AllArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ComprobanteFilter {
 
+    public Detalle idComp;
     public Cliente cliente;
     public List<ProductoStorage> productoStorageList;//
     public double montoProducto; //

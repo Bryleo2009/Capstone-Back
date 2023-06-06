@@ -19,6 +19,7 @@ import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
 import com.ofsystem.Model.Comprobante.ReportService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,13 +61,23 @@ public class ComprobanteController {
 		return new ResponseEntity<List<Comprobante>>(service.listar(),HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ResponseEntity<Comprobante> listarPorId(@PathVariable("id") String id) {
 		Comprobante unaComprobante = service.listarxID(id);
 		if(unaComprobante == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
 		}
 		return new ResponseEntity<Comprobante>(unaComprobante,HttpStatus.OK);
+	}
+
+	@GetMapping("/comp/{idComp}")
+	public ResponseEntity<List<ComprobanteFilter>> listarComprobanteXID(@PathVariable("idComp") String idComp) {
+		List<ComprobanteFilter> unComprobante = service.ListarComprobanteXID(idComp);
+		if (unComprobante == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + idComp);
+		}
+		HttpHeaders headers = new HttpHeaders();
+		return new ResponseEntity<>(unComprobante, headers, HttpStatus.OK);
 	}
 
 
@@ -77,7 +88,6 @@ public class ComprobanteController {
 	public  String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
 		return services.exportReport(format);
 	}
-
 
 
 

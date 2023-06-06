@@ -1,5 +1,6 @@
 package com.ofsystem.Model.Comprobante;
 
+import com.ofsystem.Mapper.Filter.ComprobanteFilter;
 import com.ofsystem.Model.Comprobante.Comprobante;
 import com.ofsystem.Service.Service.Comprobante.IComprobanteService;
 import net.sf.jasperreports.engine.*;
@@ -20,9 +21,10 @@ public class ReportService {
     @Autowired
     private IComprobanteService service;
 
+
     public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
         String path = "C:\\Users\\Adrian Rondan\\Desktop";
-        List<Comprobante> comprobantes = service.listar();
+        List<ComprobanteFilter> comprobantes = service.ListarComprobanteXID("N0000");
         // cargar datos
         File file = ResourceUtils.getFile("classpath:comprobante.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());

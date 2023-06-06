@@ -45,9 +45,7 @@ public class Detalle {
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 
-	@ManyToOne
-	@JoinColumn(name = "id_listadeseo")
-	private ListaDeseos listaDeseos;
+
 
 	public Detalle(int cantProductDetalle, double precioUniDetalle, double precioTotalDetalle, String productoDetalle, Producto idProduct, Comprobante idComp, Double precioDescuentoDetalle) {
 		this.cantProductDetalle = cantProductDetalle;
