@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pruebas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="71dd3188-057f-4d86-96d0-4a57c0877a85">
-    <field name="idComp" class="java.lang.String">
+
+    <field name="id_comp" class="java.lang.String">
     </field>
-    <field name="direccionComp" class="java.lang.String">
+    <field name="direccion_comp" class="java.lang.String">
     </field>
-    <field name="fechaEmiComp" class="java.sql.Timestamp">
+    <field name="fecha_emi_comp" class="java.sql.Timestamp">
     </field>
     <field name="iuc" class="java.lang.String">
     </field>
-    <field name="montoSubtotalComp" class="java.lang.Double">
+    <field name="monto_subtotal_comp" class="java.lang.Double">
     </field>
-    <field name="montoTotalComp" class="java.lang.Double">
+    <field name="monto_total_comp" class="java.lang.Double">
     </field>
-    <field name="razonSocial" class="java.lang.String">
+    <field name="razon_social_comp" class="java.lang.String">
     </field>
-    <field name="ruc" class="java.lang.String">
+    <field name="ruc_comp" class="java.lang.String">
     </field>
-    <field name="ubigeoComp" class="java.lang.String">
+    <field name="ubigeo_comp" class="java.lang.String">
     </field>
-    <field name="idCliente" class="java.lang.Integer">
+    <field name="id_cliente" class="java.lang.Integer">
     </field>
     <field name="apellido" class="java.lang.String">
     </field>
-    <field name="correoCliente" class="java.lang.String">
+    <field name="correo_cliente" class="java.lang.String">
     </field>
     <field name="nombre" class="java.lang.String">
     </field>
-    <field name="direccionCliente" class="java.lang.String">
+    <field name="direccion_cliente" class="java.lang.String">
     </field>
-    <field name="numDocumento" class="java.lang.String">
+    <field name="num_documento" class="java.lang.String">
     </field>
     <field name="telefono" class="java.lang.String">
     </field>
-    <field name="ubigueoCliente" class="java.lang.String">
+    <field name="ubigueo_cliente" class="java.lang.String">
     </field>
-    <field name="cantProductDetalle" class="java.lang.Integer">
+    <field name="cant_product_detalle" class="java.lang.Integer">
     </field>
-    <field name="precioDescuentoDetalle" class="java.lang.Double">
+    <field name="precio_descuento_detalle" class="java.lang.Double">
     </field>
-    <field name="precioTotalDetalle" class="java.lang.Double">
+    <field name="precio_total_detalle" class="java.lang.Double">
     </field>
-    <field name="precioUniDetalle" class="java.lang.Double">
+    <field name="precio_uni_detalle" class="java.lang.Double">
     </field>
-    <field name="productoDetalle" class="java.lang.String">
+    <field name="producto_detalle" class="java.lang.String">
     </field>
     <background>
         <band splitType="Stretch"/>
@@ -70,7 +71,7 @@
                     <textElement>
                         <font size="16"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{idComp}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{id_comp}]]></textFieldExpression>
                 </textField>
                 <textField>
                     <reportElement x="550" y="130" width="100" height="30" forecolor="#3B8773" uuid="9ff9ab24-c49f-497f-9173-76ccfb66710c">
@@ -79,7 +80,7 @@
                     <textElement>
                         <font size="16"/>
                     </textElement>
-                    <textFieldExpression><![CDATA[$F{idCliente}]]></textFieldExpression>
+                    <textFieldExpression><![CDATA[$F{id_cliente}]]></textFieldExpression>
                 </textField>
             </frame>
         </band>
@@ -111,7 +112,7 @@
                 <textElement>
                     <font isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{correoCliente}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{correo_cliente}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="100" y="50" width="100" height="24" uuid="57905149-7d3e-4c9f-a6e4-0ed02c710f92">
@@ -129,7 +130,7 @@
                 <textElement>
                     <font isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{numDocumento}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{num_documento}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="100" y="95" width="100" height="20" uuid="aae0affc-aa87-4f81-b65e-781b365be6f6">
@@ -138,7 +139,7 @@
                 <textElement verticalAlignment="Top">
                     <font isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{direccionCliente}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{direccion_cliente}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="200" y="95" width="100" height="20" uuid="78ea26fb-712f-4a74-a343-bdcc3d9ba3a3">
@@ -147,13 +148,13 @@
                 <textElement verticalAlignment="Top">
                     <font isBold="false"/>
                 </textElement>
-                <textFieldExpression><![CDATA[$F{ubigueoCliente}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ubigueo_cliente}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="680" y="4" width="100" height="30" uuid="500aa54f-4e22-4717-ae71-944d1b00aceb">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="67911875-1c05-457c-8d16-35b2e79a6918"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$F{fechaEmiComp}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{fecha_emi_comp}]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="590" y="4" width="100" height="30" uuid="dfaa44f5-f453-4700-b6b6-e8ae62deb49a">
@@ -186,13 +187,13 @@
                 <reportElement x="639" y="35" width="91" height="30" uuid="22d63e14-efeb-44c2-8479-1d2dbfded9d4">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a80e391b-74d9-4c26-a49b-5c4a0576f1df"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$F{ruc}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{ruc_comp}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="669" y="65" width="110" height="30" uuid="5bb7a9d7-6031-447e-aceb-6ebf83af8e9a">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="234378c5-c212-47d6-ae1f-036fd9757199"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{razon_social_comp}]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="1" y="0" width="100" height="20" uuid="897578b8-1272-4cbb-a179-22b9afbcad1e">
@@ -303,30 +304,30 @@
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="05ef6055-e08a-4068-b71d-f14a14c1294d"/>
                 </reportElement>
                 <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{cantProductDetalle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{cant_product_detalle}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="320" y="50" width="100" height="30" uuid="ee26e934-9a58-4195-b800-7fd4bd21e6fd">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7c63e7dd-cff4-476e-85e9-5a9dbf305564"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$F{precioUniDetalle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{precio_uni_detalle}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="471" y="50" width="100" height="30" uuid="021fb3dc-8d72-41ab-8bb3-cba52bec23a2">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca3b6164-6bb4-451f-ac42-9f9a968fce8e"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$F{precioDescuentoDetalle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{precio_descuento_detalle}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="170" y="50" width="100" height="30" uuid="06f36b0d-2645-4ebf-bffc-ed50060433be">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dffcd5c1-d225-49e0-b98d-fac78a127f88"/>
                 </reportElement>
-                <textFieldExpression><![CDATA[$F{productoDetalle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{producto_detalle}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="631" y="50" width="80" height="30" uuid="76a7be13-6e7c-411f-9fe7-72591c187750"/>
                 <textElement verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{precioTotalDetalle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{precio_total_detalle}]]></textFieldExpression>
             </textField>
         </band>
     </columnHeader>
@@ -347,7 +348,7 @@
             <textField>
                 <reportElement x="690" y="10" width="80" height="30" uuid="d1bf7da8-8bfe-4dfe-a03a-b8dfcb46bfac"/>
                 <textElement verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{precioTotalDetalle}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{precio_total_detalle}]]></textFieldExpression>
             </textField>
         </band>
     </columnFooter>

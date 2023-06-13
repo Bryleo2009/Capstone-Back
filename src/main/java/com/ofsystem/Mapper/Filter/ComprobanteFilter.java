@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ComprobanteFilter {
 
-    public Detalle idComp;
     public Cliente cliente;
     public List<ProductoStorage> productoStorageList;//
     public double montoProducto; //

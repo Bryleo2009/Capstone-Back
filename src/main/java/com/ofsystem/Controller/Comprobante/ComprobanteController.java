@@ -1,6 +1,7 @@
 package com.ofsystem.Controller.Comprobante;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Mapper.Filter.ComprobanteDFilter;
 import com.ofsystem.Mapper.Filter.ProductoStorage;
 import com.ofsystem.Mapper.Filter.ComprobanteFilter;
 import com.ofsystem.Model.Comprobante.Comprobante;
@@ -71,8 +72,8 @@ public class ComprobanteController {
 	}
 
 	@GetMapping("/comp/{idComp}")
-	public ResponseEntity<List<ComprobanteFilter>> listarComprobanteXID(@PathVariable("idComp") String idComp) {
-		List<ComprobanteFilter> unComprobante = service.ListarComprobanteXID(idComp);
+	public ResponseEntity<List<ComprobanteDFilter>> listarComprobanteXID(@PathVariable("idComp") String idComp) {
+		List<ComprobanteDFilter> unComprobante = service.ListarComprobanteXID(idComp);
 		if (unComprobante == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + idComp);
 		}
@@ -84,9 +85,13 @@ public class ComprobanteController {
 	@Autowired
 	private ReportService services;
 
-	@GetMapping("/report/{format}")
-	public  String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
-		return services.exportReport(format);
+	@GetMapping("/{idComp}/report/{format}")
+	public  String generateReport(@PathVariable String format, @PathVariable String idComp) throws FileNotFoundException, JRException {
+		List<ComprobanteDFilter> unComprobante = service.ListarComprobanteXID(idComp);
+		if (unComprobante == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + idComp);
+		}
+		return services.exportReport(format,idComp);
 	}
 
 

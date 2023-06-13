@@ -1,5 +1,6 @@
 package com.ofsystem.Mapper;
 
+import com.ofsystem.Mapper.Filter.ComprobanteDFilter;
 import com.ofsystem.Mapper.Filter.ComprobanteFilter;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,5 +16,5 @@ public interface IComprobanteMapper {
             "from  public.comprobante e\n" +
             "left join public.cliente c on e.id_cliente = c.id\n" +
             "left join public.detalle_comprobante d on d.id_comp = e.id_comp where d.id_comp = #{idComp};")
-    List<ComprobanteFilter> ListarComprobanteXID(@Param("idComp") String idComp);
+    List<ComprobanteDFilter> ListarComprobanteXID(@Param("idComp") String idComp);
 }
