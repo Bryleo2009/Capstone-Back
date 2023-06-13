@@ -62,7 +62,7 @@
                 </staticText>
                 <image>
                     <reportElement x="50" y="30" width="170" height="90" uuid="cca8c348-6c00-44d9-b0ac-b8cb6b8ab085"/>
-                    <imageExpression><![CDATA["C:/Users/Adrian Rondan/Downloads/img_its_peru/L3.png"]]></imageExpression>
+                    <imageExpression><![CDATA["mediafiles/logo/L3.png"]]></imageExpression>
                 </image>
                 <textField>
                     <reportElement x="489" y="130" width="100" height="30" forecolor="#3B8773" uuid="d0aa1c03-add3-4ee5-b321-ece92440ee36">
