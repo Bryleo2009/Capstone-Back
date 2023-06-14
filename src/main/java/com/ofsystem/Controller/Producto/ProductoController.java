@@ -93,7 +93,7 @@ public class ProductoController {
 		return new ResponseEntity<List<Producto>>(unaProducto,HttpStatus.OK);
 	}
 
-	@PostMapping
+	/*@PostMapping
 	public ResponseEntity<Object> registrar(@RequestBody RegistroProductFilter registroProductFilter) throws IOException, WriterException {
 		Producto dato = registroProductFilter.getProducto();
 		List<TallaColorFilter> tallaColorFilters = registroProductFilter.getTallaColorFilters();
@@ -123,8 +123,8 @@ public class ProductoController {
 		}
 		return ResponseEntity.created(location).build();
 	}
-
-	@PostMapping("/masivo")
+*/
+	/*@PostMapping("/masivo")
 	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
 		for(RegistroProductFilter registros: registroProductFilter){
 			Producto dato = registros.getProducto();
@@ -156,8 +156,41 @@ public class ProductoController {
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	}*/
 
+	@PostMapping
+	public ResponseEntity<Object> registrar(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
+		for(RegistroProductFilter registros: registroProductFilter){
+			Producto dato = registros.getProducto();
+			List<TallaColorFilter> tallaColorFilters = registros.getTallaColorFilters();
+			dato.setIUP();
+			dato.setExistente();
+			IUP = dato.getIUP();
+			String cadena = IUP;
+			int unaProducto = service.listarxIUP(cadena).size();
+			URI location = null;
+			if(unaProducto != 0) {
+				//location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
+				//throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
+				System.out.println("Producto no registrado por existencia similar: " + dato.getIUP());
+			} else {
+				service.registrar(dato);
+				registros.setProducto(dato);
+				generadorQR(registros);
+				location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
+
+				for (TallaColorFilter tallaColorFilter: tallaColorFilters){
+					ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
+							serviceTalla.listarxID(tallaColorFilter.getTalla()),
+							serviceColor.listarxID(tallaColorFilter.getColor()),
+							tallaColorFilter.getCantidad());
+
+					servicePTC.registrar(productoTallaColor);
+				}
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	@PutMapping
 	public ResponseEntity<Producto> modificar( @RequestBody Producto dato) {		
 		return new ResponseEntity<Producto>(service.modificar(dato),HttpStatus.OK);
