@@ -11,13 +11,16 @@ import com.ofsystem.Service.Service.Producto.IProductoTallaColorService;
 import com.ofsystem.Service.Imple.CRUDServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 @Service
 public class ProductoTallaColorServiceImpl extends CRUDServiceImpl<ProductoTallaColor, Integer> implements IProductoTallaColorService {
-
+	private EntityManager entityManager;
 	@Autowired
 	private IProductoTallaColorRepo repo;
 
@@ -38,6 +41,8 @@ public class ProductoTallaColorServiceImpl extends CRUDServiceImpl<ProductoTalla
 	public List<ColorTallaFilter> colorTalla(int idProduct) {
 		return maper.colorTalla(idProduct);
 	}
+
+
 
 
 }
