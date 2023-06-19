@@ -143,14 +143,14 @@ public class ProductoController {
 			generadorQR(registroProductFilter);
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
 
-			for (TallaColorFilter tallaColorFilter: registroProductFilter.getTallaColorFilters()){
+			 TallaColorFilter tallaColorFilter = registroProductFilter.getTallaColorFilters();
 				ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
 						serviceTalla.listarxID(tallaColorFilter.getTalla()),
 						serviceColor.listarxID(tallaColorFilter.getColor()),
 						tallaColorFilter.getCantidad());
 
 				servicePTC.registrar(productoTallaColor);
-			}
+
 
 
 		}
@@ -191,11 +191,11 @@ public class ProductoController {
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}*/
-	@PostMapping("/masivo")
+	/*@PostMapping("/masivo")
 	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
 		for(RegistroProductFilter registros: registroProductFilter){
 			Producto dato = registros.getProducto();
-			List<TallaColorFilter> tallaColorFilters = registros.getTallaColorFilters();
+			//List<TallaColorFilter> tallaColorFilters = registros.getTallaColorFilters();
 			dato.setIUP();
 			dato.setExistente();
 			IUP = dato.getIUP();
@@ -223,7 +223,7 @@ public class ProductoController {
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	}*/
 
 
 
