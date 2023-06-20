@@ -14,5 +14,5 @@ public class RegistroProductFilter {
     private Producto producto;
 
     //se modifico el tallacolorfilter aqui iba  private List<TallaColorFilter> tallaColorFilters;
-    private TallaColorFilter tallaColorFilters;
+    private List<TallaColorFilter> tallaColorFilters;
 }

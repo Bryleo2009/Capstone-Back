@@ -143,15 +143,13 @@ public class ProductoController {
 			generadorQR(registroProductFilter);
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
 
-			 TallaColorFilter tallaColorFilter = registroProductFilter.getTallaColorFilters();
+			 TallaColorFilter tallaColorFilter = (TallaColorFilter) registroProductFilter.getTallaColorFilters();
 				ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
 						serviceTalla.listarxID(tallaColorFilter.getTalla()),
 						serviceColor.listarxID(tallaColorFilter.getColor()),
 						tallaColorFilter.getCantidad());
 
 				servicePTC.registrar(productoTallaColor);
-
-
 
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
