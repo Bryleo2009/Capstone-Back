@@ -1,5 +1,7 @@
 package com.ofsystem.Mapper.Filter;
 
+import com.ofsystem.Model.Comprobante.Comprobante;
+import com.ofsystem.Model.Comprobante.Detalle;
 import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Usuario.Trabajador;
 import lombok.AllArgsConstructor;
