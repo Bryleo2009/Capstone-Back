@@ -1,5 +1,7 @@
 package com.ofsystem.Model.Comprobante;
 
+import com.ofsystem.Mapper.Filter.ComprobanteDFilter;
+import com.ofsystem.Mapper.Filter.ComprobanteFilter;
 import com.ofsystem.Model.Comprobante.Comprobante;
 import com.ofsystem.Service.Service.Comprobante.IComprobanteService;
 import net.sf.jasperreports.engine.*;
@@ -20,9 +22,11 @@ public class ReportService {
     @Autowired
     private IComprobanteService service;
 
-    public String exportReport(String reportFormat) throws FileNotFoundException, JRException {
-        String path = "C:\\Users\\Adrian Rondan\\Desktop\\Report";
-        List<Comprobante> comprobantes = service.listar();
+
+    public String exportReport(String reportFormat, String idComp) throws FileNotFoundException, JRException {
+        //String userHome = System.getProperty("user.home");
+        String path ="mediafiles/Comprobantes";
+        List<ComprobanteDFilter> comprobantes = service.ListarComprobanteXID(idComp);
         // cargar datos
         File file = ResourceUtils.getFile("classpath:comprobante.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
@@ -30,12 +34,13 @@ public class ReportService {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("CreatedBy", "JULIAN SAC");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-
+        String rutapdf = String.format("comprobante_%s.pdf",idComp);
+        String rutahtml = String.format("comprobante_%s.html",idComp);
         if(reportFormat.equalsIgnoreCase("html")){
-            JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\comprobante.html");
+            JasperExportManager.exportReportToHtmlFile(jasperPrint,path+ File.separator + rutahtml);
         }
         if (reportFormat.equalsIgnoreCase("pdf")){
-            JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\comprobante.pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint,path+ File.separator + rutapdf);
         }
 
         return "report generated in path: " + path ;

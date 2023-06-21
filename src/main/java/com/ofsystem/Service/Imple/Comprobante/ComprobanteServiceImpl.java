@@ -1,7 +1,8 @@
 package com.ofsystem.Service.Imple.Comprobante;
 
+import com.ofsystem.Mapper.Filter.ComprobanteDFilter;
+import com.ofsystem.Mapper.IComprobanteMapper;
 import com.ofsystem.Model.Comprobante.Comprobante;
-import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Repo.Comprobante.IComprobanteRepo;
 import com.ofsystem.Service.Service.Comprobante.IComprobanteService;
 import com.ofsystem.Service.Imple.CRUDServiceImpl;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,6 +17,8 @@ public class ComprobanteServiceImpl extends CRUDServiceImpl<Comprobante, String>
 
 	@Autowired
 	private IComprobanteRepo repo;
+	@Autowired
+	private IComprobanteMapper repoMapper;
 	
 	@Override
 	protected JpaRepository<Comprobante, String> getRepo() {
@@ -31,6 +33,11 @@ public class ComprobanteServiceImpl extends CRUDServiceImpl<Comprobante, String>
 	@Override
 	public Comprobante findByIuc(String iuc) {
 		return repo.findByIuc(iuc);
+	}
+
+	@Override
+	public List<ComprobanteDFilter> ListarComprobanteXID(String idComp){
+		return repoMapper.ListarComprobanteXID(idComp);
 	}
 
 
