@@ -73,7 +73,10 @@
 			<artifactId>jasperreports</artifactId>
 			<version>6.16.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 		<!-- Swagger dependencies -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

@@ -25,7 +25,7 @@ public class ReportService {
 
     public String exportReport(String reportFormat, String idComp) throws FileNotFoundException, JRException {
         //String userHome = System.getProperty("user.home");
-        String path ="mediafiles/Comprobantes";
+        String path ="mediafiles/comprobantes";
         List<ComprobanteDFilter> comprobantes = service.ListarComprobanteXID(idComp);
         // cargar datos
         File file = ResourceUtils.getFile("classpath:comprobante.jrxml");

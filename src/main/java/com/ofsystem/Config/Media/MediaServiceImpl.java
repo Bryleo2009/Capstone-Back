@@ -29,6 +29,8 @@ public class MediaServiceImpl {
         rootLocation = Paths.get(mediaLocation);
         Path productosQr = rootLocation.resolve("productosQr");
         Files.createDirectories(productosQr);
+        Path comprobantes = rootLocation.resolve("comprobantes");
+        Files.createDirectories(comprobantes);
     }
 
     /*public String store(MultipartFile file, String subruta ) {
