@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IProductoTallaColorRepo extends JpaRepository<ProductoTallaColor, Integer> {
 
+
     ProductoTallaColor findByProductoAndTallaAndColor(Producto idProducto, Talla idTalla, Color idColor);
 
 }

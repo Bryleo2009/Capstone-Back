@@ -7,18 +7,17 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Mapper.Filter.ProductoStorage;
-import com.ofsystem.Mapper.Filter.ProductoFilter;
-import com.ofsystem.Mapper.Filter.RegistroProductFilter;
-import com.ofsystem.Mapper.Filter.TallaColorFilter;
+import com.ofsystem.Mapper.Filter.*;
 import com.ofsystem.Model.Enums.Color;
 import com.ofsystem.Model.Producto.Producto;
 import com.ofsystem.Model.Producto.ProductoTallaColor;
 import com.ofsystem.Model.Enums.Talla;
-import com.ofsystem.Service.Imple.Enums.ColorServiceImpl;
+import com.ofsystem.Model.Usuario.Cliente;
+import com.ofsystem.Model.Usuario.Usuario;
+import com.ofsystem.Service.Imple.Enums.*;
 import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
 import com.ofsystem.Service.Imple.Producto.ProductoTallaColorServiceImpl;
-import com.ofsystem.Service.Imple.Enums.TallaServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -55,9 +54,10 @@ public class ProductoController {
 
 	@Autowired
 	private ColorServiceImpl serviceColor;
-
 	@Autowired
 	private ProductoTallaColorServiceImpl productoTallaColorService;
+
+
 
 	String IUP="";
 	
@@ -74,7 +74,7 @@ public class ProductoController {
 	public ResponseEntity<List<Producto>> listar() {
 		return new ResponseEntity<List<Producto>>(service.listar(),HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Producto> listarPorId(@PathVariable("id") int id) {
 		Producto unaProducto = service.listarxID(id);
@@ -93,6 +93,38 @@ public class ProductoController {
 		return new ResponseEntity<List<Producto>>(unaProducto,HttpStatus.OK);
 	}
 
+	/*@PostMapping
+	public ResponseEntity<Object> registrar(@RequestBody RegistroProductFilter registroProductFilter) throws IOException, WriterException {
+
+		Producto dato = registroProductFilter.getProducto();
+
+		List<TallaColorFilter> tallaColorFilters = registroProductFilter.getTallaColorFilters();
+		dato.setIUP();
+		dato.setExistente();
+		IUP = dato.getIUP();
+		String cadena = IUP;
+		int unaProducto = service.listarxIUP(cadena).size();
+		URI location = null;
+		if(unaProducto != 0) {
+			//location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
+			throw new ModeloNotFoundException("ID YA REGISTRADO EN LA BASE DE DATOS: " + dato.getIdProduct() + " --- " + location);
+		} else {
+			service.registrar(dato);
+			registroProductFilter.setProducto(dato);
+			generadorQR(registroProductFilter);
+			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
+
+			for (TallaColorFilter tallaColorFilter: tallaColorFilters){
+				ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
+						serviceTalla.listarxID(tallaColorFilter.getTalla()),
+						serviceColor.listarxID(tallaColorFilter.getColor()),
+						tallaColorFilter.getCantidad());
+
+				servicePTC.registrar(productoTallaColor);
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+		/*return ResponseEntity.created(location).build();*/
 	@PostMapping
 	public ResponseEntity<Object> registrar(@RequestBody RegistroProductFilter registroProductFilter) throws IOException, WriterException {
 		Producto dato = registroProductFilter.getProducto();
@@ -124,7 +156,7 @@ public class ProductoController {
 		return ResponseEntity.created(location).build();
 	}
 
-	@PostMapping("/masivo")
+	/*@PostMapping("/masivo")
 	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
 		for(RegistroProductFilter registros: registroProductFilter){
 			Producto dato = registros.getProducto();
@@ -156,14 +188,49 @@ public class ProductoController {
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	}*/
+	/*@PostMapping("/masivo")
+	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
+		for(RegistroProductFilter registros: registroProductFilter){
+			Producto dato = registros.getProducto();
+			//List<TallaColorFilter> tallaColorFilters = registros.getTallaColorFilters();
+			dato.setIUP();
+			dato.setExistente();
+			IUP = dato.getIUP();
+			String cadena = IUP;
+			int unaProducto = service.listarxIUP(cadena).size();
+			URI location = null;
+			if(unaProducto != 0) {
+				//location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
+				//throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
+				System.out.println("Producto no registrado por existencia similar: " + dato.getIUP());
+			} else {
+				service.registrar(dato);
+				registros.setProducto(dato);
+				generadorQR(registros);
+				location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
+
+				for (TallaColorFilter tallaColorFilter: tallaColorFilters){
+					ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
+							serviceTalla.listarxID(tallaColorFilter.getTalla()),
+							serviceColor.listarxID(tallaColorFilter.getColor()),
+							tallaColorFilter.getCantidad());
+
+					servicePTC.registrar(productoTallaColor);
+				}
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}*/
+
+
 
 	@PutMapping
-	public ResponseEntity<Producto> modificar( @RequestBody Producto dato) {		
+	public ResponseEntity<Producto> modificar( @RequestBody Producto dato) {
 		return new ResponseEntity<Producto>(service.modificar(dato),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	/*@DeleteMapping("/{id}")
 	public ResponseEntity<Object> eliminar(@PathVariable("id") int id) {
 		Producto unaProducto = service.listarxID(id);
 		if(unaProducto == null) {
@@ -172,7 +239,26 @@ public class ProductoController {
 			service.eliminar(id);
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}*/
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> eliminar(@PathVariable("id") int id) {
+		Producto unaProducto = service.listarxID(id);
+		if (unaProducto == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO: " + id);
+		} else {
+			try {
+				// Eliminar los registros asociados en producto_talla_color
+				// Eliminar el producto
+				service.eliminar(id);
+			} catch (Exception e) {
+				throw e; // Manejar el error según tus necesidades
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+
+
 	@GetMapping()
 	public ResponseEntity<Page<ProductoFilter>> busquedaFiltrada(@RequestParam(required = false, value="categoria") String categoria,
 																 @RequestParam(required = false, value="tipos") String[] tipos,
@@ -293,6 +379,11 @@ public class ProductoController {
 			}
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+	@GetMapping("/stockPrendas/{id}")
+	public ResponseEntity<List<ColorTallaFilter>>ColorTalla(@PathVariable("id") int id){
+		return new ResponseEntity<>(productoTallaColorService.colorTalla(id),HttpStatus.OK);
 	}
 
 }

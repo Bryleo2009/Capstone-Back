@@ -1,5 +1,6 @@
 package com.ofsystem.Service.Service.Cliente;
 
+import com.ofsystem.Mapper.Filter.ColorTallaFilter;
 import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
 import com.ofsystem.Mapper.Filter.TrazabilidadPedidoFilter;
 import com.ofsystem.Model.Cliente.Pedido;
@@ -16,6 +17,5 @@ public interface IPedidoService extends ICRUDService<Pedido, Integer> {
     List<SeguimientoPedidoFilter> listarPedido (int idUser);
 
     List<TrazabilidadPedidoFilter>TrazaPedido(int idPedido);
-
 
 }

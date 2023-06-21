@@ -1,4 +1,4 @@
-package com.ofsystem.Model.Cliente;
+/*package com.ofsystem.Model.Cliente;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,3 +60,4 @@ public class ListaDeseos {
         return cant;
     }
 }
+*/

@@ -1,6 +1,7 @@
 package com.ofsystem.Mapper;
 
 
+import com.ofsystem.Mapper.Filter.ColorTallaFilter;
 import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
 import com.ofsystem.Mapper.Filter.TrazabilidadPedidoFilter;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,4 +26,6 @@ public interface IPedidoMapper {
                 "on estpro.id_est_pedido = trazape.id_proce_actual\n" +
                 "where pe.id_pedido = #{idPedido};")
         List<TrazabilidadPedidoFilter>TrazaPedido(@Param("idPedido") int idPedido);
+
+
 }

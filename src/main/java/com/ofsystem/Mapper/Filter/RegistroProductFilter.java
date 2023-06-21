@@ -12,5 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RegistroProductFilter {
     private Producto producto;
+
+    //se modifico el tallacolorfilter aqui iba  private List<TallaColorFilter> tallaColorFilters;
     private List<TallaColorFilter> tallaColorFilters;
 }

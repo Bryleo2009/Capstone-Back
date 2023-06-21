@@ -3,7 +3,6 @@ package com.ofsystem.Model.Comprobante;
 
 import javax.persistence.*;
 
-import com.ofsystem.Model.Cliente.ListaDeseos;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Enums.TipoCompro;
 import com.ofsystem.Model.Enums.TipoPago;
