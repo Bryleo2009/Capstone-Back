@@ -156,7 +156,7 @@ public class ProductoController {
 		return ResponseEntity.created(location).build();
 	}
 
-	/*@PostMapping("/masivo")
+	@PostMapping("/masivo")
 	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
 		for(RegistroProductFilter registros: registroProductFilter){
 			Producto dato = registros.getProducto();
@@ -188,7 +188,7 @@ public class ProductoController {
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
-	}*/
+	}
 	/*@PostMapping("/masivo")
 	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
 		for(RegistroProductFilter registros: registroProductFilter){
