@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/*
 @Service
 public class ListaDeseoServiceImpl extends CRUDServiceImpl<ListaDeseos, Integer> implements IListaDeseoService {
 
@@ -40,8 +40,8 @@ public class ListaDeseoServiceImpl extends CRUDServiceImpl<ListaDeseos, Integer>
         return repo.findByIdComp_IdComp(idComp);
     }
 
-    @Override
+   /* @Override
     public List<SeguimientoListadeseosFilter> listarListadeseo(int idUser) {
         return repoMapper.listarListaDeseo(idUser);
     }
-}
+*/

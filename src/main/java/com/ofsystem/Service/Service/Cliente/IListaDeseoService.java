@@ -1,4 +1,4 @@
-package com.ofsystem.Service.Service.Cliente;
+/*package com.ofsystem.Service.Service.Cliente;
 
 import com.ofsystem.Mapper.Filter.SeguimientoListadeseosFilter;
 import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
@@ -15,3 +15,4 @@ public interface IListaDeseoService extends ICRUDService<ListaDeseos, Integer> {
 
     List<SeguimientoListadeseosFilter> listarListadeseo (int idUser);
 }
+*/

@@ -128,32 +128,32 @@ public class ProductoController {
 	@PostMapping
 	public ResponseEntity<Object> registrar(@RequestBody RegistroProductFilter registroProductFilter) throws IOException, WriterException {
 		Producto dato = registroProductFilter.getProducto();
+		List<TallaColorFilter> tallaColorFilters = registroProductFilter.getTallaColorFilters();
 		dato.setIUP();
 		dato.setExistente();
-		String IUP = dato.getIUP();
+		IUP = dato.getIUP();
 		String cadena = IUP;
 		int unaProducto = service.listarxIUP(cadena).size();
 		URI location = null;
-		if (unaProducto != 0) {
-			// location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
-			throw new ModeloNotFoundException("ID YA REGISTRADO EN LA BASE DE DATOS: " + dato.getIdProduct() + " --- " + location);
+		if(unaProducto != 0) {
+			//location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
+			throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
 		} else {
 			service.registrar(dato);
 			registroProductFilter.setProducto(dato);
 			generadorQR(registroProductFilter);
 			location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
 
-			 TallaColorFilter tallaColorFilter = (TallaColorFilter) registroProductFilter.getTallaColorFilters();
+			for (TallaColorFilter tallaColorFilter: tallaColorFilters){
 				ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
 						serviceTalla.listarxID(tallaColorFilter.getTalla()),
 						serviceColor.listarxID(tallaColorFilter.getColor()),
 						tallaColorFilter.getCantidad());
 
 				servicePTC.registrar(productoTallaColor);
-
+			}
 		}
-		return new ResponseEntity<>(HttpStatus.OK);
-		// return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).build();
 	}
 
 	/*@PostMapping("/masivo")
