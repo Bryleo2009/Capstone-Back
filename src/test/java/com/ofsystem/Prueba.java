@@ -1,7 +1,7 @@
 package com.ofsystem;
 
-import com.ofsystem.Model.Producto.Producto;
-import com.ofsystem.Service.Imple.Producto.ProductoServiceImpl;
+import com.ofsystem.Capstone.Model.Producto.Producto;
+import com.ofsystem.Capstone.Service.Imple.Producto.ProductoServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
