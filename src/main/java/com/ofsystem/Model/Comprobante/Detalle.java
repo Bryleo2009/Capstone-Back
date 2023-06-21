@@ -3,7 +3,6 @@ package com.ofsystem.Model.Comprobante;
 
 import javax.persistence.*;
 
-import com.ofsystem.Model.Cliente.ListaDeseos;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Enums.TipoCompro;
 import com.ofsystem.Model.Enums.TipoPago;
@@ -45,9 +44,7 @@ public class Detalle {
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 
-	@ManyToOne
-	@JoinColumn(name = "id_listadeseo")
-	private ListaDeseos listaDeseos;
+
 
 	public Detalle(int cantProductDetalle, double precioUniDetalle, double precioTotalDetalle, String productoDetalle, Producto idProduct, Comprobante idComp, Double precioDescuentoDetalle) {
 		this.cantProductDetalle = cantProductDetalle;

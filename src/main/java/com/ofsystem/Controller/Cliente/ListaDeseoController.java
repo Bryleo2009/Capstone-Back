@@ -5,10 +5,10 @@ import com.ofsystem.Mapper.Filter.ListadeseoFilter;
 import com.ofsystem.Mapper.Filter.PedidoFilter;
 import com.ofsystem.Mapper.Filter.SeguimientoListadeseosFilter;
 import com.ofsystem.Mapper.Filter.SeguimientoPedidoFilter;
-import com.ofsystem.Model.Cliente.ListaDeseos;
 import com.ofsystem.Model.Cliente.Pedido;
 import com.ofsystem.Model.Cliente.TrazabilidadPedidos;
-import com.ofsystem.Service.Imple.Cliente.ListaDeseoServiceImpl;
+/*
+import com.ofsystem.Service.Imple.Cliente.ListaDeseoServiceImpl;*/
 import com.ofsystem.Service.Imple.Cliente.TrazabilidadPedidosServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.ComprobanteServiceImpl;
 import com.ofsystem.Service.Imple.Comprobante.DetalleServiceImpl;
@@ -24,15 +24,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Date;
 import java.util.List;
-
+/*
 
 @RestController
 @RequestMapping("/ListaDeseos")
 public class ListaDeseoController {
 
     @Autowired
-    private ListaDeseoServiceImpl service;
-    @Autowired
+    private ListaDeseoServiceImpl service;*/
+   /* @Autowired
     private DetalleServiceImpl detalleService;
     @Autowired
     private ComprobanteServiceImpl comprobanteService;
@@ -45,7 +45,7 @@ public class ListaDeseoController {
     @Autowired
     private TrazabilidadPedidosServiceImpl trazabilidadPedidosService;
 
-    @GetMapping
+  /*  @GetMapping
     public ResponseEntity<List<ListaDeseos>> listar() {
         return new ResponseEntity<List<ListaDeseos>>(service.listar(),HttpStatus.OK);
     }
@@ -73,7 +73,7 @@ public class ListaDeseoController {
 
         return ResponseEntity.created(location).build();
     }*/
-    @PostMapping
+   /* @PostMapping
     public ResponseEntity<Object> registrar( @RequestBody ListadeseoFilter dato,
                                              @RequestParam("iuc") String iuc) {
         System.out.println("dato ListadeseoControler: " + dato);
@@ -118,4 +118,4 @@ public class ListaDeseoController {
     public ResponseEntity<List<SeguimientoListadeseosFilter>> listarListadeseo(@PathVariable("idUser")int idUser){
         return new ResponseEntity<>(service.listarListadeseo(idUser),HttpStatus.OK);
     }
-}
+}*/
