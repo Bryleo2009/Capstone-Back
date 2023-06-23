@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ITrabajadorRepo extends JpaRepository<Trabajador, Integer> {
-    Trabajador findByIdUserCliente_Username (String username);
+    Trabajador findByIdUserTrabajador_Username (String username);
 }
