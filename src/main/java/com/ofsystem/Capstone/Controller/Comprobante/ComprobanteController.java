@@ -115,7 +115,6 @@ public class ComprobanteController {
 
 		try {
 			//comprobante
-
 			comprobantes.setIdComp(nextIdComp);
 			comprobantes.setMontoSubtotalComp(dato.getMontoProducto());
 			comprobantes.setMontoTotalComp(dato.getAmmount());

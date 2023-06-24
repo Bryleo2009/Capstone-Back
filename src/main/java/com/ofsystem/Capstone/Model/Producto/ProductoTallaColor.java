@@ -49,4 +49,14 @@ public class ProductoTallaColor {
         this.existe_noexiste = true;
         setStock(Stock,Stock);
     }
+
+    @Override
+    public String toString() {
+        return "ProductoTallaColor{" +
+                "producto=" + producto.getIdProduct() +
+                ", talla=" + talla.getIdTalla() +
+                ", color=" + color.getIdColor() +
+                ", stockVirtualProduct=" + stockVirtualProduct +
+                '}';
+    }
 }

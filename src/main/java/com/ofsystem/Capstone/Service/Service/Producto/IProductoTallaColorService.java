@@ -14,5 +14,7 @@ public interface IProductoTallaColorService extends ICRUDService<ProductoTallaCo
 
     List<Color> colores(Producto unProducto);
 
-    ProductoTallaColor findByProducto_IdProductAndColorAndTalla(int idProducto, Color color, Talla talla);
+    ProductoTallaColor findByProductoAndTallaAndColor(Producto idProducto,Talla talla, Color color);
+
+    List<ProductoTallaColor> findByProducto_IdProduct(int idProducto);
 }

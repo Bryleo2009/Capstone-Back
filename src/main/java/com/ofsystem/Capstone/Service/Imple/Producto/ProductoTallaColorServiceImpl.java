@@ -35,7 +35,12 @@ public class ProductoTallaColorServiceImpl extends CRUDServiceImpl<ProductoTalla
 	}
 
 	@Override
-	public ProductoTallaColor findByProducto_IdProductAndColorAndTalla(int idProducto, Color color, Talla talla) {
-		return repo.findByProducto_IdProductAndColorAndTalla(idProducto,color,talla);
+	public ProductoTallaColor findByProductoAndTallaAndColor(Producto idProducto, Talla talla,Color color) {
+		return repo.findByProductoAndTallaAndColor(idProducto,talla,color);
+	}
+
+	@Override
+	public List<ProductoTallaColor> findByProducto_IdProduct(int idProducto) {
+		return repo.findByProducto_IdProduct(idProducto);
 	}
 }

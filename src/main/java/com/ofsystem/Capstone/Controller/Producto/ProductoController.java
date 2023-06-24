@@ -6,15 +6,12 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.ofsystem.Capstone.Mapper.Filter.ProductoFilter;
-import com.ofsystem.Capstone.Mapper.Filter.ProductoStorage;
+import com.ofsystem.Capstone.Mapper.Filter.*;
 import com.ofsystem.Capstone.Model.Producto.Producto;
 import com.ofsystem.Capstone.Model.Producto.ProductoTallaColor;
 import com.ofsystem.Capstone.Service.Imple.Enums.ColorServiceImpl;
 import com.ofsystem.Capstone.Service.Imple.Enums.TallaServiceImpl;
 import com.ofsystem.Capstone.Config.Exception.ModeloNotFoundException;
-import com.ofsystem.Capstone.Mapper.Filter.RegistroProductFilter;
-import com.ofsystem.Capstone.Mapper.Filter.TallaColorFilter;
 import com.ofsystem.Capstone.Model.Enums.Color;
 import com.ofsystem.Capstone.Model.Enums.Talla;
 import com.ofsystem.Capstone.Service.Imple.Producto.ProductoServiceImpl;
@@ -238,25 +235,24 @@ public class ProductoController {
 		}
 	@PutMapping("/carrito")
 	public ResponseEntity<Object> CarritoOperador( @RequestBody List<ProductoFilter> dato) {
-
 		for (ProductoFilter productoStorage : dato) {
-			for(int i = 0; i > productoStorage.getTallas().size(); i++){
 				Producto unproducto = service.listarxID(productoStorage.getProducto().getIdProduct());
-				Talla unatalla = serviceTalla.listarxID(productoStorage.getTallas().get(i).getIdTalla());
-				Color uncolor = serviceColor.listarxID(productoStorage.getColors().get(i).getIdColor());
-				ProductoTallaColor productoTallaColor = servicePTC.findByProductoAndTallaAndColor(unproducto,unatalla,uncolor);
-
-				if (productoTallaColor != null) {
-					if (productoTallaColor.getStockVirtualProduct() >= cantidad && (productoTallaColor.getTalla().getIdTalla()==talla) && (productoTallaColor.getColor().getIdColor()==color)) {
-						productoTallaColor.setStockVirtualProduct(productoTallaColor.getStockVirtualProduct() - cantidad);
-						productoTallaColor.setIdProductoTallaColor(productoTallaColor.getIdProductoTallaColor());
-						productoTallaColorService.modificar(productoTallaColor);
+				List<ProductoTallaColor> productoTallaColors = servicePTC.findByProducto_IdProduct(unproducto.getIdProduct());
+				for(ProductoTallaColor productoTallaColor: productoTallaColors){
+					System.out.println("productoTallaColor " + productoTallaColor);
+					if (productoTallaColor.getStockVirtualProduct() >= productoStorage.getCantidad()) {
+						if(productoTallaColor.getStockVirtualProduct() - productoStorage.getCantidad() == 0){
+							unproducto.setExistente(false);
+							service.modificar(unproducto);
+						} else {
+							productoTallaColor.setStockVirtualProduct(productoTallaColor.getStockVirtualProduct() - productoStorage.getCantidad());
+							productoTallaColor.setIdProductoTallaColor(productoTallaColor.getIdProductoTallaColor());
+							servicePTC.modificar(productoTallaColor);
+						}
+					} else {
+						System.out.println("Producto sin stock");
 					}
 				}
-			}
-
-
-
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}

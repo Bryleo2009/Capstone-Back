@@ -17,11 +17,12 @@ public interface IProductoTallaColorRepo extends JpaRepository<ProductoTallaColo
     ProductoTallaColor findByProductoAndTallaAndColor(Producto idProducto, Talla idTalla, Color idColor);
     ProductoTallaColor findByProducto_IdProductAndColorAndTalla(int idProducto, Color color, Talla talla);
 
-
     @Query("SELECT DISTINCT ptc.talla FROM ProductoTallaColor ptc WHERE ptc.producto = :producto")
     List<Talla> tallas(@Param("producto") Producto producto);
 
     @Query("SELECT DISTINCT ptc.color FROM ProductoTallaColor ptc WHERE ptc.producto = :producto")
     List<Color> colores(@Param("producto") Producto producto);
+
+    List<ProductoTallaColor> findByProducto_IdProduct(int idProducto);
 
 }
