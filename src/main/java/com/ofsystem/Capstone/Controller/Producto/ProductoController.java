@@ -236,5 +236,29 @@ public class ProductoController {
 
 			System.out.println("Qr generado: IUP|"+IUP+" - Ruta| "+rutaCompleta);
 		}
+	@PutMapping("/carrito")
+	public ResponseEntity<Object> CarritoOperador( @RequestBody List<ProductoFilter> dato) {
+
+		for (ProductoFilter productoStorage : dato) {
+			for(int i = 0; i > productoStorage.getTallas().size(); i++){
+				Producto unproducto = service.listarxID(productoStorage.getProducto().getIdProduct());
+				Talla unatalla = serviceTalla.listarxID(productoStorage.getTallas().get(i).getIdTalla());
+				Color uncolor = serviceColor.listarxID(productoStorage.getColors().get(i).getIdColor());
+				ProductoTallaColor productoTallaColor = servicePTC.findByProductoAndTallaAndColor(unproducto,unatalla,uncolor);
+
+				if (productoTallaColor != null) {
+					if (productoTallaColor.getStockVirtualProduct() >= cantidad && (productoTallaColor.getTalla().getIdTalla()==talla) && (productoTallaColor.getColor().getIdColor()==color)) {
+						productoTallaColor.setStockVirtualProduct(productoTallaColor.getStockVirtualProduct() - cantidad);
+						productoTallaColor.setIdProductoTallaColor(productoTallaColor.getIdProductoTallaColor());
+						productoTallaColorService.modificar(productoTallaColor);
+					}
+				}
+			}
+
+
+
+		}
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
 
 	}
