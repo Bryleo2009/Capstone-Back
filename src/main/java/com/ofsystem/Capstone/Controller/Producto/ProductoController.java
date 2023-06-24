@@ -100,7 +100,42 @@ public class ProductoController {
 			return new ResponseEntity<List<Producto>>(unaProducto,HttpStatus.OK);
 		}
 
-		@PostMapping
+	@PostMapping("/masivo")
+	public ResponseEntity<Object> registrarMasivo(@RequestBody List<RegistroProductFilter> registroProductFilter) throws IOException, WriterException {
+		for(RegistroProductFilter registros: registroProductFilter){
+			Producto dato = registros.getProducto();
+			List<TallaColorFilter> tallaColorFilters = registros.getTallaColorFilters();
+			dato.setIUP();
+			dato.setExistente();
+			IUP = dato.getIUP();
+			String cadena = IUP;
+			int unaProducto = service.listarxIUP(cadena).size();
+			URI location = null;
+			if(unaProducto != 0) {
+				//location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(unaProducto.getIdProduct()).toUri();
+				//throw new ModeloNotFoundException("ID YA REGISTRADO: " + dato.getIdProduct() + " --- " + location);
+				System.out.println("Producto no registrado por existencia similar: " + dato.getIUP());
+			} else {
+				service.registrar(dato);
+				registros.setProducto(dato);
+				generadorQR(registros);
+				location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dato.getIdProduct()).toUri();
+
+				for (TallaColorFilter tallaColorFilter: tallaColorFilters){
+					ProductoTallaColor productoTallaColor = new ProductoTallaColor( dato,
+							serviceTalla.listarxID(tallaColorFilter.getTalla()),
+							serviceColor.listarxID(tallaColorFilter.getColor()),
+							tallaColorFilter.getCantidad());
+
+					servicePTC.registrar(productoTallaColor);
+				}
+			}
+		}
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+
+	@PostMapping
 		public ResponseEntity<Object> registrar( @RequestBody Producto dato) {
 			dato.setIUP();
 			return new ResponseEntity<>(service.registrar(dato), HttpStatus.OK);
@@ -170,42 +205,6 @@ public class ProductoController {
 			service.modificar(unaProducto);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		}
-
-
-	/*public void generadorQR(Producto producto) throws IOException {
-
-		//producto.setIUP();
-		// Generar el código QR con el dato IUP
-		String iup = IUP;
-		String contenidoQR = 	"IUP: " + producto.getIUP() + "\n" +
-								"Nombre: " + producto.getNombreProduct() + "\n" +
-								"Precio: " + producto.getPrecioUni() + "\n" +
-								"Descripción: " + producto.getDescripcionProduct() + "\n" +
-								"Categorias: " + producto.getIdCateg() + "\n" +
-								"Marcas: " + producto.getIdMarca().getVistaItem() + "\n" +
-								"Etiquetas: " + producto.concatenarEtiqueta(producto.getIdEtiqueta()) + "\n" +
-								"Tallas: " + producto.concatenarTalla(producto.getIdTalla()) + "\n" +
-								"Colores: " + producto.concatenarColor(producto.getIdColor()) ;
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		QRCode.from(contenidoQR).to(ImageType.PNG).withSize(550, 550).writeTo(baos);
-
-		// Crear el directorio si no existe
-		rootLocation = Paths.get(mediaLocation);
-		Path productosQr = rootLocation.resolve("productosQr");
-		if (!Files.exists(productosQr)) {
-			Files.createDirectories(productosQr);
-		}
-
-		// Crear el archivo con el nombre del IUP
-		Path qrFile = productosQr.resolve(iup + ".png");
-		Files.write(qrFile, baos.toByteArray());
-
-		// Obtener la ruta absoluta del archivo guardado
-		String rutaArchivo = qrFile.toAbsolutePath().toString();
-
-		System.out.println("Qr generado: IUP|"+IUP+" - Ruta|"+rutaArchivo);
-	}*/
-
 
 		public void generadorQR(RegistroProductFilter producto) throws IOException, WriterException {
 			//producto.setIUP();
