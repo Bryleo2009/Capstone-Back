@@ -16,6 +16,7 @@ public class ProductoFilter {
     Producto Producto;
     List<Talla> Tallas;
     List<Color> Colors;
+    int cantidad;
 
     public com.ofsystem.Capstone.Model.Producto.Producto getProducto() {
         return Producto;
@@ -39,5 +40,13 @@ public class ProductoFilter {
 
     public void setColors(List<Color> colors) {
         Colors = colors;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

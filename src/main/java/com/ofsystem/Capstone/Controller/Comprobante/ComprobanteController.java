@@ -3,6 +3,7 @@ package com.ofsystem.Capstone.Controller.Comprobante;
 import com.ofsystem.Capstone.Config.Exception.ModeloNotFoundException;
 import com.ofsystem.Capstone.Mapper.Filter.ComprobanteDFilter;
 import com.ofsystem.Capstone.Mapper.Filter.ComprobanteFilter;
+import com.ofsystem.Capstone.Mapper.Filter.ProductoFilter;
 import com.ofsystem.Capstone.Mapper.Filter.ProductoStorage;
 import com.ofsystem.Capstone.Model.Comprobante.ReportService;
 import com.ofsystem.Capstone.Model.Producto.Producto;
@@ -111,7 +112,6 @@ public class ComprobanteController {
 		System.out.println("nuevo " + nextIdComp);
 		Comprobante comprobantes = new Comprobante();
 		Detalle detalle = new Detalle();
-		TrazabilidadComprobantes trazabilidadComprob = new TrazabilidadComprobantes();
 
 		try {
 			//comprobante
@@ -142,11 +142,11 @@ public class ComprobanteController {
 			//detalle
 
 			detalle.setIdComp(service.listarxID(nextIdComp));
-			for (ProductoStorage productoStorage : dato.getProductoStorageList()){
-				int cantidad = productoStorage.getCantProduct();
+			for (ProductoFilter productoStorage : dato.getProductoStorageList()){
+				int cantidad = productoStorage.getCantidad();
 				detalle.setIdDetalle(detalleService.idDetalle() + 1);
 				detalle.setCantProductDetalle(cantidad);
-				Producto producto = productoService.listarxID(productoStorage.getIdProduct());
+				Producto producto = productoService.listarxID(productoStorage.getProducto().getIdProduct());
 				System.out.println(producto.getIUP());
 				detalle.setPrecioUniDetalle(producto.getPrecioUni());
 				detalle.setPrecioTotalDetalle(producto.getPrecioUni() * cantidad);
@@ -160,24 +160,6 @@ public class ComprobanteController {
 		}catch (Exception e) {
 			System.out.println("Detalle no creado" + e);
 		}
-
-		try {
-			//trazabilidad
-			trazabilidadComprob.setIdComp(service.listarxID(nextIdComp));
-			trazabilidadComprob.setIdProceActual(estComproService.listarxID(1));
-			trazabilidadComprob.setFechaIniProc(new Date());
-			trazabilidadComprob.setObservac("Online");
-			if(dato.getTrabajador().getNumDocumento()!= null){
-				trazabilidadComprob.setIdTraba(dato.getTrabajador());
-			}else {
-				trazabilidadComprob.setIdTraba(trabajadorService.findByIdUserCliente_Username("Online"));
-			}
-			trazabilidadComprobantesService.registrar(trazabilidadComprob);
-			System.out.println("Trazabilidad creado");
-		}catch (Exception e) {
-			System.out.println("Trazabilidad no creado" + e);
-		}
-
 		return new ResponseEntity<>(comprobantes.getIuc(),HttpStatus.OK);
 	}
 	@PutMapping
