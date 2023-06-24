@@ -139,11 +139,9 @@ public class ComprobanteController {
 
 		try {
 			//detalle
-
 			detalle.setIdComp(service.listarxID(nextIdComp));
 			for (ProductoFilter productoStorage : dato.getProductoStorageList()){
 				int cantidad = productoStorage.getCantidad();
-				detalle.setIdDetalle(detalleService.idDetalle() + 1);
 				detalle.setCantProductDetalle(cantidad);
 				Producto producto = productoService.listarxID(productoStorage.getProducto().getIdProduct());
 				System.out.println(producto.getIUP());
@@ -156,6 +154,10 @@ public class ComprobanteController {
 				System.out.println(detalle);
 			}
 			System.out.println("Detalle creado");
+
+			// Llamar a la función generateReport después de crear el detalle
+			services.exportReport("pdf", nextIdComp);
+			System.out.println("Reporte generado");
 		}catch (Exception e) {
 			System.out.println("Detalle no creado" + e);
 		}

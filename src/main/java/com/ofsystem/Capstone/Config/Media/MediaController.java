@@ -15,11 +15,12 @@ public class MediaController {
     private final MediaServiceImpl service;
 
     @GetMapping("/{folder}/{filename:.+}")
-    public ResponseEntity<Resource> getEmpleadoFile(@PathVariable String folder,@PathVariable String filename) {
+    public ResponseEntity<Resource> getEmpleadoFile(@PathVariable String folder, @PathVariable String filename) {
         Resource file = service.loadAsResource(filename, folder);
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(file);
     }
+
 
 }

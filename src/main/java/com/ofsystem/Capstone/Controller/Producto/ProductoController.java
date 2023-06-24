@@ -247,6 +247,7 @@ public class ProductoController {
 						} else {
 							productoTallaColor.setStockVirtualProduct(productoTallaColor.getStockVirtualProduct() - productoStorage.getCantidad());
 							productoTallaColor.setIdProductoTallaColor(productoTallaColor.getIdProductoTallaColor());
+							System.out.println("stock disminuido");
 							servicePTC.modificar(productoTallaColor);
 						}
 					} else {
