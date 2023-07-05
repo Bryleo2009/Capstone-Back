@@ -156,7 +156,7 @@ public class ComprobanteController {
 			System.out.println("Detalle creado");
 
 			// Llamar a la función generateReport después de crear el detalle
-			services.exportReport("pdf", nextIdComp);
+			services.exportReport("html", nextIdComp);
 			System.out.println("Reporte generado");
 		}catch (Exception e) {
 			System.out.println("Detalle no creado" + e);
