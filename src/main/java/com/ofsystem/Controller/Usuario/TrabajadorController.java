@@ -1,7 +1,11 @@
 package com.ofsystem.Controller.Usuario;
 
 import com.ofsystem.Config.Exception.ModeloNotFoundException;
+import com.ofsystem.Model.Enums.Rol;
+import com.ofsystem.Model.Enums.TipoDoc;
+import com.ofsystem.Model.Usuario.Cliente;
 import com.ofsystem.Model.Usuario.Trabajador;
+import com.ofsystem.Model.Usuario.Usuario;
 import com.ofsystem.Service.Imple.Usuario.TrabajadorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Date;
 import java.util.List;
 
 
@@ -63,5 +68,12 @@ public class TrabajadorController {
 			service.eliminar(id);
 		}
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+
+
+	@GetMapping("/byNum/{num}")
+	public ResponseEntity<Trabajador> findByNum(@PathVariable("num") String num) {
+		Trabajador unaEmpleado = service.findByIdUserCliente_Username(num);
+		return new ResponseEntity<Trabajador>(unaEmpleado,HttpStatus.OK);
 	}
 }

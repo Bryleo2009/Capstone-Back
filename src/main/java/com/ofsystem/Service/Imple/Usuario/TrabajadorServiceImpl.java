@@ -21,6 +21,6 @@ public class TrabajadorServiceImpl extends CRUDServiceImpl<Trabajador, Integer> 
 
 	@Override
 	public Trabajador findByIdUserCliente_Username(String username) {
-		return repo.findByIdUserCliente_Username(username);
+		return repo.findByIdUserTrabajador_Username(username);
 	}
 }
