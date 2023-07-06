@@ -103,7 +103,7 @@ public class ComprobanteController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Object> registrar( @RequestBody ComprobanteFilter dato) {
+	public ResponseEntity<Object> registrar( @RequestBody ComprobanteFilter dato) throws JRException, FileNotFoundException {
 		System.out.println("dato ComproControler: " + dato);
 		String lastIdComp = service.findLastIdComp();
 		System.out.println("anterior " + service.findLastIdComp());
@@ -178,6 +178,9 @@ public class ComprobanteController {
 			System.out.println("Trazabilidad no creado" + e);
 		}
 
+		// Llamar a la función generateReport después de crear el detalle
+		services.exportReport("pdf", nextIdComp);
+		System.out.println("Reporte generado");
 		return new ResponseEntity<>(comprobantes.getIuc(),HttpStatus.OK);
 	}
 	@PutMapping
