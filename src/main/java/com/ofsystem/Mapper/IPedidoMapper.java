@@ -16,7 +16,7 @@ public interface IPedidoMapper {
                 "inner join comprobante com\n" +
                 "on com.id_comp = pe.id_comp inner join cliente cl\n" +
                 "on cl.id = com.id_cliente inner join usuario u\n" +
-                "on u.id_user = cl.id_user_cliente where u.id_user = #{idUser};")
+                "on u.id_user = cl.id_user_cliente where u.id_user = #{idUser} order by pe.id_pedido desc;")
     List<SeguimientoPedidoFilter>listarPedido(@Param("idUser")int idUser);
 
         @Select("SELECT  trazape.fecha_fin_proc,trazape.fecha_ini_proc,estpro.vista_item, pe.id_pedido FROM pedido pe\n" +
